@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# TypeScript build output
+dist/
+
+# macOS Finder bestanden
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Jest coverage reports
+coverage/

@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "scripts": {
-    "test": "jest",
-    "start": "nodemon index.ts"
-  },
+ "scripts": {
+  "dev": "nodemon --watch src --watch views --watch public --exec ts-node src/index.ts",
+  "start": "npm run dev",
+  "test": "jest"
+}
+,
   "author": "",
   "license": "ISC",
   "devDependencies": {
