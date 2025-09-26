@@ -4,7 +4,7 @@ import path from "path";
 
 dotenv.config();
 
-const app : Express = express();
+const app: Express = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -15,12 +15,19 @@ app.set("views", path.join(__dirname, "views"));
 app.set("port", process.env.PORT ?? 3000);
 
 app.get("/", (req, res) => {
-    res.render("index", {
-        title: "Hello World",
-        message: "Hello World"
-    })
+  res.render("index", {
+    title: "Hello World",
+    message: "Hello World",
+  });
+});
+
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Login",
+    message: "Please log in",
+  });
 });
 
 app.listen(app.get("port"), () => {
-    console.log("Server started on http://localhost:" + app.get("port"));
+  console.log("Server started on http://localhost:" + app.get("port"));
 });
