@@ -1,14 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title><%= title %></title>
-</head>
-<body>
-    <header>
+<header style="
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+">
+    <!-- Linker kant -->
+    <div style="
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    ">
+        <a href="/">
+            <img src="/assets/images/Logo.png" alt="Logo" style="height: 40px;">
+        </a>
+        <a href="/" style="font-weight: bold; font-size: 20px; text-decoration: none; color: black;">
+            Pizza Gusto
+        </a>
+        <a href="/over" style="text-decoration: none; color: black;">
+            Over
+        </a>
+        <a href="/contact" style="text-decoration: none; color: black;">
+            Contact
+        </a>
+        <a href="/login" style="text-decoration: none; color: black;">
+            Log In
+        </a>
+    </div>
 
-        <!-- Code : bv. Titel, logo en nav-->
-
-    </header>
+    <!-- Rechter kant -->
+    <div>
+        <a href="/bestel" style="
+            background: #d42114;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            text-decoration: none;
+        ">
+            Bestel nu
+        </a>
+    </div>
+</header>
