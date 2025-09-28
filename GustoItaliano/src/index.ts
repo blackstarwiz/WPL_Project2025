@@ -2,6 +2,9 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { setLocals } from "./middelware/locals";
+import bestelRouter from "./routers/bestel";
+import contactRouter from "./routers/contact";
+import loginRouter from "./routers/login";
 
 dotenv.config();
 
@@ -18,28 +21,18 @@ app.set("port", process.env.PORT ?? 3000);
 // Middleware voor locals
 app.use(setLocals);
 
-app.get("/", (req, res) => {
-    res.render("index", {
-        title: "Hello World",
-        page: 'index',
-        message: "Hello World"
-    })
-});
+//Routers
+app.use("/login", loginRouter());
+app.use("/contact", contactRouter());
+app.use("/bestel", bestelRouter());
 
-app.get("/login", (req, res) => {
-  res.render("login", {
-    title: "Login",
-    page: "login",
-    message: "Please log in",
+app.get("/", (req, res) => {
+  res.render("index", {
+    title: "Hello World",
+    page: "index",
+    message: "Hello World",
   });
 });
-
-app.get("/contact", (req, res) => {
-    res.render("contact", {
-        title: 'Contact',
-        page: 'contact'
-    })
-})
 
 app.listen(app.get("port"), () => {
   console.log("Server started on http://localhost:" + app.get("port"));

@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+  <main>
+    <h2>Onze Menu</h2>
+    <div class="menu">
+      <% menu.forEach(function(item){ %>
+        <div class="card">
+          <div class="placeholder">Geen foto</div>
+          <p><%= item.naam %></p>
+          <form action="/bestel" method="POST">
+            <input type="hidden" name="pizza" value="<%= item.naam %>">
+            <button type="submit">Bestel nu</button>
+          </form>
+        </div>
+      <% }); %>
+    </div>
+  </main>
+
+
+ 
+  <aside>
+    <h2>Uw Bestelling</h2>
+    <ul class="order-list">
+        <% bestellingen.forEach(function(b, i){ %>
+          <li>
+            <span><%= b %></span>
+            <form action="/bestel/verwijder" method="POST" style="display:inline;">
+              <input type="hidden" name="index" value="<%= i %>">
+              <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
+            </form>
+          </li>
+        <% }); %>
+    </ul>
+  </aside>
+
+<%- include('partials/footer') %>
