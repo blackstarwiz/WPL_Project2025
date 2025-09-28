@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: beige;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-div {
+            background: rgb(193, 193, 168);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 350px;
+        }
+
+        .login-div label,
+        .login-div input {
+            display: block;
+            margin: 5px auto;
+        }
+
+        button {
+            background: #d42114;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+        <div class="login-div">
+            <h2>Inloggen</h2>
+            <form>
+                <label for="email">E-Mail</label>
+                <input type="email" placeholder="voorbeeld@example.com" id="email" required>
+
+                <label for="password">Wachtwoord</label>
+                <input type="password" placeholder="••••••••••••" id="password" required>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Ingelogd blijven</label>
+                </div>
+
+                <button type="submit">Inloggen</button>
+            </form>
+        </div>
+        <%- include('partials/footer') %>
+</body>
+
+</html>

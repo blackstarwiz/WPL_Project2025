@@ -5,7 +5,7 @@ import { setLocals } from "./middelware/locals";
 
 dotenv.config();
 
-const app : Express = express();
+const app: Express = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -26,6 +26,14 @@ app.get("/", (req, res) => {
     })
 });
 
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Login",
+    page: "login",
+    message: "Please log in",
+  });
+});
+
 app.get("/contact", (req, res) => {
     res.render("contact", {
         title: 'Contact',
@@ -34,5 +42,5 @@ app.get("/contact", (req, res) => {
 })
 
 app.listen(app.get("port"), () => {
-    console.log("Server started on http://localhost:" + app.get("port"));
+  console.log("Server started on http://localhost:" + app.get("port"));
 });
