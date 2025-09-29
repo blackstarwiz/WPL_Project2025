@@ -35,12 +35,12 @@
 }
 
 .menu h2{
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     margin-bottom: 2px;
 }
 
 .menu p, .menulist p{
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-top: 0;
     color:darkslategrey;
 }
@@ -102,7 +102,7 @@
     width: 100%;
 }
 .aboutUs img{
-    max-width: 300px;
+    max-width: 350px;
     margin: 10px auto auto auto;
 }
 .aboutUs p{
@@ -146,6 +146,7 @@
     background-color: whitesmoke;
     align-items:center;
     border-radius: 4px;
+    margin-top: 30px;
 }
 
 .order h1{
