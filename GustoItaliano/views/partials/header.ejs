@@ -1,64 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl-be">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
 
     <% if (page === 'contact') { %>
+        <link rel="stylesheet" href="/css/contact.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
         <link rel="stylesheet" href="/css/map.css">
     <% } %>
 
+    <% if (page === 'Menu') { %>
+        <link rel="stylesheet" href="/css/bestel.css">
+    <% } %>
+
+    <% if (page === 'login') { %>
+        <link rel="stylesheet" href="/css/login.css">
+    <% } %>   
+
     <title><%= title %></title>
 </head>
 <body>
-    <header style="
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 20px;
-        background: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    ">
+    <header>
         <!-- Linker kant -->
-        <div style="
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        ">
+        <div class="leftheader">
             <a href="/">
-                <img src="/assets/images/Logo.png" alt="Logo" style="height: 40px;">
+                <img src="/assets/images/Logo.png" alt="Logo" id="logo">
             </a>
-            <a href="/" style="font-weight: bold; font-size: 20px; text-decoration: none; color: black;">
+            <a href="/" id="title" >
                 Pizza Gusto
             </a>
-            <a href="/over" style="text-decoration: none; color: black;">
-                Over
+            <a href="/bestel">
+                Menu
             </a>
-            <a href="/contact" style="text-decoration: none; color: black;">
+            <a href="/contact">
                 Contact
             </a>
-            <a href="/login" style="text-decoration: none; color: black;">
+            <a href="/login">
                 Log In
             </a>
         </div>
 
         <!-- Rechter kant -->
         <div>
-            <a href="/bestel" style="
-                background: #d42114;
-                color: white;
-                border: none;
-                padding: 8px 12px;
-                margin-top: 10px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-family: Arial, sans-serif;
-                text-decoration: none;
-            ">
+            <a href="/bestel" class="rightheader">
                 Bestel nu
             </a>
         </div>
