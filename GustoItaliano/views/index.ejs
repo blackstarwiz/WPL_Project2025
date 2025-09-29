@@ -1,10 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title><%= title %></title>
+</head>
+
 <%- include('partials/header') %>
 
 <main>
+  <!-- Code -->
+  <h1>Startpagina</h1>
+  <section class="highlights">
+    <article class="topitem">
+      <img src="../public/assets/images/pizza_hawaii.png" alt="" />
+      <h1></h1>
+      <p></p>
+    </article>
+    <article class="topitem">
+      <img src="../public/assets/images/pizza_margherita.png" alt="" />
+      <h1></h1>
+      <p></p>
+    </article>
+    <article class="topitem">
+      <img src="../public/assets/images/pizza_fungi.png" alt="" />
+      <h1></h1>
+      <p></p>
+    </article>
+  </section>
+  <section class="menu">
+    <h1>Menu</h1>
+    <article>
+      <h4>Ondertitel</h4>
+      <p>lorem</p>
+    </article>
+    <article>
+      <h4>Ondertitel</h4>
+      <p>lorem</p>
+    </article>
+    <article>
+      <h4>Ondertitel</h4>
+      <p>lorem</p>
+    </article>
+    <a href="./bestel-pagina.ejs">Menu</a>
+  </section>
+  <section class="menulist">
+    <h2>Pizza</h2>
+    <ul>
+      <% menu.forEach(function(item){ %>
+      <li class="item">
+        <span class="itemname"><%= item.naam %></span
+        ><span class="price"><%= item.price %></span>
+      </li>
+      <% }); %>
+    </ul>
+  </section>
 
-    <!-- Code -->
-    <%= message %>
+  <section class="reviews"></section>
 
+  <div class="">
+    <p>Bestel nu</p>
+    <a href="./bestel-pagina.ejs" class="orderbutton">Bestel</a>
+  </div>
 </main>
 
 <%- include('partials/footer') %>
