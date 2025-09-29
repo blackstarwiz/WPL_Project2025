@@ -1,19 +1,51 @@
-# Node modules
+# Node.js dependencies
 node_modules/
-
-# Environment variables
-.env
-
-# TypeScript build output
-dist/
-
-# macOS Finder bestanden
-.DS_Store
-
-# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Jest coverage reports
+# Optional: lockfiles (kies er één om te committen voor consistente builds)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Logs
+logs
+*.log
+*.log.*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+lib-cov
+coverage
+.nyc_output
+
+# Build outputs
+dist/
+build/
+tmp/
+temp/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
+*.orig
+
+# TypeScript (indien je TS gebruikt)
+*.tsbuildinfo
+
+# Testing
 coverage/
+.jest/
