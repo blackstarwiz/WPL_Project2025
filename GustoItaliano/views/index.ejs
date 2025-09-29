@@ -1,10 +1,80 @@
 <%- include('partials/header') %>
 
 <main>
+  <!-- Code -->
+  <h1>Populaire Pizza's</h1>
+  <section class="highlights">
+    <article class="topitem">
+      <img src="/assets/images/pizza_hawaii.png" alt="" />
+      <h2>Hawaii</h2>
+      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
+    </article>
+    <article class="topitem">
+      <img src="/assets/images/pizza_margherita.png" alt="" />
+      <h2>Margherita</h2>
+      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
+    </article>
+    <article class="topitem">
+      <img src="/assets/images/pizza_fungi.png" alt="" />
+      <h2>Fungi</h2>
+      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
+    </article>
+  </section>
 
-    <!-- Code -->
-    <%= message %>
+  <div class="middensection">
+  <section class="menu">
+    <h1>Menu</h1>
+    <article>
+      <h2>Ondertitel</h2>
+      <p>lorem</p>
+    </article>
+    <article>
+      <h2>Ondertitel</h2>
+      <p>lorem</p>
+    </article>
+    <article>
+      <h2>Ondertitel</h2>
+      <p>lorem</p>
+    </article>
+    <a class="orderbutton" href="/bestel">Menu</a>
+  </section>
 
+  <section class="menulist">
+    <% // for loop van alle pizzas%>
+    <h1>Pizza</h1>
+    <div class="pizzalist">
+        <h2>pizzanaam</h2> 
+        <p><span>prijs</span> </p> 
+    </div>
+    <p>info</p>      
+  </section>
+  </div>
+
+  <section class="aboutUs">
+    <h1>Over ons</h1>
+    <img src="/assets/images/Marco_Donatelli.png" alt="Marco Donatelli">
+     
+    <p>Ik groeide op in een klein stadje in de buurt van Napels, Italië, omringd door de rijke culinaire tradities van mijn familie. Al op jonge leeftijd was ik betoverd door de magie die zich in de keuken ontvouwde, waar mijn grootmoeder eenvoudige ingrediënten veranderde in verrukkelijke gerechten. Geïnspireerd door deze vroege ervaringen, verfijnde ik mijn vaardigheden aan een prestigieuze culinaire school in Rome. <br> <br>
+
+    In 2015 besloot ik mijn passie voor de authentieke Italiaanse keuken naar het hart van Antwerpen te brengen. Ik had een plek voor ogen waar mensen de ware essentie van Italiaans dineren konden ervaren - genieten van maaltijden die met liefde en de beste lokale ingrediënten waren gemaakt. En zo werd Gusto Italiano geboren. Het restaurant werd al snel een geliefde plek, bekend om de levendige sfeer, zelfgemaakte pasta en een menu dat met de seizoenen mee verandert, wat mijn toewijding aan versheid en kwaliteit weerspiegelt. <br> <br>
+
+    Mijn visie gaat verder dan eten; hij streeft ernaar een warme, uitnodigende ruimte te creëren waar elke maaltijd aanvoelt als een viering van het leven en van familie - waarden die diep geworteld zijn in de Italiaanse cultuur.</p>   
+  </section>
+
+  <section class="reviews">
+    <h1>Reviews</h1>
+    <div class="reviewProfile">
+    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
+    
+        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
+        <p> <% //naam laten inlopen%> naam</p>
+    </div>
+  </section>
+
+  <div class="order">
+    <h1>BESTEL NU</h1>
+    <a class="orderbutton" href="/bestel">Bestel</a>
+  </div>
 </main>
 
 <%- include('partials/footer') %>

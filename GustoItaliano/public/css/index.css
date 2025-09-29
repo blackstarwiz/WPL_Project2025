@@ -1,0 +1,153 @@
+
+/*topsellers*/
+.highlights{
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.topitem{
+    max-width: 270px;
+}
+
+.topitem img{
+    max-width: 270px;
+    border-radius: 4%;
+}
+
+.topitem h2{
+    margin: 10px auto 10px 0;
+}
+
+/*midden gebied*/
+.middensection{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 30px 0;
+    width: 100%;
+}
+.menu{
+    width: 50%;
+}
+.menu h2, .menu p{
+    margin-left: 5px;
+}
+
+.menu h2{
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.menu p, .menulist p{
+    font-size: 1rem;
+    margin-top: 0;
+    color:darkslategrey;
+}
+
+.orderbutton{
+  background-color: #c40009;
+  color: whitesmoke;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+.menulist{
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 30px;
+    width: 50%;
+    border: black solid 1px;
+    background-color:beige;
+    max-width: 50%;
+}
+
+.menulist h1{
+    text-align: center;
+    width: 100%;
+    border-bottom: black solid 2px;
+}
+
+.menulist p{
+    margin-top: 0;
+    
+}
+
+.pizzalist{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: baseline;
+    border-radius: 4%;
+}
+
+.pizzalist span{
+    font-weight: bold;
+}
+
+/* over mij deel*/
+
+.aboutUs{
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 50px;
+}
+
+.aboutUs h1{
+    width: 100%;
+}
+.aboutUs img{
+    max-width: 300px;
+    margin: 10px auto auto auto;
+}
+.aboutUs p{
+    max-width: 50%;
+}
+
+/* reviewpart */
+.reviews{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.reviews h1, .quote{
+    width: 100%;
+}
+
+.reviewProfile{
+    display: flex;
+    flex-flow: row wrap;
+    align-items:center;
+    border: solid 1px darkgrey;
+    border-radius: 4%;
+    margin: 10px;
+    padding: 15px;
+    width: 250px;
+}
+
+.reviewProfile img{
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    overflow:hidden;
+    margin-right: 5px;
+}
+
+
+/*bestel strook*/
+.order{
+    display: flex;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    align-items:center;
+    border-radius: 4px;
+}
+
+.order h1{
+    font-weight: bold;
+}
