@@ -1,27 +1,48 @@
 <%- include('partials/header') %>
+<body class="with-aside">
+    
 
 <main>
-    <h1>Contacteer ons</h1>
-    <section class="contact-content">
-        <div id="map"></div>
-
-        <article>
-            <h2>Adres</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae obcaecati aliquam dolores cupiditate tempore ratione, quisquam architecto soluta eveniet dolorum quod repellat repellendus exercitationem, enim aliquid pariatur? Quam, error nostrum.</p>
-        </article>
-        <article>
-            <h2>Openingsuren</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut quae a voluptate officiis tenetur alias quos odit dolore, officia adipisci praesentium rem numquam iste deleniti culpa eveniet. Dolore, repellendus suscipit?</p>
-        </article>
-        <article>
-            <h2>Bel ons</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et sit delectus, vitae iste cum tenetur perferendis autem illo porro numquam, nam earum qui. Harum eos quos, delectus voluptatibus necessitatibus cum?</p>
-        </article>
-    </section>
+  <h1>Contacteer ons</h1>
+    <div id="map"></div>
+  <section class="contact">
+    <div><article>
+      <h2>Adres</h2>
+      <ul>
+        <li>Ellermanstraat 33, 2060 Antwerpen</li>
+      </ul>
+    </article>
+    <article>
+      <h2>Bel ons</h2>
+      <ul>
+        <li>Telefoon: 012 345 6789</li>
+        <li>Email: info@example.com</li>
+      </ul>
+    </article>
+</div>
+    <article>
+      <h2>Openingsuren</h2>
+      <ul>
+        <li>Maandag: 9:00 - 17:00</li>
+        <li>Dinsdag: 9:00 - 17:00</li>
+        <li>Woensdag: 9:00 - 17:00</li>
+        <li>Donderdag: 9:00 - 17:00</li>
+        <li>Vrijdag: 9:00 - 17:00</li>
+        <li>Zaterdag: 10:00 - 14:00</li>
+        <li>Zondag: Gesloten</li>
+      </ul>
+    </article>
+  </section>
+  <section class="order">
+    <h1>BESTEL NU</h1>
+    <a class="orderbutton" href="/bestel">Bestel</a>
+  </section>
 </main>
 
- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
 <script src="/js/map.js"></script>
 <%- include('partials/footer') %>

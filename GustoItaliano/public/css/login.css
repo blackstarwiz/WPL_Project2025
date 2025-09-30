@@ -1,0 +1,39 @@
+
+.login-div {
+    background: rgb(193, 193, 168);
+    padding: 20px;
+    border-radius: 5%;
+    width: 350px;
+    margin:  50px auto;
+}
+
+.login-div h2{
+    text-align: center;
+}
+
+.login-div input{
+    padding: 5px;
+    margin: 1px 0 10px 0;
+    border-radius: 6px;
+}
+
+.login-div label, .login-div  {
+    display: block;
+}
+
+.checkbox-group{
+    display: flex;
+    align-items: baseline;
+}
+
+button {
+    background: #c40009;
+    color: whitesmoke;
+    border: none;
+    padding: 8px 40px;
+    margin-top: 10px;
+    border-radius: 13px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 10px auto;
+}

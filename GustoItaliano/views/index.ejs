@@ -42,16 +42,29 @@
   <section class="menulist">
     <% // for loop van alle pizzas%>
     <h1>Pizza</h1>
-    <div class="pizzalist">
-        <h2>pizzanaam</h2> 
-        <p><span>prijs</span> </p> 
-    </div>
-    <p>info</p>      
+    <ul>
+        <li>
+            <div class="pizzalist">
+                <h2>pizzanaam</h2> 
+                <p><span>prijs</span> </p> 
+            </div>
+            <p>info</p>
+        </li>
+        <li>
+            <div class="pizzalist">
+                <h2>pizzanaam</h2> 
+                <p><span>prijs</span> </p> 
+            </div>
+            <p>info</p>
+        </li>
+    </ul>
+          
   </section>
   </div>
 
+  <h1>Over ons</h1>
   <section class="aboutUs">
-    <h1>Over ons</h1>
+    
     <img src="/assets/images/Marco_Donatelli.png" alt="Marco Donatelli">
      
     <p>Ik groeide op in een klein stadje in de buurt van Napels, Italië, omringd door de rijke culinaire tradities van mijn familie. Al op jonge leeftijd was ik betoverd door de magie die zich in de keuken ontvouwde, waar mijn grootmoeder eenvoudige ingrediënten veranderde in verrukkelijke gerechten. Geïnspireerd door deze vroege ervaringen, verfijnde ik mijn vaardigheden aan een prestigieuze culinaire school in Rome. <br> <br>
@@ -63,18 +76,31 @@
 
   <section class="reviews">
     <h1>Reviews</h1>
-    <div class="reviewProfile">
+    <article class="reviewProfile">
     <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
     
         <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
         <p> <% //naam laten inlopen%> naam</p>
-    </div>
+    </article>
+    <article class="reviewProfile">
+    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
+    
+        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
+        <p> <% //naam laten inlopen%> naam</p>
+    </article>
+    <article class="reviewProfile">
+    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
+    
+        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
+        <p> <% //naam laten inlopen%> naam</p>
+    </article>
   </section>
+  
 
-  <div class="order">
+  <section class="order">
     <h1>BESTEL NU</h1>
     <a class="orderbutton" href="/bestel">Bestel</a>
-  </div>
+  </section>
 </main>
 
 <%- include('partials/footer') %>

@@ -4,7 +4,7 @@
     display: flex;
     flex-flow: row;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .topitem{
@@ -23,9 +23,9 @@
 /*midden gebied*/
 .middensection{
     display: flex;
-    justify-content: space-between;
-    margin: 15px 0 30px 0;
-    width: 100%;
+    flex-flow: row;
+    gap: 20px;
+    justify-content: space-around;
 }
 .menu{
     width: 50%;
@@ -45,26 +45,17 @@
     color:darkslategrey;
 }
 
-.orderbutton{
-  background-color: #c40009;
-  color: whitesmoke;
-  border: none;
-  padding: 8px 12px;
-  margin-top: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-}
+
 
 
 .menulist{
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 0;
     padding: 30px;
-    width: 50%;
     border: black solid 1px;
+    border-radius: 2%;
     background-color:beige;
-    max-width: 50%;
+    width: 50%;
 }
 
 .menulist h1{
@@ -83,7 +74,7 @@
     flex-flow: row;
     justify-content: space-between;
     align-items: baseline;
-    border-radius: 4%;
+    
 }
 
 .pizzalist span{
@@ -94,8 +85,9 @@
 
 .aboutUs{
     display: flex;
-    flex-flow: row wrap;
-    margin-top: 50px;
+    flex-flow: row;
+    gap: 20px;
+    justify-content: space-around;
 }
 
 .aboutUs h1{
@@ -103,16 +95,18 @@
 }
 .aboutUs img{
     max-width: 350px;
-    margin: 10px auto auto auto;
+    margin: 10px auto auto 0;
+    border-radius: 2%;
 }
 .aboutUs p{
-    max-width: 50%;
+    max-width: 60%;
 }
 
 /* reviewpart */
 .reviews{
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
 }
 
 .reviews h1, .quote{
@@ -127,7 +121,7 @@
     border-radius: 4%;
     margin: 10px;
     padding: 15px;
-    width: 250px;
+    width: 230px;
 }
 
 .reviewProfile img{
@@ -138,17 +132,8 @@
     margin-right: 5px;
 }
 
-
-/*bestel strook*/
-.order{
-    display: flex;
-    justify-content: space-between;
-    background-color: whitesmoke;
-    align-items:center;
-    border-radius: 4px;
-    margin-top: 30px;
-}
-
-.order h1{
-    font-weight: bold;
+.highlights, .middensection, .aboutUs, .reviews{
+    border-bottom: solid #0d7b03 2px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
 }
