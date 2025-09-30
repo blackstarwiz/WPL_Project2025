@@ -1,27 +1,27 @@
-
 .login-div {
     background: rgb(193, 193, 168);
     padding: 20px;
     border-radius: 5%;
     width: 350px;
-    margin:  50px auto;
+    margin: 50px auto;
 }
 
-.login-div h2{
+.login-div h2 {
     text-align: center;
 }
 
-.login-div input{
+.login-div input {
     padding: 5px;
     margin: 1px 0 10px 0;
     border-radius: 6px;
 }
 
-.login-div label, .login-div  {
+.login-div label,
+.login-div {
     display: block;
 }
 
-.checkbox-group{
+.checkbox-group {
     display: flex;
     align-items: baseline;
 }

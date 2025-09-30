@@ -1,146 +1,151 @@
 /*Algemene structuur terug + header + footer)*/
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-weight: 400;
-  text-align: left;
-  color: black;
-  font-family: Nunito, sans-serif;
-  text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+    text-align: left;
+    color: black;
+    font-family: Nunito, sans-serif;
+    text-decoration: none;
 }
 
 body {
-  display: grid;
-  grid-template-areas:
-    "header header header header"
-    "main   main   main   main"
-    "footer footer footer footer";
-  grid-template-rows: auto 1fr auto;
-  line-height: 1.5;
-  background-color: #f7f6d7;
-  min-height: 100vh;
-  width: 100%;
+    display: grid;
+    grid-template-areas:
+        "header header header header"
+        "main   main   main   main"
+        "footer footer footer footer";
+    grid-template-rows: auto 1fr auto;
+    line-height: 1.5;
+    background-color: #f7f6d7;
+    min-height: 100vh;
+    width: 100%;
 }
 
 header {
-  grid-area: header;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centreer de nav */
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  background-color: whitesmoke;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centreer de nav */
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
-  width: 68%;
-  max-width: 1000px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 68%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.leftheader{
-  display: flex;
-  align-items: center;
-  padding-right: 5rem;
-  gap: 20px;
+.leftheader {
+    display: flex;
+    align-items: center;
+    padding-right: 5rem;
+    gap: 20px;
 }
 
-.rightheader{
-  background: #c40009;
-  color: whitesmoke;
-  border: none;
-  padding: 8px 12px;
-  margin-top: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
+.rightheader {
+    background: #c40009;
+    color: whitesmoke;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-#logo{
-  height: 90px;
-  width: 90px;
+#logo {
+    height: 90px;
+    width: 90px;
 }
 
-main{
-  grid-area: main;
-  width: 68%;
-  max-width: 1000px;
-  margin: 0 auto; 
-  padding: 0 20px; 
-  box-sizing: border-box;
+main {
+    grid-area: main;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /*orderstrook onderaan*/
-.order{
+.order {
     display: flex;
     justify-content: space-between;
     background-color: whitesmoke;
-    align-items:center;
+    align-items: center;
     border-radius: 4px;
     padding: 20px;
     margin-top: 30px;
 }
 
-.order h1{
+.order h1 {
     font-weight: bold;
 }
 
-.orderbutton{
-  background-color: #c40009;
-  color: whitesmoke;
-  border: none;
-  padding: 8px 12px;
-  margin-top: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
+.orderbutton {
+    background-color: #c40009;
+    color: whitesmoke;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-
-
-footer{
-  grid-area: footer;
-  padding: 15px 0;
-  background: whitesmoke;
-  font-size: 14px;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+footer {
+    grid-area: footer;
+    padding: 15px 0;
+    background: whitesmoke;
+    font-size: 14px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
-#logofooter{
-  width: 50px;
+#logofooter {
+    width: 50px;
 }
 
-h1{
-  font-family: Lobster;
-  font-size: 2.3rem;
-  margin: 10px 0;
+h1 {
+    font-family: Lobster;
+    font-size: 2.3rem;
+    margin: 10px 0;
 }
 
-h2{
-  font-family: lora;
-  font-size: 2rem;
+h2 {
+    font-family: lora;
+    font-size: 2rem;
 }
 
-p{
-  font-size:  1.3rem;
+p {
+    font-size: 1.3rem;
 }
 
-
-#title{
-  font-family: lobster, sans-serif;
-  font-weight: bold;
+#title {
+    font-family: lobster, sans-serif;
+    font-weight: bold;
 }
 
 ul {
     list-style-type: none;
 }
+@media (max-width: 1600px) {
+    header .nav {
+        width: 100%;
+    }
+}
 
-
+@media (max-width: 1000px) {
+    .leftheader {
+        padding-right: 2rem;
+    }
+}
