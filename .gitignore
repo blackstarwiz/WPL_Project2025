@@ -5,6 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+
 # Optional: lockfiles (kies er één om te committen voor consistente builds)
 # package-lock.json
 # yarn.lock
