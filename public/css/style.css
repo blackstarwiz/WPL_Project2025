@@ -89,7 +89,7 @@ main {
     font-weight: bold;
 }
 
-.orderbutton {
+.orderbutton, .orderbuttonpizzalist {
     background-color: #c40009;
     color: whitesmoke;
     border: none;
