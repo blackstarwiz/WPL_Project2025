@@ -5,10 +5,21 @@ import { setLocals } from "./middelware/locals";
 import bestelRouter from "./routers/bestel";
 import contactRouter from "./routers/contact";
 import loginRouter from "./routers/login";
+import livereload, { LiveReloadServer } from "livereload";
+import connectLivereload from "connect-livereload";
 
 dotenv.config();
 
+const liveReloadServer: LiveReloadServer = livereload.createServer();
+liveReloadServer.watch(path.join(__dirname, "public"));
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});
+
 const app: Express = express();
+app.use(connectLivereload());
 
 app.set("view engine", "ejs");
 app.use(express.json());
