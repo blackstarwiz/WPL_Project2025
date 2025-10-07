@@ -6,7 +6,7 @@ export default function bestelRouter() {
 
   router.get("/", (req, res) => {
     res.render("bestel", {
-      title: "Bestel",
+      title: "Pizza Gusto",
       page: "bestel",
       menu,
       bestellingen,

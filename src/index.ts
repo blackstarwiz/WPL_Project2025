@@ -40,9 +40,8 @@ app.use("/bestel", bestelRouter());
 
 app.get("/", (req, res) => {
   res.render("index", {
-    title: "Hello World",
+    title: "Pizza Gusto",
     page: "index",
-    message: "Hello World",
   });
 });
 

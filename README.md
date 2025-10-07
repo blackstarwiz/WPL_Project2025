@@ -16,6 +16,10 @@ npm install
 npm run build
 npm start
 ```
+Voor devs (Live Reloader):
+``` bash
+npm run dev
+```
 
 Open je browser en ga naar:
 
