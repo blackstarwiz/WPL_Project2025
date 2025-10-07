@@ -31,7 +31,7 @@ header {
     justify-content: center; /* Centreer de nav */
     font-size: 1.5rem;
     padding: 10px 20px;
-    background-color: whitesmoke;
+    background-color: var(--color-light-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -51,12 +51,12 @@ header {
 }
 
 .rightheader {
-    background: #c40009;
-    color: whitesmoke;
+    background: var(--primary-color);
+    color: var(--color-light-bg);
     border: none;
     padding: 8px 12px;
     margin-top: 10px;
-    border-radius: 4px;
+    border-radius: var(--border-raduis-small);
     cursor: pointer;
     text-decoration: none;
 }
@@ -78,10 +78,10 @@ main {
 .order {
     display: flex;
     justify-content: space-between;
-    background-color: whitesmoke;
+    background-color: var(--color-light-bg);
     align-items: center;
     border-radius: 4px;
-    padding: 20px;
+    padding: --spacing-meduim;
     margin-top: 30px;
 }
 
@@ -90,12 +90,12 @@ main {
 }
 
 .orderbutton, .orderbuttonpizzalist {
-    background-color: #c40009;
-    color: whitesmoke;
+    background-color: var(--primary-color);
+    color: var(--color-light-bg);
     border: none;
     padding: 8px 12px;
     margin-top: 10px;
-    border-radius: 4px;
+    border-radius: var(--border-raduis-small);
     cursor: pointer;
     text-decoration: none;
 }
@@ -103,7 +103,7 @@ main {
 footer {
     grid-area: footer;
     padding: 15px 0;
-    background: whitesmoke;
+    background: var(--color-light-bg);
     font-size: 14px;
     margin-top: 30px;
     display: flex;

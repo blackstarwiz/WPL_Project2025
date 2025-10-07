@@ -1,6 +1,6 @@
 .login-div {
-    background: rgb(193, 193, 168);
-    padding: 20px;
+    background: var(--color-login-bg);
+    padding: var(--spacing-medium);
     border-radius: 5%;
     width: 350px;
     margin: 50px auto;
@@ -27,12 +27,12 @@
 }
 
 button {
-    background: #c40009;
-    color: whitesmoke;
+    background: var(--primary-color);
+    color: var(--color-light-bg);
     border: none;
     padding: 8px 40px;
     margin-top: 10px;
-    border-radius: 13px;
+    border-radius: var(--border-radius-large);
     cursor: pointer;
     display: block;
     margin: 20px auto 10px auto;

@@ -1,0 +1,21 @@
+:root{
+    /* HUIDIGE KLEUREN EN FONTEN */
+    --primary-color: #c40009;
+    --secondary-color: #f7f6d7;
+    --primary-font-family: Lobster;
+    --secondary-font-family: lora;
+
+    
+   /* NIEUWE KLEUREN */
+    --color-green-dark: #0d7b03; /* als hover effect */
+    --color-grey-dark: darkslategrey;
+    --color-light-bg: whitesmoke;
+    --color-beige: beige; /* Toegevoegd: Achtergrondkleur menulist */
+
+    /* NIEUWE SPACING EN AFMETINGEN */
+    --spacing-medium: 20px;
+    --border-radius-small: 4px;
+    --border-radius-large: 13px;
+    --border-radius-rounded: 50%; /* Voor profielfoto's */
+
+}

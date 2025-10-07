@@ -2,7 +2,7 @@
 .highlights {
     display: flex;
     flex-flow: row;
-    gap: 20px;
+    gap: var(--spacing-medium);
     justify-content: space-between;
 }
 
@@ -23,14 +23,14 @@
 .middensection {
     display: flex;
     flex-flow: row;
-    gap: 20px;
+    gap: var(--spacing-medium);
     justify-content: space-around;
 }
 
 .menulist p {
     font-size: 1.2rem;
     margin-top: 0;
-    color: darkslategrey;
+    color: var(--color-dark-gray);
 }
 
 .menulist {
@@ -39,7 +39,7 @@
     padding: 150px;
     border: black solid 1px;
     border-radius: 2%;
-    background-color: beige;
+    background-color: var(--color-beige);
     width: 100%;
 }
 
@@ -47,10 +47,6 @@
     text-align: center;
     width: 100%;
     border-bottom: black solid 2px;
-}
-
-.menulist p {
-    margin-top: 0;
 }
 
 .pizzalist {
@@ -73,7 +69,7 @@
 .aboutUs {
     display: flex;
     flex-flow: row;
-    gap: 20px;
+    gap: var(--spacing-medium);
     justify-content: space-around;
 }
 
@@ -124,7 +120,7 @@
 .middensection,
 .aboutUs,
 .reviews {
-    border-bottom: solid #0d7b03 2px;
+    border-bottom: solid var(--color-green-dark) 2px;
     padding-bottom: 40px;
     margin-bottom: 40px;
 }
