@@ -4,11 +4,12 @@
 
 
   <!-- voorbeeld nu de css te kunnen gebruiken, onderaan staat de ejs -->
+   
    <main>
     <h1>Ons Menu</h1>
     <section class="menu">
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -17,7 +18,7 @@
         </form>
       </article>
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -26,7 +27,7 @@
         </form>
       </article>
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -35,7 +36,7 @@
         </form>
       </article>
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -44,7 +45,7 @@
         </form>
       </article>
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -53,7 +54,7 @@
         </form>
       </article>
       <article class="card">
-        <img src="/assets/images/pizza_hawaii.png" alt="">
+        <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="">
         <h2>pizza</h2>
         <p>info Lorem ipsum dolor sit amet consectetur.</p>
         <form action="/bestel" method="POST">
@@ -102,7 +103,7 @@
     <div class="menu">
       <% menu.forEach(function(item){ %>
         <div class="card">
-          <div class="placeholder">Geen foto</div>
+          <div class="placeholder"><img src="<%= item.foto%>" alt="foto niet beschikbaar"></div>
           <p><%= item.naam %></p>
           <form action="/bestel" method="POST">
             <input type="hidden" name="pizza" value="<%= item.naam %>">
@@ -134,6 +135,6 @@
     </ul>
     <h2>totaal: <% // prijs%></h2>
     <button type="submit">Bestellen</button>
-  </aside>-->
-
+  </aside>
+-->
 <%- include('partials/footer') %>

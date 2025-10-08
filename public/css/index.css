@@ -1,120 +1,185 @@
-/*topsellers*/
-.highlights {
+/*Main*/
+main{
     display: flex;
-    flex-flow: row;
-    gap: var(--spacing-medium);
-    justify-content: space-between;
+    flex-direction: column;
+}
+/*Intro*/
+#intro{
+    width: 99vw;
+    display: flex;
+    height: 30rem;
+    align-items:end;
+    background-image: url(/assets/images/Marco_Donatelli.png);
+    background-size:cover;
+    background-position: -10% 45%;
+    #overMarco{
+        padding: 0 2rem;
+        padding-bottom: 10rem;
+        
+
+        p{
+            color: var(--color-light-bg);
+            padding: 0.75rem;
+            width: 20rem;
+            word-wrap: normal;
+        }
+
+        .anchor{
+            text-align: center;
+            position: relative;
+            background: var(--primary-color);
+            color: var(--color-light-bg);
+            border: none;
+            padding: 8px 12px;
+            margin: 0.75rem 0;
+            border-radius: 2rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }
 }
 
+
+/*topsellers*/
+
+/*doos van de bestsellers*/
+.highlights {
+    display: flex;
+    flex-flow: column;
+    align-self: center;
+
+    h1{
+        text-align: center;
+    }
+    /*div element grid met een repeat om de items naast elkaar te krijgen*/
+    #topitems{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: var(--spacing-medium);
+        article{
+            
+            background-color: var(--color-beige);
+            border-radius: var(--border-radius-large);
+            border: solid var(--color-green-dark);
+        }
+    }
+    border-bottom: solid var(--color-green-dark) 2px;
+    padding-bottom: 40px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+/*bestsellers*/
 .topitem {
-    max-width: 270px;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    
+    align-items: center;/*elk element centreren*/
+
+    .topitemButton{
+        text-align: center;
+        width: 10rem;
+        position: relative;
+        background: var(--primary-color);
+        color: var(--color-light-bg);
+        border: none;
+        padding: 8px 12px;
+        margin: 0.75rem 0;
+        border-radius: 2rem;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
 }
 
 .topitem img {
-    max-width: 270px;
+    margin: 0.75rem;
+    height: 20rem;
     border-radius: 4%;
-}
+} 
 
-.topitem h2 {
-    margin: 10px auto 10px 0;
-}
 
-/*midden gebied*/
-.middensection {
+/*Reviews*/
+#review{
+    
     display: flex;
-    flex-flow: row;
-    gap: var(--spacing-medium);
-    justify-content: space-around;
-}
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
 
-.menulist p {
-    font-size: 1.2rem;
-    margin-top: 0;
-    color: var(--color-dark-gray);
-}
+    border-bottom: solid var(--color-green-dark) 2px;
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+    #reviewItems{
+        display: flex;
+        flex-direction: row;
+        
+    }
+    #reviewItems{
+        display: flex;
+        gap: var(--spacing-medium);
+        .reviewItem{
+            
+            background-color: var(--color-beige);
+            border-radius: var(--border-radius-large);
+            border: solid var(--color-green-dark);
+        
+            .profilePic{
+                border-radius: 60rem;
+                height: 5rem;
+            }
 
-.menulist {
-    margin-left: auto;
-    margin-right: 0;
-    padding: 150px;
-    border: black solid 1px;
-    border-radius: 2%;
-    background-color: var(--color-beige);
-    width: 100%;
-}
+            h2{
+               
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-medium);
+            }
+            
+            p{
+                max-width: 22rem;
+                font-size: 1rem;
+            }
+            h2,p{
+                padding: 1rem 0.75rem;
+            }
+        }
+        
+    }
 
-.menulist h1 {
-    text-align: center;
-    width: 100%;
-    border-bottom: black solid 2px;
-}
-
-.pizzalist {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.pizzalist span {
-    font-weight: bold;
-}
-
-.orderbuttonpizzalist{
-    /* moet nog rechts gezet worden */
+    
+    
 }
 
 /* over mij deel*/
 
 .aboutUs {
+    min-width: var(--section-max-width);
     display: flex;
-    flex-flow: row;
-    gap: var(--spacing-medium);
-    justify-content: space-around;
+    flex-direction: column;
+    align-self: center;
+    h1{
+        text-align: center;
+    }
+    #verhaal{
+        display: flex;
+        gap: var(--spacing-medium);
+        img {
+            width: 20rem;
+            margin: 10px auto auto 0;
+            border-radius: 2%;
+        }
+        p{
+            max-width: 45rem;
+        }
+    }
 }
 
-.aboutUs h1 {
-    width: 100%;
-}
-.aboutUs img {
-    max-width: 350px;
-    margin: 10px auto auto 0;
-    border-radius: 2%;
-}
-.aboutUs p {
-    max-width: 60%;
-}
 
-/* reviewpart */
-.reviews {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
+.aboutUs 
 
-.reviews h1,
-.quote {
-    width: 100%;
-}
 
-.reviewProfile {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    border: solid 1px darkgrey;
-    border-radius: 4%;
-    margin: 10px;
-    padding: 15px;
-    width: 230px;
-}
-
-.reviewProfile img {
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    overflow: hidden;
-    margin-right: 5px;
-}
 
 .highlights,
 .middensection,
@@ -122,11 +187,20 @@
 .reviews {
     border-bottom: solid var(--color-green-dark) 2px;
     padding-bottom: 40px;
+    margin: 0 auto;
     margin-bottom: 40px;
 }
-@media (max-width: 900px) {
-    .topitemm,
-    .topitem img {
-        max-width: 200px;
+@media screen and (max-width: 1100px) {
+   .topitem img {
+    margin: 0.75rem;
+    height: 16rem;
+    border-radius: 4%;
+    }
+
+    .reviewItem{
+        p{
+            max-width: 18rem;
+            font-size: 1rem;
+        }
     }
 }
