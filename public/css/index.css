@@ -7,20 +7,19 @@ main{
 #intro{
     width: 99vw;
     display: flex;
-    height: 30rem;
-    align-items:end;
+    height: 50rem;
+    align-items:center;
     background-image: url(/assets/images/Marco_Donatelli.png);
     background-size:cover;
     background-position: -10% 45%;
     #overMarco{
-        padding: 0 2rem;
-        padding-bottom: 10rem;
+      padding: 0 2rem;
         
 
         p{
             color: var(--color-light-bg);
-            padding: 0.75rem;
-            width: 20rem;
+            padding: 1rem 0 ;
+            width: 25rem;
             word-wrap: normal;
         }
 
@@ -31,7 +30,6 @@ main{
             color: var(--color-light-bg);
             border: none;
             padding: 8px 12px;
-            margin: 0.75rem 0;
             border-radius: 2rem;
             cursor: pointer;
             text-decoration: none;
@@ -95,7 +93,7 @@ main{
 
 .topitem img {
     margin: 0.75rem;
-    height: 20rem;
+    height: 25rem;
     border-radius: 4%;
 } 
 
@@ -118,7 +116,7 @@ main{
     }
     #reviewItems{
         display: flex;
-        gap: var(--spacing-medium);
+        gap: var( --spacing-medium);
         .reviewItem{
             
             background-color: var(--color-beige);
@@ -131,14 +129,13 @@ main{
             }
 
             h2{
-               
                 display: flex;
                 align-items: center;
                 gap: var(--spacing-medium);
             }
             
             p{
-                max-width: 22rem;
+                max-width: 27rem;
                 font-size: 1rem;
             }
             h2,p{
@@ -175,11 +172,6 @@ main{
         }
     }
 }
-
-
-.aboutUs 
-
-
 
 .highlights,
 .middensection,

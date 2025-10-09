@@ -1,122 +1,152 @@
-body {
-    grid-template-areas:
-        "header header header header"
-        ". main aside ."
-        "footer footer footer footer";
-    grid-template-columns: auto 68% 20% auto;
-}
-
 main {
-    grid-area: main;
-    padding: 0 --spacing-medium;
-    box-sizing: border-box;
-}
+  display: flex;
+  flex-direction: row;
 
-aside {
-    grid-area: aside;
-    padding: 0 var(--spacing-medium);
-    box-sizing: border-box;
-    position: sticky;
-    top: var(--spacing-medium);
-    align-self: start;
+  padding: 0 --spacing-medium;
+  box-sizing: border-box;
+
+  /*menu*/
+  .menu {
+    width: fit-content;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    #bestsellers {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+    }
+    .listItem {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+
+      border: solid var(--color-green-dark);
+
+      img {
+        margin: 0 1rem;
+        margin-top: 1rem;
+        max-width: 20rem;
+        border-radius: 4%;
+      }
+
+      h1 {
+        align-self: center;
+        font-size: 2.1rem;
+      }
+      h2 {
+        align-self: center;
+        font-size: 1rem;
+      }
+      p,
+      h1,
+      h2 {
+        height: fit-content;
+        text-align: left;
+        padding-left: 0.3rem;
+      }
+      button {
+        margin: 1rem 0;
+        border-radius: 20rem;
+      }
+      ul {
+        margin: 0.8rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        div {
+          border: solid red;
+          display: flex;
+          justify-content: space-between;
+
+          afmeetingPizza,
+          .prijsPizza {
+            margin: 0 0.4rem 0 0.4rem;
+          }
+          p {
+            font-size: 1rem;
+            color: var(--color-grey-dark);
+          }
+        }
+      }
+      form {
+        align-self: center;
+      }
+    }
+  }
+
+  /*inhoud aside*/
+  aside {
+    padding: 2rem;
     height: fit-content;
-    max-height: 100vh;
-    overflow-y: auto;
+    flex-direction: column;
+    position: sticky;
+    margin-top: 11rem;
+    right: 10rem;
+    top: var(--spacing-medium);
+    h1 {
+      font-size: 1.75rem;
+    }
+    .pizzalist {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .bestelButton {
+      padding: 8px 12px;
+      margin-top: 10px;
+    }
+
+    .remove-button {
+      padding: 8px 12px;
+      margin-top: 5px;
+    }
+
+    .total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: solid black 2px;
+      margin-top: var(--spacing-medium);
+    }
+    form {
+      padding: 5rem;
+    }
+  }
 }
 
-.menu {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+/*algemeen uiterlijk*/
+.card,
+aside {
+  background-color: var(--color-items-card);
+  border-radius: var(--border-radius-large);
+  border: solid var(--primary-color);
+  box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
 }
-
-.card {
-    max-width: 200px;
-    margin-bottom: var(--spacing-medium);
-}
-.card img {
-    max-width: 200px;
-    border-radius: 4%;
-}
-
-.card h2 {
-    margin: 10px auto 10px 0;
-    color: var(--primary-color);
-}
-
-.card p {
-    font-size: 1.2rem;
-    margin-top: 0;
-    color: var(--color-grey-dark);
-}
-
-/*inhoud aside*/
-.pizzalist,
-.total {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.total {
-    border-top: solid black 2px;
-    margin-top: var(--spacing-medium);
-}
-
 .remove-button,
-.orderbuttongreen {
-    color: var(--color-light-bg);
-    border: none;
-
-    border-radius: var(--border-radius-small);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.orderbuttongreen {
-    background-color: var(--primary-color);
-    padding: 8px 12px;
-    margin-top: 10px;
-}
-
-.remove-button {
-    background-color: var(--primary-color);
-    padding: 8px 12px;
-    margin-top: 5px;
+.bestelButton {
+  background-color: var(--primary-color);
+  color: var(--color-light-bg);
+  border: none;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  text-decoration: none;
 }
 
 @media (max-width: 800px) {
-    .card img {
-        min-width: 50vw;
-    }
-    .menu {
-        max-width: 45vw;
-    }
 }
 @media (max-width: 1000px) {
-    .menu {
-        gap: var(--spacing-medium);
-    }
-    main {
-        margin: 0;
-    }
 }
 @media (max-width: 1200px) {
-    body {
-        grid-template-columns: 2fr 1fr;
-        grid-template-areas:
-            "header header"
-            "main aside "
-            "footer footer";
-    }
 }
 
 @media (min-width: 1200px) {
-    .card {
-        max-width: 250px;
-    }
-    aside {
-        padding: 0px;
-    }
 }

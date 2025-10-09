@@ -11,9 +11,10 @@
     --color-grey-dark: darkslategrey;
     --color-light-bg: whitesmoke;
     --color-beige: beige; /* Toegevoegd: Achtergrondkleur menulist */
+    --color-items-card: #f3f3e0;
 
     /* NIEUWE SPACING EN AFMETINGEN */
-    --spacing-medium: 20px;
+    --spacing-medium: 5rem;
     --border-radius-small: 4px;
     --border-radius-large: 13px;
     --border-radius-rounded: 75%; /* Voor profielfoto's */
