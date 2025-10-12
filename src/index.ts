@@ -7,6 +7,7 @@ import contactRouter from "./routers/contact";
 import loginRouter from "./routers/login";
 import livereload, { LiveReloadServer } from "livereload";
 import connectLivereload from "connect-livereload";
+import { getPizzas } from "./database";
 
 dotenv.config();
 
@@ -48,4 +49,15 @@ app.get("/", (req, res) => {
 
 app.listen(app.get("port"), () => {
   console.log("Server started on http://localhost:" + app.get("port"));
+});
+
+
+app.get("/", async (req, res) => {
+  const pizzas = await getPizzas();
+  res.render("index", { pizzas });
+});
+
+app.get("/bestel", async (req, res) => {
+  const pizzas = await getPizzas();
+  res.render("bestel", { pizzas });
 });
