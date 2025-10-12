@@ -1,194 +1,45 @@
 <%- include('partials/header') %>
 
+<main>
+  <h1>Ons Menu</h1>
+  <section class="menu">
+    <% (pizzas || []).forEach(pizza => { %>
+      <article class="card">
+        <img src="<%= pizza.AfbeeldingURL || '/assets/images/pizza_placeholder.png' %>" alt="<%= pizza.Naam %>">
+        <h2><%= pizza.Naam %></h2>
+        <p><%= pizza.Beschrijving || 'Geen beschrijving beschikbaar.' %></p>
+        <p><strong>€ <%= Number(pizza.Prijs || 0).toFixed(2) %></strong></p>
+        <form action="/bestel" method="POST">
+          <input type="hidden" name="pizza" value="<%= pizza.Naam %>">
+          <button type="submit" class="orderbutton">Bestel nu</button>
+        </form>
+      </article>
+    <% }) %>
+  </section>
+</main>
 
-
-
-  <!-- voorbeeld nu de css te kunnen gebruiken, onderaan staat de ejs -->
-   <main>
-    <h1>Ons Menu</h1>
-    <section class="menu">
-      <% if (Array.isArray(pizzas) && pizzas.length) { %>
-        <% pizzas.forEach(p => { %>
-          <article class="card">
-            <img src="<%= p.AfbeeldingURL || '/assets/images/pizza_hawaii.png' %>" alt="<%= p.Naam %>">
-            <h2><%= p.Naam %></h2>
-            <p><%= p.Beschrijving || 'info Lorem ipsum dolor sit amet consectetur.' %></p>
-            <p><strong>€ <%= Number(p.Prijs).toFixed(2) %></strong></p>
-
-            <form action="/bestel" method="POST">
-              <!-- waarden die je post naar je server -->
-              <input type="hidden" name="itemId" value="<%= p.idmenuitems %>">
-              <input type="hidden" name="pizza" value="<%= p.Naam %>">
-              <input type="hidden" name="prijs" value="<%= p.Prijs %>">
-              <label>
-                Aantal:
-                <input type="number" name="aantal" min="1" value="1">
-              </label>
-              <button type="submit" class="orderbutton">Bestel nu</button>
-            </form>
-          </article>
-        <% }) %>
-      <% } else { %>
-        <!-- Fallback: jouw originele statische kaarten blijven zichtbaar als er (nog) geen pizzas-array is -->
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-        <article class="card">
-          <img src="/assets/images/pizza_hawaii.png" alt="">
-          <h2>pizza</h2>
-          <p>info Lorem ipsum dolor sit amet consectetur.</p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </article>
-      <% } %>
-    </section>
-  </main>
-
-  <aside>
-    <h1>Uw Bestelling</h1>
-
-    <% if (Array.isArray(bestellingen) && bestellingen.length) { %>
-      <ul class="order-list">
-        <% bestellingen.forEach((b, i) => { %>
-          <li>
-            <div class="pizzalist">
-              <h2><%= b.Naam || 'pizzanaam' %></h2>
-              <p>€ <%= (Number(b.Prijs || 0) * Number(b.Aantal || 1)).toFixed(2) %></p>
-            </div>
-            <form action="/bestel/verwijder" method="POST" style="display:inline;">
-              <input type="hidden" name="index" value="<%= i %>">
-              <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
-            </form>
-          </li>
-        <% }) %>
-      </ul>
-
-      <div class="total">
-        <h2>totaal: <% // prijs%></h2>
-        <p>
-          € <%= bestellingen
-                .reduce((t, b) => t + (Number(b.Prijs || 0) * Number(b.Aantal || 1)), 0)
-                .toFixed(2) %>
-        </p>
-      </div>
-      <form action="/bestel/bevestig" method="POST">
-        <button type="submit" class="orderbuttongreen">Bestellen</button>
-      </form>
-    <% } else { %>
-      <!-- Fallback: jouw originele statische voorbeeld blijft -->
-      <ul class="order-list">
-        <li>
-          <div class="pizzalist">
-            <h2>pizzanaam</h2>
-            <p>prijs</p>
-          </div>
-          <form action="/bestel/verwijder" method="POST" style="display:inline;">
-            <input type="hidden" name="index" value="">
-            <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
-          </form>
-        </li>  
-        
-        <li>
-          <div class="pizzalist">
-            <h2>pizzanaam</h2>
-            <p>prijs</p>
-          </div>
-          <form action="/bestel/verwijder" method="POST" style="display:inline;">
-            <input type="hidden" name="index" value="">
-            <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
-          </form>
-        </li> 
-      </ul>
-      <div class="total">
-        <h2>totaal: <% // prijs%></h2>
+<aside>
+  <h1>Uw Bestelling</h1>
+  <ul class="order-list">
+    <!-- tijdelijk statisch voorbeeld, mag weg -->
+    <li>
+      <div class="pizzalist">
+        <h2>pizzanaam</h2>
         <p>prijs</p>
       </div>
-      <button type="submit" class="orderbuttongreen">Bestellen</button>
-    <% } %>
-  </aside>
-
-  <!-- de code die gebruikt kan worden
-  <main>
-    <h1>Ons Menu</h1>
-    <div class="menu">
-      <% menu.forEach(function(item){ %>
-        <div class="card">
-          <div class="placeholder">Geen foto</div>
-          <p><%= item.naam %></p>
-          <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= item.naam %>">
-            <button type="submit" class="orderbutton">Bestel nu</button>
-          </form>
-        </div>
-      <% }); %>
-    </div>
-  </main>
-
-
- 
-  <aside>
-    <h1>Uw Bestelling</h1>
-    <ul class="order-list">
-        <% bestellingen.forEach(function(b, i){ %>
-          <li>
-            <div class="pizzalist">
-              <h2><%= b %>pizzanaam</h2>
-              <p>prijs</p>
-            </div>
-            <form action="/bestel/verwijder" method="POST" style="display:inline;">
-              <input type="hidden" name="index" value="<%= i %>">
-              <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
-            </form>
-          </li>
-        <% }); %>
-        
-    </ul>
-    <h2>totaal: <% // prijs%></h2>
-    <button type="submit">Bestellen</button>
-  </aside>-->
+      <form action="/bestel/verwijder" method="POST" style="display:inline;">
+        <input type="hidden" name="index" value="">
+        <button type="submit" class="remove-button" aria-label="Verwijder bestelling">Verwijder</button>
+      </form>
+    </li>
+  </ul>
+  <div class="total">
+    <h2>Totaal:</h2>
+    <p>€ 0.00</p>
+  </div>
+  <form action="/bestel/afrekenen" method="POST">
+    <button type="submit" class="orderbuttongreen">Bestellen</button>
+  </form>
+</aside>
 
 <%- include('partials/footer') %>

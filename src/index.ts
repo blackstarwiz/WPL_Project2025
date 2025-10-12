@@ -34,30 +34,25 @@ app.set("port", process.env.PORT ?? 3000);
 // Middleware voor locals
 app.use(setLocals);
 
-//Routers
+// Routers
 app.use("/login", loginRouter());
 app.use("/contact", contactRouter());
-app.use("/bestel", bestelRouter());
+app.use("/bestel", bestelRouter()); // <-- laat GET/POST /bestel door de router afhandelen
 
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "Hello World",
-    page: "index",
-    message: "Hello World",
-  });
+// ✅ ENKEL DEZE HOME-ROUTE (geeft pizzas mee!)
+app.get("/", async (req, res, next) => {
+  try {
+    const pizzas = await getPizzas();
+    res.render("index", {
+      title: "Home",
+      page: "index",
+      pizzas,
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.listen(app.get("port"), () => {
   console.log("Server started on http://localhost:" + app.get("port"));
-});
-
-
-app.get("/", async (req, res) => {
-  const pizzas = await getPizzas();
-  res.render("index", { pizzas });
-});
-
-app.get("/bestel", async (req, res) => {
-  const pizzas = await getPizzas();
-  res.render("bestel", { pizzas });
 });

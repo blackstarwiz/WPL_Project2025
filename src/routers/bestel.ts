@@ -1,29 +1,26 @@
 // src/routers/bestel.ts
 import express, { Router } from 'express';
-import { getPizzas, getBestellingen, addBestelling, deleteBestelling } from '../database';
+import { getPizzas } from '../database';
 
 export default function bestelRouter() {
   const router: Router = express.Router();
 
-  // GET: toon pizzas + huidige bestellingen uit DB
-  router.get('/', async (_req, res, next) => {
-    try {
-      const [pizzas, bestellingen] = await Promise.all([
-        getPizzas(),
-        getBestellingen(),
-      ]);
+  // GET: toon pizzas
+router.get("/", async (req, res, next) => {
+  try {
+    const pizzas = await getPizzas();
+    res.render("bestel", {
+      title: "Bestelpagina",   // ✅ voeg dit toe
+      pizzas
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 
-      res.render('bestel', {
-        title: 'Bestel',
-        page: 'bestel',
-        pizzas,
-        bestellingen,
-      });
-    } catch (e) {
-      next(e);
-    }
-  });
-
+  return router;
+}
+/* ==== 
   // POST: voeg 1 pizza toe aan bestellingen (Naam, Prijs, Aantal)
   router.post('/', async (req, res, next) => {
     try {
@@ -66,3 +63,4 @@ export default function bestelRouter() {
 
   return router;
 }
+ ==== */

@@ -2,7 +2,7 @@
 import 'dotenv/config';
 import mysql from 'mysql2/promise';
 
-/* ==== VERPLICHTE DB-CONNECTIE (geen fallback) ==== */
+/* ==== VERPLICHTE DB-CONNECTIE ==== */
 if (!process.env.DB_HOST || !process.env.DB_USER || !process.env.DB_NAME) {
   throw new Error('DB env vars ontbreken (DB_HOST/DB_USER/DB_NAME).');
 }
@@ -29,50 +29,125 @@ export async function query<T = any>(sql: string, params?: any[]): Promise<T[]> 
   return rows as T[];
 }
 
-/* ==== PIZZA’S ==== */
+/* ==== PIZZAS LADEN UIT DB ==== */
 export type PizzaRow = {
   idmenuitems: number;
   Naam: string;
   Beschrijving: string | null;
-  Prijs: string; // DECIMAL komt als string
+  Prijs: string; // DECIMAL => string
   AfbeeldingURL: string | null;
 };
 
 export async function getPizzas(): Promise<PizzaRow[]> {
-  // filter op categorie-naam 'Pizza' + Beschikbaar = 1
   return query<PizzaRow>(`
-    SELECT mi.idmenuitems, mi.Naam, mi.Beschrijving, mi.Prijs, mi.AfbeeldingURL
+    SELECT
+      ROW_NUMBER() OVER (ORDER BY mi.\`Naam\`) AS idmenuitems,
+      mi.\`Naam\`,
+      mi.\`Beschrijving\`,
+      mi.\`Prijs\`,
+      mi.\`AfbeeldingURL\`
     FROM \`menuitems\` mi
-    LEFT JOIN \`menucategorieën\` mc ON mc.idmenucategorieën = mi.CategorieId
-    WHERE mi.Beschikbaar = 1 AND mc.Naam = 'Pizza'
-    ORDER BY mi.Naam
+    WHERE mi.\`Beschikbaar\` = 1
+    ORDER BY mi.\`Naam\`
   `);
 }
 
-/* ==== BESTELLINGEN ==== */
-export type BestellingRow = {
-  idbestellingen: number;
+/* ==== BESTELLING ==== */
+export type BestellingView = {
+  id: number;             // idbestellingDetails
+  bestellingId: number;   // BestellingId
   Naam: string;
   Prijs: string;
   Aantal: number;
-  created_at: Date;
+  Subtotaal: string;
 };
 
-export async function getBestellingen(): Promise<BestellingRow[]> {
-  return query<BestellingRow>(`
-    SELECT idbestellingen, Naam, Prijs, Aantal, created_at
-    FROM \`bestellingen\`
-    ORDER BY idbestellingen DESC
-  `);
+export async function getBestellingen(limit = 20): Promise<BestellingView[]> {
+  return query<BestellingView>(`
+    SELECT
+      bd.\`idbestellingDetails\` AS id,
+      bd.\`BestellingId\`        AS bestellingId,
+      mi.\`Naam\`                AS Naam,
+      mi.\`Prijs\`               AS Prijs,
+      bd.\`Aantal\`              AS Aantal,
+      bd.\`Subtotaal\`           AS Subtotaal
+    FROM \`bestellingdetails\` bd
+    JOIN \`menuitems\` mi
+      ON mi.\`idmenuItems\` = bd.\`ItemId\`
+    ORDER BY bd.\`idbestellingDetails\` DESC
+    LIMIT ?
+  `, [limit]);
 }
 
 export async function addBestelling(opts: { Naam: string; Prijs: number; Aantal: number; }): Promise<void> {
-  await query(
-    `INSERT INTO \`bestellingen\` (Naam, Prijs, Aantal, created_at) VALUES (?, ?, ?, NOW())`,
-    [opts.Naam, opts.Prijs, opts.Aantal]
-  );
+  const { Naam, Aantal } = opts;
+
+  const items = await query<{ idmenuItems: number; Prijs: string }>(`
+    SELECT \`idmenuItems\`, \`Prijs\`
+    FROM \`menuitems\`
+    WHERE \`Naam\` = ?
+    LIMIT 1
+  `, [Naam]);
+
+  if (items.length === 0) throw new Error(`Menu-item niet gevonden: \${Naam}`);
+
+  const itemId = items[0].idmenuItems;
+  const prijsNum = Number(items[0].Prijs);
+  const aantal = Math.max(1, Number(Aantal) || 1);
+  const subtotaal = prijsNum * aantal;
+
+  await query(`
+    INSERT INTO \`bestellingen\`
+      (\`UserId\`, \`DatumBestelling\`, \`BetaalStatus\`, \`Status\`, \`TransactieId\`, \`TotaalBedrag\`)
+    VALUES (NULL, NOW(), 0, 0, NULL, ?)
+  `, [subtotaal]);
+
+  const header = await query<{ id: number }>(`SELECT LAST_INSERT_ID() as id`);
+  const bestellingId = header[0].id;
+
+  await query(`
+    INSERT INTO \`bestellingdetails\` (\`BestellingId\`, \`ItemId\`, \`Aantal\`, \`Subtotaal\`)
+    VALUES (?, ?, ?, ?)
+  `, [bestellingId, itemId, aantal, subtotaal]);
+
+  await query(`
+    UPDATE \`bestellingen\`
+    SET \`TotaalBedrag\` = (
+      SELECT SUM(\`Subtotaal\`) FROM \`bestellingdetails\` WHERE \`BestellingId\` = ?
+    )
+    WHERE \`idbestellingen\` = ?
+  `, [bestellingId, bestellingId]);
 }
 
-export async function deleteBestelling(idbestellingen: number): Promise<void> {
-  await query(`DELETE FROM \`bestellingen\` WHERE idbestellingen = ?`, [idbestellingen]);
+export async function deleteBestelling(idDetail: number): Promise<void> {
+  const r = await query<{ BestellingId: number }>(`
+    SELECT \`BestellingId\` FROM \`bestellingdetails\`
+    WHERE \`idbestellingDetails\` = ?
+  `, [idDetail]);
+  if (!r.length) return;
+
+  const bestellingId = r[0].BestellingId;
+
+  await query(`
+    DELETE FROM \`bestellingdetails\`
+    WHERE \`idbestellingDetails\` = ?
+  `, [idDetail]);
+
+  await query(`
+    UPDATE \`bestellingen\`
+    SET \`TotaalBedrag\` = (
+      SELECT COALESCE(SUM(\`Subtotaal\`), 0)
+      FROM \`bestellingdetails\`
+      WHERE \`BestellingId\` = ?
+    )
+    WHERE \`idbestellingen\` = ?
+  `, [bestellingId, bestellingId]);
+
+  await query(`
+    DELETE FROM \`bestellingen\`
+    WHERE \`idbestellingen\` = ?
+    AND NOT EXISTS (
+      SELECT 1 FROM \`bestellingdetails\` WHERE \`BestellingId\` = ?
+    )
+  `, [bestellingId, bestellingId]);
 }
