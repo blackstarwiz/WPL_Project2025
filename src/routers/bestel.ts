@@ -1,32 +1,67 @@
-import express, { Router } from "express";
-import { bestellingen, menu } from "../database";
+// src/routers/bestel.ts
+import express, { Router } from 'express';
+import { getPizzas, getBestellingen, addBestelling, deleteBestelling } from '../database';
 
 export default function bestelRouter() {
   const router: Router = express.Router();
 
-  router.get("/", (req, res) => {
-    res.render("bestel", {
-      title: "Bestel",
-      page: "bestel",
-      menu,
-      bestellingen,
-    });
+  // GET: toon pizzas + huidige bestellingen uit DB
+  router.get('/', async (_req, res, next) => {
+    try {
+      const [pizzas, bestellingen] = await Promise.all([
+        getPizzas(),
+        getBestellingen(),
+      ]);
+
+      res.render('bestel', {
+        title: 'Bestel',
+        page: 'bestel',
+        pizzas,
+        bestellingen,
+      });
+    } catch (e) {
+      next(e);
+    }
   });
 
-  router.post("/", (req, res) => {
-    const pizza = req.body.pizza;
-    if (pizza) {
-      bestellingen.push(pizza);
+  // POST: voeg 1 pizza toe aan bestellingen (Naam, Prijs, Aantal)
+  router.post('/', async (req, res, next) => {
+    try {
+      const Naam = String(req.body.Naam || '').trim();
+      const Prijs = Number(req.body.Prijs || 0);
+      const Aantal = Math.max(1, Number(req.body.Aantal || 1));
+
+      if (!Naam || !Prijs) {
+        // Safety: als alleen itemId binnenkomt, lookup doen
+        const itemId = Number(req.body.itemId || 0);
+        if (itemId > 0) {
+          const pizzas = await getPizzas();
+          const found = pizzas.find(p => p.idmenuitems === itemId);
+          if (found) {
+            await addBestelling({ Naam: found.Naam, Prijs: Number(found.Prijs), Aantal });
+            return res.redirect('/bestel');
+          }
+        }
+        return res.status(400).send('Naam en prijs vereist (of geldig itemId).');
+      }
+
+      await addBestelling({ Naam, Prijs, Aantal });
+      res.redirect('/bestel');
+    } catch (e) {
+      next(e);
     }
-    res.redirect("/bestel");
   });
 
-  router.post("/verwijder", (req, res) => {
-    const idx = parseInt(req.body.index, 10);
-    if (!Number.isNaN(idx) && idx >= 0 && idx < bestellingen.length) {
-      bestellingen.splice(idx, 1);
+  // POST /bestel/verwijder
+  router.post('/verwijder', async (req, res, next) => {
+    try {
+      const id = Number(req.body.id || req.body.index); // ondersteunt <input name="id"> of legacy "index"
+      if (!Number.isFinite(id)) return res.status(400).send('Ongeldig id');
+      await deleteBestelling(id);
+      res.redirect('/bestel');
+    } catch (e) {
+      next(e);
     }
-    res.redirect("/bestel");
   });
 
   return router;
