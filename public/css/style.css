@@ -1,168 +1,190 @@
 /*Algemene structuur terug + header + footer)*/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-weight: 400;
-    text-align: left;
-    color: black;
-    font-family: Nunito, sans-serif;
-    text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 400;
+  text-align: left;
+  color: black;
+  font-family: Nunito, sans-serif;
+  text-decoration: none;
 
-    .title{
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: lobster, sans-serif;
-        font-weight: bold;
-    }
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: lobster, sans-serif;
+    font-weight: bold;
+  }
 }
 
 body {
-    display: grid;
-    grid-template-areas:
-        "header header header header"
-        "main   main   main   main"
-        "footer footer footer footer";
-    grid-template-rows: auto 1fr auto;
-    line-height: 1.5;
-    background-color: var(--color-beige);
-    min-height: 100vh;
-    width: 100%;
+  display: grid;
+  grid-template-areas:
+    "header header header header"
+    "main   main   main   main"
+    "footer footer footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  line-height: 1.5;
+  background-color: var(--color-beige);
+  min-height: 100vh;
+  width: 100%;
 }
 
 header {
-    grid-area: header;
+  grid-area: header;
+  align-items: center;
+  justify-content: center; /* Centreer de nav */
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: var(--color-light-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .hamburger-menu {
+    display: none;
+  }
+  .nav {
+    display: flex;
+    gap: 6rem;
+    align-content: center;
+    #logoheader {
+      height: 90px;
+      width: 90px;
+    }
+  }
+
+  #navOpties {
+    display: flex;
     align-items: center;
-    justify-content: center; /* Centreer de nav */
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    background-color: var(--color-light-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .nav{
-        display: flex;
-        gap: 6rem;
-        align-content: center;
-        #logoheader {
-            height: 90px;
-            width: 90px;
-        }
+    flex-grow: 2;
+    a {
+      flex-grow: 1;
     }
+  }
 
-    #navOpties {
-        display: flex;
-        align-items: center;
-        flex-grow: 2;
-        a{
-            flex-grow: 1;
-        }
+  #rightheader {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    #bestelButton {
+      background: var(--primary-color);
+      color: var(--color-light-bg);
+      border: none;
+      padding: 8px 12px;
+      border-radius: var(--border-radius-large);
+      cursor: pointer;
+      text-decoration: none;
     }
-
-    #rightheader {
-        display: flex;
-        align-self: center;
-        align-items: center;
-        #bestelButton{
-            background: var(--primary-color);
-            color: var(--color-light-bg);
-            border: none;
-            padding: 8px 12px;
-            border-radius: var(--border-radius-large);
-            cursor: pointer;
-            text-decoration: none;
-        }
-    }
+  }
 }
 
-
-
-
 main {
-    grid-area: main;
-    
-    box-sizing: border-box;
+  grid-area: main;
+
+  box-sizing: border-box;
 }
 
 /*orderstrook onderaan*/
 .order {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--color-light-bg);
-    align-items: center;
-    border-radius: 4px;
-    padding: --spacing-meduim;
-    margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-light-bg);
+  align-items: center;
+  border-radius: 4px;
+  padding: --spacing-meduim;
+  margin-top: 30px;
 }
 
 .order h1 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.orderbutton, .orderbuttonpizzalist {
-    background-color: var(--primary-color);
-    color: var(--color-light-bg);
-    border: none;
-    padding: 8px 12px;
-    margin-top: 10px;
-    border-radius: var(--border-raduis-small);
-    cursor: pointer;
-    text-decoration: none;
+.orderbutton,
+.orderbuttonpizzalist {
+  background-color: var(--primary-color);
+  color: var(--color-light-bg);
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: var(--border-raduis-small);
+  cursor: pointer;
+  text-decoration: none;
 }
 
 footer {
-    height: 10vh;
-    grid-area: footer;
-    background: var(--primary-color);
-    display: flex;
-    align-items: center;
+  height: 10vh;
+  grid-area: footer;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
 
-    
-
-    #logoConFooter{
-        padding-left: 1rem;
-        #logofooter {
-            height: 55px;
-            width: 55px;
-        }
+  #logoConFooter {
+    padding-left: 1rem;
+    #logofooter {
+      height: 55px;
+      width: 55px;
     }
-    #marker{
-       text-align: center;
-        align-self: center;
-        flex-grow: 2;
+  }
+  #marker {
+    text-align: center;
+    align-self: center;
+    flex-grow: 2;
+  }
+  #contact {
+    padding-right: 1rem;
+    ul {
+      display: flex;
+      gap: 1rem;
     }
-    #contact{
-        padding-right: 1rem;
-        ul{
-            display: flex;
-            gap: 1rem;
-        }
-    }
+  }
 }
 
-
 h1 {
-    font-family: Lobster;
-    font-size: 2.3rem;
+  font-family: Lobster;
+  font-size: 2.3rem;
 }
 
 h2 {
-    font-family: lora;
-    font-size: 2rem;
+  font-family: lora;
+  font-size: 2rem;
 }
 
 p {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
-
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 @media (max-width: 1000px) {
+  header {
     .leftheader {
-        padding-right: 2rem;
+      padding-right: 2rem;
     }
+    .nav {
+      flex-direction: column;
+      gap: 1rem;
+      .title {
+        justify-content: center;
+      }
+    }
+
+    #navOpties {
+      flex-direction: column;
+    }
+    #navOpties:active {
+      display: flex;
+    }
+  }
+
+  footer {
+    flex-direction: column;
+    height: auto;
+    div {
+      margin-top: 5px;
+    }
+  }
 }
