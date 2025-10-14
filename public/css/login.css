@@ -26,14 +26,16 @@
     align-items: baseline;
 }
 
-button {
-    background: var(--primary-color);
-    color: var(--color-light-bg);
-    border: none;
-    padding: 8px 40px;
-    margin-top: 10px;
-    border-radius: var(--border-radius-large);
-    cursor: pointer;
-    display: block;
-    margin: 20px auto 10px auto;
+form {
+    button {
+        background: var(--primary-color);
+        color: var(--color-light-bg);
+        border: none;
+        padding: 8px 40px;
+        margin-top: 10px;
+        border-radius: var(--border-radius-large);
+        cursor: pointer;
+        display: block;
+        margin: 20px auto 10px auto;
+    }
 }
