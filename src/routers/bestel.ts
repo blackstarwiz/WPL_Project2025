@@ -6,7 +6,7 @@ export default function bestelRouter() {
 
   router.get("/", (req, res) => {
     res.render("bestel", {
-      title: "Bestel",
+      title: "Pizza Gusto",
       page: "bestel",
       menu,
       bestellingen,
@@ -14,6 +14,7 @@ export default function bestelRouter() {
   });
 
   router.post("/", (req, res) => {
+    console.log("POST /bestel body:", req.body);
     const pizza = req.body.pizza;
     if (pizza) {
       bestellingen.push(pizza);

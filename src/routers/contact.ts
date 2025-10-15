@@ -5,7 +5,7 @@ export default function contactRouter() {
 
   router.get("/", (req, res) => {
     res.render("contact", {
-      title: "Contact",
+      title: "Pizza Gusto",
       page: "contact",
     });
   });

@@ -1,90 +1,74 @@
 <%- include('partials/header') %>
 
+ 
+
 <main>
+
   <!-- Code -->
-  <h1>Populaire Pizza's</h1>
+ <section id="intro">
+    <div id="overMarco">
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, harum.</p>
+      <a class="anchor">Over Pizza Gusto </a>
+    </div>
+  </section>
+
   <section class="highlights">
-    <article class="topitem">
-      <img src="/assets/images/pizza_hawaii.png" alt="" />
-      <h2>Hawaii</h2>
-      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
-    </article>
-    <article class="topitem">
-      <img src="/assets/images/pizza_margherita.png" alt="" />
-      <h2>Margherita</h2>
-      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
-    </article>
-    <article class="topitem">
-      <img src="/assets/images/pizza_fungi.png" alt="" />
-      <h2>Fungi</h2>
-      <p>info Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex fugit facilis porro architecto repudiandae alias eveniet optio corporis iusto iure.</p>
-    </article>
+      <h1>Populaire Pizza's</h1>
+    <div id="topitems">
+        <article class="topitem">
+          <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="" />
+          <h2>Hawaii</h2>
+          <p>prijs</p>
+          <a href="/bestel" class="topitemButton"> Bestel nu </a>
+        </article>
+        <article class="topitem">
+          <img src="/assets/images/pizza_images/pizza_margherita.png" alt="" />
+          <h2>Margheria</h2>
+          <p>prijs</p>
+          <a href="/bestel" class="topitemButton"> Bestel nu </a>
+        </article>
+          <article class="topitem">
+          <img src="/assets/images/pizza_images/pizza_fungi.png" alt="" />
+          <h2>Fungi</h2>
+          <p>prijs</p>
+          <a href="/bestel" class="topitemButton"> Bestel nu </a>
+        </article>
+        
+    </div>
   </section>
 
-  <div class="middensection">
-  
-  <section class="menulist">
-    <% // for loop van alle pizzas%>
-    <h1>Pizza</h1>
-    <ul>
-        <li>
-            <div class="pizzalist">
-                <h2>pizzanaam</h2> 
-                <p><span>prijs</span> </p> 
-            </div>
-            <p>info</p>
-        </li>
-        <li>
-            <div class="pizzalist">
-                <h2>pizzanaam</h2> 
-                <p><span>prijs</span> </p> 
-            </div>
-            <p>info</p>
-        </li>
-    </ul>
-    <a class="orderbuttonpizzalist" href="/bestel">Menu</a>      
-  </section>
-  </div>
+  <section id="review">
 
-  <h1>Over ons</h1>
-  <section class="aboutUs">
-    
-    <img src="/assets/images/Marco_Donatelli.png" alt="Marco Donatelli">
-     
-    <p>Ik groeide op in een klein stadje in de buurt van Napels, Italië, omringd door de rijke culinaire tradities van mijn familie. Al op jonge leeftijd was ik betoverd door de magie die zich in de keuken ontvouwde, waar mijn grootmoeder eenvoudige ingrediënten veranderde in verrukkelijke gerechten. Geïnspireerd door deze vroege ervaringen, verfijnde ik mijn vaardigheden aan een prestigieuze culinaire school in Rome. <br> <br>
-
-    In 2015 besloot ik mijn passie voor de authentieke Italiaanse keuken naar het hart van Antwerpen te brengen. Ik had een plek voor ogen waar mensen de ware essentie van Italiaans dineren konden ervaren - genieten van maaltijden die met liefde en de beste lokale ingrediënten waren gemaakt. En zo werd Gusto Italiano geboren. Het restaurant werd al snel een geliefde plek, bekend om de levendige sfeer, zelfgemaakte pasta en een menu dat met de seizoenen mee verandert, wat mijn toewijding aan versheid en kwaliteit weerspiegelt. <br> <br>
-
-    Mijn visie gaat verder dan eten; hij streeft ernaar een warme, uitnodigende ruimte te creëren waar elke maaltijd aanvoelt als een viering van het leven en van familie - waarden die diep geworteld zijn in de Italiaanse cultuur.</p>   
-  </section>
-
-  <section class="reviews">
     <h1>Reviews</h1>
-    <article class="reviewProfile">
-    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
+    <div id="reviewItems">
+      <article class="reviewItem">
+       <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_margherita.png" alt="" />person1</h2>
+       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum id dolorem vitae corrupti voluptatem numquam exercitationem nobis labore blanditiis repellat?</p>
+      </article>
+      <article class="reviewItem">
+        <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_margherita.png" alt="" />person2</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero ea a voluptate cumque repellendus laudantium doloribus, facilis aliquam est et unde consequatur tenetur corporis asperiores rem ipsam delectus perspiciatis id eveniet praesentium beatae. Assumenda deserunt expedita alias fugiat! Enim perspiciatis molestiae quaerat repudiandae repellat ab nihil doloribus quo iste dolorum!</p>
+      </article>
+      <article class="reviewItem">
+        <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_fungi.png" alt="" />person3</h2>
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quo est, illo qui rerum similique incidunt dolorum ipsum deserunt porro! Praesentium ducimus amet fugiat officiis, nobis eligendi. Consequatur id magnam illum illo. Est atque et neque ullam ad dolores odio delectus porro! Itaque a dolorum quaerat nam debitis quia saepe consequatur placeat adipisci! Sint eius corrupti dicta tempore iure minima inventore! Sed dolorem, corporis eaque aut harum quaerat fuga ex ipsam, alias modi soluta recusandae!</p>
+      </article>
+    </div>
     
-        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
-        <p> <% //naam laten inlopen%> naam</p>
-    </article>
-    <article class="reviewProfile">
-    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
-    
-        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
-        <p> <% //naam laten inlopen%> naam</p>
-    </article>
-    <article class="reviewProfile">
-    <p class="quote">"<% //revieuw laten inlopen%> test review"</p>
-    
-        <img src="<% //foto's laten inlopen%> /assets/images/Marco_Donatelli.png" alt="">
-        <p> <% //naam laten inlopen%> naam</p>
-    </article>
   </section>
   
-
-  <section class="order">
-    <h1>BESTEL NU</h1>
-    <a class="orderbutton" href="/bestel">Bestel</a>
-  </section>
-</main>
+  <section class="aboutUs">
+    <h1>Over ons</h1>
+    <div id="verhaal">
+      <img src="/assets/images/Marco_Donatelli.png" alt="Marco Donatelli">
+     
+      <p>
+        Ik groeide op in een klein stadje in de buurt van Napels, Italië, omringd door de rijke culinaire tradities van mijn familie. Al op jonge leeftijd was ik betoverd door de magie die zich in de keuken ontvouwde, waar mijn grootmoeder eenvoudige ingrediënten veranderde in verrukkelijke gerechten. Geïnspireerd door deze vroege ervaringen, verfijnde ik mijn vaardigheden aan een prestigieuze culinaire school in Rome. <br> <br>
+        In 2015 besloot ik mijn passie voor de authentieke Italiaanse keuken naar het hart van Antwerpen te brengen. Ik had een plek voor ogen waar mensen de ware essentie van Italiaans dineren konden ervaren - genieten van maaltijden die met liefde en de beste lokale ingrediënten waren gemaakt. En zo werd Gusto Italiano geboren. Het restaurant werd al snel een geliefde plek, bekend om de levendige sfeer, zelfgemaakte pasta en een menu dat met de seizoenen mee verandert, wat mijn toewijding aan versheid en kwaliteit weerspiegelt. <br> <br>
+        Mijn visie gaat verder dan eten; hij streeft ernaar een warme, uitnodigende ruimte te creëren waar elke maaltijd aanvoelt als een viering van het leven en van familie - waarden die diep geworteld zijn in de Italiaanse cultuur.
+      </p>   
+  
+    </div>
+    </section>
 
 <%- include('partials/footer') %>
