@@ -32,6 +32,7 @@ main {
       border-radius: 2rem;
       cursor: pointer;
       text-decoration: none;
+      display: inline-block;
     }
   }
 }
@@ -172,6 +173,22 @@ main {
   margin: 0 auto;
   margin-bottom: 40px;
 }
+
+button:hover,
+.topitemButton:hover,
+#intro #overMarco .anchor:hover,
+.anchor:hover { 
+  background-color: var(--color-green-dark);
+  transform: scale(1.05);
+}
+
+button:active,
+.topitemButton:active,
+#intro #overMarco .anchor:active,
+.anchor:active { 
+  transform: scale(0.95);
+}
+
 @media screen and (max-width: 1100px) {
   #intro {
     height: 30rem;

@@ -1,144 +1,142 @@
 main {
-  display: flex;
-  flex-direction: row;
-
-  padding: 0 --spacing-medium;
-  box-sizing: border-box;
-
-  /*menu*/
-  .menu {
-    width: fit-content;
-    padding-left: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    flex-direction: row;
+    padding: 0 --spacing-medium;
 
-    #bestsellers {
-      display: flex;
-      gap: 1rem;
-      flex-direction: column;
-    }
-    .listItem {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin: 1rem 0;
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-
-      border: solid var(--color-green-dark);
-
-      img {
-        margin: 0 1rem;
-        margin-top: 1rem;
-        max-width: 20rem;
-        border-radius: 4%;
-      }
-
-      h1 {
-        align-self: center;
-        font-size: 2.1rem;
-      }
-      h2 {
-        align-self: center;
-        font-size: 1rem;
-      }
-      p,
-      h1,
-      h2 {
-        height: fit-content;
-        text-align: left;
-        padding-left: 0.3rem;
-      }
-      button {
-        margin: 1rem 0;
-        border-radius: 20rem;
-      }
-      ul {
-        margin: 0.8rem 0;
+    /*menu*/
+    .menu {
+        width: fit-content;
+        padding-left: 2rem;
         display: flex;
         flex-direction: column;
-        gap: 0.35rem;
+        gap: 2rem;
 
-        div {
-          border: solid red;
-          display: flex;
-          justify-content: space-between;
-
-          afmeetingPizza,
-          .prijsPizza {
-            margin: 0 0.4rem 0 0.4rem;
-          }
-          p {
-            font-size: 1rem;
-            color: var(--color-grey-dark);
-          }
+        #bestsellers {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
         }
-      }
-      form {
-        align-self: center;
-      }
-    }
-  }
+        .listItem {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
 
-  /*inhoud aside*/
-  aside {
-    padding: 2rem;
-    height: fit-content;
-    flex-direction: column;
-    position: sticky;
-    margin-top: 11rem;
-    right: 10rem;
-    top: var(--spacing-medium);
-    h1 {
-      font-size: 1.75rem;
-    }
-    .pizzalist {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .bestelButton {
-      padding: 8px 12px;
-      margin-top: 10px;
+            border: solid var(--color-green-dark);
+
+            img {
+                margin: 0 1rem;
+                margin-top: 1rem;
+                max-width: 20rem;
+                border-radius: 4%;
+            }
+
+            h1 {
+                align-self: center;
+                font-size: 2.1rem;
+            }
+            h2 {
+                align-self: center;
+                font-size: 1rem;
+            }
+            p,
+            h1,
+            h2 {
+                height: fit-content;
+                text-align: left;
+                padding-left: 0.3rem;
+            }
+            button {
+                margin: 1rem 0;
+                border-radius: 20rem;
+            }
+            ul {
+                margin: 0.8rem 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.35rem;
+
+                div {
+                    border: solid red;
+                    display: flex;
+                    justify-content: space-between;
+
+                    afmeetingPizza,
+                    .prijsPizza {
+                        margin: 0 0.4rem 0 0.4rem;
+                    }
+                    p {
+                        font-size: 1rem;
+                        color: var(--color-grey-dark);
+                    }
+                }
+            }
+            form {
+                align-self: center;
+            }
+        }
     }
 
-    .remove-button {
-      padding: 8px 12px;
-      margin-top: 5px;
-    }
+    /*inhoud aside*/
+    aside {
+        padding: 2rem;
+        height: fit-content;
+        flex-direction: column;
+        position: sticky;
+        margin-top: 11rem;
+        right: 10rem;
+        top: var(--spacing-medium);
+        h1 {
+            font-size: 1.75rem;
+        }
+        .pizzalist {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .bestelButton {
+            padding: 8px 12px;
+            margin-top: 10px;
+        }
 
-    .total {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: solid black 2px;
-      margin-top: var(--spacing-medium);
+        .remove-button {
+            padding: 8px 12px;
+            margin-top: 5px;
+        }
+
+        .total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: solid black 2px;
+            margin-top: var(--spacing-medium);
+        }
+        form {
+            padding: 5rem;
+        }
     }
-    form {
-      padding: 5rem;
-    }
-  }
 }
 
 /*algemeen uiterlijk*/
 .card,
 aside {
-  background-color: var(--color-items-card);
-  border-radius: var(--border-radius-large);
-  border: solid var(--primary-color);
-  box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-items-card);
+    border-radius: var(--border-radius-large);
+    border: solid var(--primary-color);
+    box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
 }
 .remove-button,
 .bestelButton {
-  background-color: var(--primary-color);
-  color: var(--color-light-bg);
-  border: none;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--color-light-bg);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 @media (max-width: 800px) {

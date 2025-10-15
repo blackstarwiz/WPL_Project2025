@@ -29,6 +29,7 @@
       href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
+    <script src="/js/hamburger.js" defer></script>
     <title><%= title %></title>
   </head>
   <body>
@@ -41,12 +42,27 @@
   <body>
     <header>
       <div class="nav">
-        <a href="/" class="title"
-          ><img src="/assets/images/Logo.png" alt="Logo" id="logoheader" />Pizza
-          Gusto</a
-        >
+        <!-- Logo -->
+        <a href="/" class="title">
+          <img src="/assets/images/Logo.png" alt="Logo" id="logoheader" />
+          <span class="title-text">Pizza Gusto</span>
+        </a>
 
-        <!-- Linker kant -->
+        <!-- Hamburger-menu knop -->
+        <button class="hamburger-menu" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Linker kant Desktop nav-->
+        <div id="navOptiesMobile" class="hidden">
+          <a href="/bestel" class="mobileNavButtons">Menu</a>
+          <a href="/contact" class="mobileNavButtons">Contact</a>
+          <a href="/login" class="mobileNavButtons">Login</a>
+        </div>
+
+        <!-- Linker kant Desktop nav-->
         <div id="navOpties">
           <a href="/bestel">Menu</a>
           <a href="/contact">Contact</a>
@@ -65,6 +81,7 @@
         </div>
       </div>
     </header>
+    <div class="menu-overlay" id="menuOverlay"></div>
   </body>
 </html>
 

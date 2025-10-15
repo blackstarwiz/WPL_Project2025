@@ -1,5 +1,7 @@
 /*Algemene structuur terug + header + footer)*/
-
+html {
+  overflow-y: scroll; /* scrollbar altijd tonen */
+}
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +16,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+  .title-text {
     font-family: lobster, sans-serif;
     font-weight: bold;
   }
@@ -40,12 +44,14 @@ body {
   grid-template-areas:
     "flash flash flash flash"
     "header header header header"
-    "main main main main"
+    "main   main   main   main"
     "footer footer footer footer";
   grid-template-rows: auto auto 1fr auto; /* flash, header, main, footer */
-  min-height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   line-height: 1.5;
-  background-color: #f7f6d7;
+  background-color: var(--color-beige);
+  min-height: 100vh;
+  width: 100%;
 }
 
 header {
@@ -92,12 +98,15 @@ header {
       cursor: pointer;
       text-decoration: none;
     }
+    #bestelButton:hover {
+      background-color: var(--color-green-dark);
+      transform: scale(1.05); /* Subtiele vergroting */
+    }
   }
 }
 
 main {
   grid-area: main;
-
   box-sizing: border-box;
 }
 
@@ -114,7 +123,6 @@ main {
 
 .order h1 {
   font-weight: bold;
-  font-weight: bold;
 }
 
 .orderbutton,
@@ -124,7 +132,7 @@ main {
   border: none;
   padding: 8px 12px;
   margin-top: 10px;
-  border-radius: var(--border-raduis-small);
+  border-radius: var(--border-radius-small);
   cursor: pointer;
   text-decoration: none;
 }
@@ -165,18 +173,120 @@ h1 {
 h2 {
   font-family: lora;
   font-size: 2rem;
-  font-family: lora;
-  font-size: 2rem;
 }
 
 p {
-  font-size: 1.3rem;
   font-size: 1.3rem;
 }
 
 ul {
   list-style-type: none;
-  list-style-type: none;
+}
+
+/* Hover-effect voor alle buttons */
+button:hover,
+.orderbutton:hover,
+.orderbuttonpizzalist:hover,
+#bestelButton:hover {
+  background-color: var(--color-green-dark);
+  transform: scale(1.05); /* Subtiele vergroting */
+}
+/* Actie-effect voor alle buttons */
+button:active,
+.orderbutton:active,
+.orderbuttonpizzalist:active,
+#bestelButton:active {
+  transform: scale(0.95); /* Subtiele verkleining bij klik */
+}
+
+.hidden {
+  display: none;
+}
+#navOptiesMobile {
+  position: fixed; /* Zorg dat het menu bovenop de content verschijnt */
+  left: 0;
+  top: 0;
+  width: 200px; /* Breedte van het menu */
+  height: 100%; /* Volledige hoogte */
+  background-color: var(--color-light-bg); /* Achtergrondkleur */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Links uitlijnen */
+  gap: 2rem; /* Ruimte tussen links */
+  padding: 1rem; /* Binnenruimte */
+  z-index: 1000; /* Zorg dat het menu bovenop alles staat */
+  transform: translateX(-100%); /* Begin buiten het scherm */
+  transition: transform 0.3s ease-in-out; /* Animatie bij openen/sluiten */
+
+  &.show {
+    transform: translateX(0); /* Breng het menu in beeld */
+  }
+
+  a {
+    display: inline-block;
+    width: 100%; /* Maak de links de volledige breedte */
+    font-size: 2rem; /* Maak de links groter */
+    color: var(--primary-color); /* Tekstkleur */
+    padding: 0.5rem 1rem;
+    &:hover {
+      color: var(--color-green-dark);
+      transform: scale(1.05); /* Subtiele vergroting */
+    }
+
+    &:active {
+      transform: scale(0.95); /* Subtiele verkleining bij klik */
+    }
+  }
+}
+
+.leaflet-container,
+.leaflet-pane,
+.leaflet-map-pane {
+  z-index: 0; /* Zorg dat de kaart onder andere elementen blijft */
+}
+.hamburger-menu {
+  &.open {
+    z-index: 1100; /* Zorg dat de hamburger boven het menu staat */
+
+    span:nth-child(1) {
+      transform: rotate(45deg);
+      position: absolute;
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg);
+      position: absolute;
+    }
+  }
+}
+
+header {
+  & .nav {
+    #logoheader {
+      z-index: 1100; /* Zorg dat het logo boven het menu staat */
+    }
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  pointer-events: all;
 }
 
 @media (max-width: 1000px) {
@@ -185,10 +295,37 @@ ul {
       padding-right: 2rem;
     }
     .nav {
-      flex-direction: column;
+      #navOpties {
+        display: none;
+      }
+      #rightheader {
+        margin-right: 0px;
+        margin-left: auto;
+      }
+      align-items: center;
       gap: 1rem;
       .title {
+        .title-text {
+          display: none;
+        }
+      }
+      .hamburger-menu {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        span {
+          display: block;
+          width: 40px;
+          height: 3px;
+          background: var(--primary-color);
+          border-radius: 3px;
+          transition: transform 0.25s ease, opacity 0.2s ease;
+        }
       }
     }
 
