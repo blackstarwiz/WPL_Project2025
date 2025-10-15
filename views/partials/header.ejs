@@ -25,6 +25,11 @@
     <title><%= title %></title>
   </head>
   <body>
+    <% if (message) { %>
+    <div class="flash-message <%= message.type %>" style="grid-area: flash">
+      <%= message.text %>
+    </div>
+    <% } %>
     <header>
       <div class="nav">
         <!-- Linker kant -->

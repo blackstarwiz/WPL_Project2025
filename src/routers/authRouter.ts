@@ -14,7 +14,6 @@ export default function loginRouter() {
       res.render("login", {
         title: "Login",
         page: "login",
-        message: "Please log in",
         user: res.locals.user,
       });
     }

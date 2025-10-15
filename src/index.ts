@@ -46,10 +46,10 @@ app.use("/contact", secureMiddleware, contactRouter());
 app.use("/bestel", secureMiddleware, bestelRouter());
 
 app.get("/", secureMiddleware, (req, res) => {
+  console.log(res.locals.message);
   res.render("index", {
     title: "Hello World",
     page: "index",
-    message: "Hello World",
   });
 });
 
