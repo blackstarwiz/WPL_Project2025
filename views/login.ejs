@@ -1,24 +1,34 @@
 <%- include('partials/header') %>
 
-
 <main>
-        <div class="login-div">
-            <h2>Inloggen</h2>
-            <form>
-                <label for="email">E-Mail</label>
-                <input type="email" placeholder="voorbeeld@example.com" id="email" required>
+  <div class="login-div">
+    <h2>Inloggen</h2>
+    <form action="/login" method="post">
+      <label for="email">E-Mail</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="voorbeeld@example.com"
+        id="email"
+        required
+      />
 
-                <label for="password">Wachtwoord</label>
-                <input type="password" placeholder="••••••••••••" id="password" required>
+      <label for="password">Wachtwoord</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="••••••••••••"
+        id="password"
+        required
+      />
 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Ingelogd blijven</label>
-                </div>
+      <!-- <div class="checkbox-group">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Ingelogd blijven</label>
+      </div> -->
 
-                <button type="submit">Inloggen</button>
-            </form>
-        </div>
-        
-    </main>
+      <button type="submit">Inloggen</button>
+    </form>
+  </div>
+</main>
 <%- include('partials/footer') %>

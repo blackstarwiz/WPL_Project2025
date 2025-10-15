@@ -5,6 +5,8 @@ export default function bestelRouter() {
   const router: Router = express.Router();
 
   router.get("/", (req, res) => {
+    console.log("Menu bestaat:", typeof menu !== "undefined");
+    console.log("Aantal items:", menu.length);
     res.render("bestel", {
       title: "Bestel",
       page: "bestel",

@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html lang="nl-be">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
 
     <% if (page === 'index') { %>
-        <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css" />
+    <% } %> <% if (page === 'contact') { %>
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="/css/map.css" />
+    <% } %> <% if (page === 'bestel') { %>
+    <link rel="stylesheet" href="/css/bestel.css" />
+    <% } %> <% if (page === 'login') { %>
+    <link rel="stylesheet" href="/css/login.css" />
     <% } %>
-
-    <% if (page === 'contact') { %>
-        <link rel="stylesheet" href="/css/contact.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-        <link rel="stylesheet" href="/css/map.css">
-    <% } %>
-
-    <% if (page === 'bestel') { %>
-        <link rel="stylesheet" href="/css/bestel.css">
-    <% } %>
-
-    <% if (page === 'login') { %>
-        <link rel="stylesheet" href="/css/login.css">
-    <% } %>   
 
     <title><%= title %></title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-
-        <div class="nav">
+      <div class="nav">
         <!-- Linker kant -->
         <div class="leftheader">
-            <a href="/">
-                <img src="/assets/images/Logo.png" alt="Logo" id="logo">
-            </a>
-            <a href="/" id="title" >
-                Pizza Gusto
-            </a>
-            <a href="/bestel">
-                Menu
-            </a>
-            <a href="/contact">
-                Contact
-            </a>
-            <a href="/login">
-                Login
-            </a>
+          <a href="/">
+            <img src="/assets/images/Logo.png" alt="Logo" id="logo" />
+          </a>
+          <a href="/" id="title"> Pizza Gusto </a>
+          <a href="/bestel"> Menu </a>
+          <a href="/contact"> Contact </a>
+          <% if (user) { %>
+          <form action="logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+          <% } else{ %>
+          <a href="/login"> Login </a>
+          <% } %>
         </div>
 
         <!-- Rechter kant -->
         <div>
-            <a href="/bestel" class="rightheader">
-                Bestel nu
-            </a>
+          <a href="/bestel" class="rightheader"> Bestel nu </a>
         </div>
-    </div>
-    </header >
+      </div>
+    </header>
+  </body>
+</html>

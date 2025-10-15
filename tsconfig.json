@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",                       /* JavaScript versie voor output */
-    "module": "commonjs",                     /* Module systeem */
-    "rootDir": "./src",                        /* Alleen src/ wordt gecompileerd */
-    "outDir": "./dist",                        /* Gecompileerde bestanden gaan naar dist/ */
-    "esModuleInterop": true,                   /* Voor importeren van CommonJS modules */
-    "forceConsistentCasingInFileNames": true,  /* Fout bij verkeerde bestandsnamen-casing */
-    "strict": true,                            /* Alle strict type checks aan */
-    "skipLibCheck": true                       /* Skip type checking van .d.ts bestanden */
+    "target": "es2016" /* JavaScript versie voor output */,
+    "module": "commonjs" /* Module systeem */,
+    "rootDir": "./src" /* Alleen src/ wordt gecompileerd */,
+    "outDir": "./dist" /* Gecompileerde bestanden gaan naar dist/ */,
+    "esModuleInterop": true /* Voor importeren van CommonJS modules */,
+    "forceConsistentCasingInFileNames": true /* Fout bij verkeerde bestandsnamen-casing */,
+    "strict": true /* Alle strict type checks aan */,
+    "skipLibCheck": true /* Skip type checking van .d.ts bestanden */
   },
-  "include": ["src/**/*"],                     /* Alleen src/ bestanden worden gecompileerd */
-  "exclude": ["node_modules", "tests"]        /* node_modules en tests worden overgeslagen */
+  "include": ["src/**/*"] /* Alleen src/ bestanden worden gecompileerd */,
+  "exclude": [
+    "node_modules",
+    "tests"
+  ] /* node_modules en tests worden overgeslagen */
 }
