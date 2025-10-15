@@ -32,6 +32,13 @@
     <title><%= title %></title>
   </head>
   <body>
+    <% if (message) { %>
+    <div class="flash-message <%= message.type %>" style="grid-area: flash">
+      <%= message.text %>
+    </div>
+    <% } %>
+  </head>
+  <body>
     <header>
       <div class="nav">
         <a href="/" class="title"
@@ -50,6 +57,11 @@
         <div id="rightheader">
           <a href="/bestel" id="bestelButton"> Bestel nu </a>
         </div>
+      </div>
+    </header>
+  </body>
+</html>
+
       </div>
     </header>
   </body>
