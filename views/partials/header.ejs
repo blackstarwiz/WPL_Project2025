@@ -50,7 +50,13 @@
         <div id="navOpties">
           <a href="/bestel">Menu</a>
           <a href="/contact">Contact</a>
-          <a href="/login">Login</a>
+          <% if (user) { %>
+          <form action="logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+          <%} else {%>
+            <a href="/login">Login</a>
+          <%} %>
         </div>
 
         <!-- Rechter kant -->

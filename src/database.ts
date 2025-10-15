@@ -1,5 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
+import { MongoClient } from "mongodb";
+import { Request } from "express";
+import { User } from "./types/interface";
+import bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 
 let naam: string[] = [
   "Calzone",
@@ -16,11 +21,6 @@ let naam: string[] = [
   "Salami",
   "Tonno",
 ];
-import { MongoClient } from "mongodb";
-import { Request } from "express";
-import { User } from "./types/interface";
-import bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
 
 export const MONGODB_URI =
   typeof process.env.MONGO_URI === "string" ? process.env.MONGO_URI : "";
@@ -54,7 +54,7 @@ async function createInitialUser() {
     });
   } catch (e: any) {
     console.error("Fout in createInitialUser:", e.message);
-    throw e; // Zorg dat de fout doorgaat naar de 'connect' catch blok
+    throw e;
   }
 }
 
@@ -78,17 +78,12 @@ export function isAuthenticate(req: Request): boolean {
   const token: string | undefined = req.cookies?.jwt;
 
   if (!token) {
-    return false; // Geen token gevonden
+    return false;
   }
-
   try {
-    // Gebruik jwt.verify synchroon (zonder callback) om direct true/false te krijgen
     jwt.verify(token, process.env.JWT_SECRET!);
-
-    // Als de verificatie slaagt zonder fouten, is de gebruiker ingelogd
     return true;
   } catch (err) {
-    // Als er een fout is (bijv. verlopen token), is de gebruiker niet geldig ingelogd
     return false;
   }
 }
@@ -99,28 +94,6 @@ export interface MenuItem {
 }
 
 export let bestellingen: string[] = [];
-
-async function exit() {
-  try {
-    await client.close();
-    console.log("Disconnected from database");
-  } catch (error) {
-    console.error(error);
-  }
-  process.exit(0);
-}
-
-export async function connect() {
-  try {
-    console.log("Poging tot database verbinding en initialisatie..."); // NIEUW
-    await createInitialUser();
-    await client.connect();
-    console.log("Connected to database");
-    process.on("SIGINT", exit);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 function humanNameFromFilename(filename: string) {
   try {
@@ -154,3 +127,25 @@ function loadMenuFromDir(
 }
 
 export let menu: MenuItem[] = loadMenuFromDir();
+
+async function exit() {
+  try {
+    await client.close();
+    console.log("Disconnected from database");
+  } catch (error) {
+    console.error(error);
+  }
+  process.exit(0);
+}
+
+export async function connect() {
+  try {
+    console.log("Poging tot database verbinding en initialisatie...");
+    await createInitialUser();
+    await client.connect();
+    console.log("Connected to database");
+    process.on("SIGINT", exit);
+  } catch (error) {
+    console.error(error);
+  }
+}
