@@ -140,7 +140,9 @@ main {
 footer {
   height: 10vh;
   grid-area: footer;
-  background: var(--primary-color);
+  background: #f5f5f5;
+  box-shadow: -3px -1px 21px 11px rgba(0, 0, 0, 0.1);
+
   display: flex;
   align-items: center;
 

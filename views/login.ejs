@@ -1,23 +1,27 @@
 <%- include('partials/header') %>
 
 <main>
-  <div class="login-div">
-    <h2>Inloggen</h2>
+  <div id="login-div">
+    <div class="login_div">
+      <h2>Inloggen</h2>
+      <h3>Geen account? <span id="aanmeldform">Registreer</span></h3>
+    </div>
+
     <form action="/login" method="post">
-      <label for="email">E-Mail</label>
+      <label for="log-email"></label>
       <input
         type="email"
         name="email"
-        placeholder="voorbeeld@example.com"
+        placeholder="Uw emailadres"
         id="email"
         required
       />
 
-      <label for="password">Wachtwoord</label>
+      <label for="password"></label>
       <input
         type="password"
         name="password"
-        placeholder="••••••••••••"
+        placeholder="Wachtwoord"
         id="password"
         required
       />
@@ -30,5 +34,71 @@
       <button type="submit">Inloggen</button>
     </form>
   </div>
+
+  <!-- start html registreer-->
+  <div id="registreer-div">
+    <div id="inhoudReg">
+      <div class="registreer_div">
+        <h2>Registreren</h2>
+        <h3>
+          <img src="\assets\nav_login\arrowhead-left.svg" alt="" srcset="" />
+          <span id="inlogForm">terug</span>
+        </h3>
+      </div>
+
+      <form action="/registreer" method="post" id="persoon_data">
+        <label for="reg-email"></label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Uw emailadres"
+          id="reg-email"
+          required
+        />
+
+        <label for="password"></label>
+        <input
+          type="password"
+          name="password"
+          id="reg-password"
+          placeholder="Kies een wachtwoord"
+          required
+        />
+
+        <!-- <div class="checkbox-group">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Ingelogd blijven</label>
+      </div> -->
+      </form>
+      <form action="/registreer" method="post" id="adres_data">
+        <input type="text" id="naam" placeholder="Voornaam" />
+        <input type="text" id="achternaam" placeholder="Achternaam" />
+        <label for="phoneNumber"></label>
+        <input
+          type="tel"
+          name="phoneNumber"
+          placeholder="+32 *** ** ** **"
+          id="reg-tel"
+          pattern="^\+32\s?\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$"
+          required
+        />
+        <input type="text" id="adres" placeholder="Uw adres" />
+        <input type="text" id="adres_num" placeholder="Uw Huisnummer" />
+        <input type="text" id="extra" placeholder="Niveau" />
+        <input list="provincie" id="provincie" placeholder="provincie" />
+        <datalist id="provincie">
+          <option value="Antwerpen"></option>
+        </datalist>
+        <input list="postcode" id="postcode" placeholder="postcode" />
+
+        <datalist id="postcode">
+          <option value="2000"></option>
+        </datalist>
+      </form>
+
+      <button type="submit">Inloggen</button>
+    </div>
+  </div>
 </main>
+<script src="/js/inlog_page.js"></script>
 <%- include('partials/footer') %>
