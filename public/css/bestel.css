@@ -101,7 +101,7 @@ main {
         justify-content: space-between;
         z-index: -1;
 
-        min-height: 35rem;
+        min-height: 25rem;
         min-width: 25rem;
         height: fit-content;
         padding: 2rem;

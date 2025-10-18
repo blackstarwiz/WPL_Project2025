@@ -6,7 +6,7 @@ main {
 /*Intro*/
 #intro {
   display: flex;
-  height: 50rem;
+  height: 55rem;
   align-items: center;
   background-image: url(/assets/images/Marco_Donatelli.png);
   background-size: cover;
@@ -114,6 +114,7 @@ main {
     display: flex;
     gap: 2rem;
     justify-content: space-around;
+    
     .reviewItem {
       background-color: #F9F3E7;
       border-radius: var(--border-radius-large);
@@ -178,13 +179,6 @@ main {
 }
 
 
-/*! Test gradient hover text*/
-
-h1:hover{
-  background: -webkit-linear-gradient(#009246,#eee, #CE2B37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 button:hover,
 .topitemButton:hover,
@@ -217,7 +211,7 @@ button:active,
     
     #reviewItems {
       flex-grow: 2;
- 
+      overflow: scroll;
       .reviewItem {
         p {
           max-width: 18rem;

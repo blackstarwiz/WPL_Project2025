@@ -7,7 +7,9 @@ main {
   background-image: url("/assets/images/inlog_page_background_main.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  
   #login-div {
+    margin: 2rem 0;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -32,6 +34,9 @@ main {
       }
       h3{
         justify-self: center;
+        span{
+          font-size: larger;
+        }
       }
       #aanmeldform {
         color: var(--primary-color);
@@ -69,6 +74,7 @@ main {
       }
     }
   }
+
   /*!start class linken aan zichtbare element voor inlog_div
     het is de enigste manier dat dit werkt voor mij
     het is een start waarde die in de js al wordt gegeven aan registreer_div
@@ -78,7 +84,7 @@ main {
     display: none;
   }
 
-    /*! registreer css*/
+  /*! registreer css*/
   #inhoudReg{
     display: flex;
     flex-direction: column;
@@ -90,7 +96,7 @@ main {
     width:50%;
   
     padding: 2rem;
-    
+    margin: 2rem 0;
     background-color: #f9f3e7;
 
     border-radius: var(--border-radius-large);
@@ -102,16 +108,13 @@ main {
 
     .registreer_div {
       justify-self: center;
+      padding-bottom: 1rem;
       h2 {
         font-size: 3.75rem;
         justify-self: center;
       }
       h3{
         display: flex;
-        
-       
-        justify-self: center;
-        
         img{
             height: 2rem;
         }
@@ -135,27 +138,19 @@ main {
       gap: 1rem;
       padding-bottom: 2rem;
       input {
-        
         text-indent: 1rem;
         border-radius: 1.75rem;
         padding: 0.2rem;
         background-color: whitesmoke;
         border: solid var(--color-green-dark);
       }
-      
-    }
-    #adres_data{
-      gap: 0.5rem;
-      border: solid green;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      input{
-      width: 30%;
+      h4{
+        text-indent: 0.5rem;
       }
       
     }
+   
+      
     button {
         width: 35%;
         justify-self: center;
