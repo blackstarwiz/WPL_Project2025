@@ -63,9 +63,6 @@ header {
   background-color: var(--color-light-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  .hamburger-menu {
-    display: none;
-  }
   .nav {
     display: flex;
     gap: 6rem;
@@ -75,7 +72,6 @@ header {
       width: 90px;
     }
   }
-
   #navOpties {
     display: flex;
     align-items: center;
@@ -140,7 +136,9 @@ main {
 footer {
   height: 10vh;
   grid-area: footer;
-  background: var(--primary-color);
+  background: #f5f5f5;
+  box-shadow: -3px -1px 21px 11px rgba(0, 0, 0, 0.1);
+
   display: flex;
   align-items: center;
 
@@ -165,7 +163,7 @@ footer {
   }
 }
 
-h1 {
+h1,span {
   font-family: Lobster;
   font-size: 2.3rem;
 }
@@ -202,22 +200,58 @@ button:active,
 .hidden {
   display: none;
 }
+
 #navOptiesMobile {
-  position: fixed; /* Zorg dat het menu bovenop de content verschijnt */
-  left: 0;
-  top: 0;
   width: 200px; /* Breedte van het menu */
-  height: 100%; /* Volledige hoogte */
-  background-color: var(--color-light-bg); /* Achtergrondkleur */
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start; /* Links uitlijnen */
-  gap: 2rem; /* Ruimte tussen links */
+
+  justify-content: space-between;
+
+  position: fixed; /* Zorg dat het menu bovenop de content verschijnt */
+  left: 0;
+  top:  0rem;
+
+  background-color: var(--color-light-bg); /* Achtergrondkleur */
+
   padding: 1rem; /* Binnenruimte */
+
   z-index: 1000; /* Zorg dat het menu bovenop alles staat */
+
   transform: translateX(-100%); /* Begin buiten het scherm */
   transition: transform 0.3s ease-in-out; /* Animatie bij openen/sluiten */
+
+  #openingUren_nav {
+    margin-top: 5.6rem;
+    flex-basis: 85%;
+    
+    align-content: center;
+    
+    h4 {
+      font-weight: bold;
+    }
+    ul {
+      width: 95%;
+      justify-self: center;
+      padding: 1rem 0;
+      border-bottom: solid #4caf50;
+      border-top: solid #4caf50;
+      border-width: 0.25rem;
+      li {
+        span{
+          font-size: 1.25rem;
+          font-style: italic;
+          font-weight: bold;
+          border-bottom: solid var(--primary-color);
+          border-width: 0.25rem;
+        }
+        line-height: 2rem;
+        font-size: 1rem;
+      }
+    }
+  }
 
   &.show {
     transform: translateX(0); /* Breng het menu in beeld */
@@ -277,10 +311,10 @@ header {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(0.1em);
   z-index: 900;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+
   pointer-events: none;
 }
 

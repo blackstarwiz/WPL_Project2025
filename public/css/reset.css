@@ -93,9 +93,9 @@ meter {
     -moz-user-modify: read-write;
     -webkit-user-modify: read-write;
     overflow-wrap: break-word;
-    line-break: anywhere;
     -webkit-line-break: after-white-space;
-    -webkit-user-select: auto;
+    line-break: anywhere;
+    
 }
 
 /* apply back the draggable feature - exist only in Chromium and Safari */

@@ -5,9 +5,8 @@ main {
 }
 /*Intro*/
 #intro {
-  width: 99vw;
   display: flex;
-  height: 50rem;
+  height: 55rem;
   align-items: center;
   background-image: url(/assets/images/Marco_Donatelli.png);
   background-size: cover;
@@ -40,22 +39,24 @@ main {
 /*topsellers*/
 
 /*doos van de bestsellers*/
-.highlights {
+.highlights:not(#topItems) {
   display: flex;
   flex-flow: column;
-  align-self: center;
-  max-width: 100%;
+ 
+  
   h1 {
+    width: fit-content;
+    align-self: center;
+    font-size: 5rem;
     text-align: center;
     margin: 15px 0 15px 0;
   }
   /*div element grid met een repeat om de items naast elkaar te krijgen*/
   #topitems {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-medium);
+    display: flex;
+    justify-content: space-around;
     article {
-      background-color: var(--color-beige);
+      background-color: #F9F3E7;
       border-radius: var(--border-radius-large);
       border: solid var(--color-green-dark);
     }
@@ -66,17 +67,17 @@ main {
   margin-bottom: 40px;
 }
 
-/*bestsellers*/
+/*Populaire Pizza's*/
 .topitem {
   height: auto;
   display: flex;
+  justify-content: space-around;
   flex-flow: column;
-
   align-items: center; /*elk element centreren*/
 
   .topitemButton {
     text-align: center;
-    width: 10rem;
+    width: 75%;
     position: relative;
     background: var(--primary-color);
     color: var(--color-light-bg);
@@ -91,7 +92,7 @@ main {
 
 .topitem img {
   margin: 0.75rem;
-  height: 25rem;
+  height: 50%;
   border-radius: 4%;
 }
 
@@ -99,21 +100,23 @@ main {
 #review {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  align-items: center;
-
+  
+  
   border-bottom: solid var(--color-green-dark) 2px;
   padding-bottom: 4rem;
   margin-bottom: 4rem;
-  #reviewItems {
-    display: flex;
-    flex-direction: row;
+  h1{
+    align-self: center;
+    font-size: 5rem;
+    margin-bottom: 1rem ;
   }
   #reviewItems {
     display: flex;
-    gap: var(--spacing-medium);
+    gap: 2rem;
+    justify-content: space-around;
+    
     .reviewItem {
-      background-color: var(--color-beige);
+      background-color: #F9F3E7;
       border-radius: var(--border-radius-large);
       border: solid var(--color-green-dark);
 
@@ -129,7 +132,7 @@ main {
       }
 
       p {
-        max-width: 27rem;
+        width: 25rem;
         font-size: 1rem;
       }
       h2,
@@ -143,12 +146,13 @@ main {
 /* over mij deel*/
 
 .aboutUs {
-  min-width: var(--section-max-width);
+  
   display: flex;
   flex-direction: column;
   align-self: center;
   h1 {
-    text-align: center;
+    align-self: center;
+    font-size: 5rem;
   }
   #verhaal {
     display: flex;
@@ -174,6 +178,8 @@ main {
   margin-bottom: 40px;
 }
 
+
+
 button:hover,
 .topitemButton:hover,
 #intro #overMarco .anchor:hover,
@@ -188,40 +194,24 @@ button:active,
 .anchor:active { 
   transform: scale(0.95);
 }
-
+/*MediaQueries*/
 @media screen and (max-width: 1100px) {
   #intro {
     height: 30rem;
-    flex-direction: column;
-    justify-content: flex-end;
+    
     #overMarco {
       margin-left: 10px;
       margin-bottom: 20px;
       padding: 0;
       max-width: 100%;
-      p {
-        width: auto;
-      }
     }
   }
-  #topitems {
-    overflow-x: scroll;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .topitem img {
-    margin: 0.75rem;
-    height: 16rem;
-    border-radius: 4%;
-  }
+  
   #review {
-    max-width: 100%;
+    
     #reviewItems {
       flex-grow: 2;
-      max-width: 100%;
-      overflow-x: scroll;
-      padding-left: 10px;
-      padding-right: 10px;
+      overflow: scroll;
       .reviewItem {
         p {
           max-width: 18rem;
