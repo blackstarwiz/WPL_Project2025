@@ -13,6 +13,7 @@ import { secureMiddleware } from "./middelware/secureMiddleware";
 import { connect } from "./database";
 import { flashMiddleware } from "./middelware/flashMiddleware";
 import sessionMiddleware from "./session";
+import stripe from "./routers/stripe";
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
@@ -51,6 +52,20 @@ app.get("/", secureMiddleware, (req, res) => {
     title: "Pizza Gusto",
     page: "index",
   });
+});
+
+app.get("/stripe-test", async (req, res) => {
+  try {
+    const products = await stripe.products.list({ limit: 1 });
+    res.send(
+      `Stripe werkt! Eerste product: ${
+        products.data[0]?.name || "geen producten"
+      }`
+    );
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).send(`Stripe fout: ${err.message}`);
+  }
 });
 
 app.listen(app.get("port"), async () => {
