@@ -11,6 +11,7 @@ html {
   color: black;
   font-family: Nunito, sans-serif;
   text-decoration: none;
+  max-width: 100%;
 
   .title {
     display: flex;
@@ -150,12 +151,13 @@ footer {
     }
   }
   #marker {
-    text-align: center;
-    align-self: center;
-    flex-grow: 2;
+    padding-right: 1rem;
   }
   #contact {
-    padding-right: 1rem;
+    
+    flex-grow: 2;
+    text-align: center;
+    justify-items: center;
     ul {
       display: flex;
       gap: 1rem;
