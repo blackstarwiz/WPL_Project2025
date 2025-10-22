@@ -18,7 +18,6 @@ main h2 {
   padding: 0 2rem;
   background-color: #f9f3e7;
   border-radius: var(--border-radius-large);
-  border: solid var(--primary-color);
   box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
 }
 

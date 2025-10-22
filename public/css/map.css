@@ -3,7 +3,6 @@
     height: 38vh;
     width: 60%;
     border-radius: var(--border-radius-large);
-    border: solid var(--color-green-dark);
     box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
 }
 
