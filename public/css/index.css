@@ -32,7 +32,6 @@ main {
 .highlights:not(#topItems) {
   display: flex;
   flex-flow: column;
-  border-bottom: solid var(--color-green-dark) 0.125rem;
   padding-bottom: 2.5rem;
   margin: 0 auto 2.5rem;
 }
@@ -42,12 +41,13 @@ main {
   align-self: center;
   font-size: 5rem;
   text-align: center;
-  margin: 0.9375rem 0;
+  margin: 1rem 0;
 }
 
 #topitems {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
 }
 
 #topitems article {
@@ -56,7 +56,6 @@ main {
   border: solid var(--color-green-dark);
 }
 
-/* ===== TOP ITEMS ===== */
 .topitem {
   height: auto;
   display: flex;
@@ -66,8 +65,8 @@ main {
 }
 
 .topitem img {
-  margin: 0.75rem;
-  height: 50%;
+  margin: 1rem;
+  max-width: 12rem;
   border-radius: 4%;
 }
 
@@ -96,9 +95,6 @@ main {
 #review {
   display: flex;
   flex-direction: column;
-  border-bottom: solid var(--color-green-dark) 0.125rem;
-  padding-bottom: 4rem;
-  margin-bottom: 4rem;
 }
 
 #review h1 {
@@ -131,7 +127,7 @@ main {
 }
 
 .reviewItem p {
-  width: 25rem;
+  max-width: 20rem;
   font-size: 1rem;
 }
 
@@ -168,13 +164,13 @@ main {
 }
 
 /* ===== COMMON SECTION STYLES ===== */
-.highlights,
-.middensection,
+.highlights, .middensection,
 .aboutUs,
-.reviews {
+#review {
   border-bottom: solid var(--color-green-dark) 0.125rem;
-  padding-bottom: 2.5rem;
-  margin: 0 auto 2.5rem;
+  padding-bottom: 4rem;
+  margin: 0 auto 4rem;
+  width: 70%;
 }
 
 /* ===== INTERACTIVE STATES ===== */
@@ -231,5 +227,87 @@ button:active,
   .aboutUs p {
     font-size: 1rem;
     padding: 0 0.9375rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Algemene full-width stijl voor alle secties */
+  .highlights:not(#topItems),
+  #review,
+  .aboutUs {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Algemene stijl voor alle titels */
+  .highlights h1,
+  #review h1,
+  .aboutUs h1 {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  /* Algemene stijl voor alle containers */
+  #topitems,
+  #reviewItems,
+  #verhaal {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+  }
+
+  /* Algemene stijl voor alle items */
+  #topitems article,
+  .reviewItem {
+    border-top: none;
+    border-bottom: none;
+    flex: 1;
+  }
+
+  .topitem {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .topitem img {
+    max-width: 6rem;
+    height: 6rem;
+    margin: 0.5rem;
+    object-fit: cover;
+  }
+
+  .topitem h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  .topitem p {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .topitemButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    width: 90%;
+    text-align: center;
+  }
+  
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  #topitems {
+    gap: 0.8rem;
+    overflow: scroll;
   }
 }

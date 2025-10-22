@@ -1,7 +1,8 @@
 /* ===== MAIN CONTACT LAYOUT ===== */
 main {
-  width: 100%;
   padding: 2rem;
+  width: 80%;
+  justify-self: center;
 }
 
 main h2 {
@@ -81,4 +82,46 @@ main h2 {
   font-style: italic;
   font-weight: 200;
   border-bottom: solid var(--primary-color) 0.25rem;
+}
+
+@media (max-width: 800px) {
+  main {
+    width: 100%;
+    padding: 1rem;
+    justify-self: stretch;
+  }
+  #contactCard {
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  .contact {
+    flex-direction: column;
+  }
+
+  #gegevens_con {
+    width: 100%;
+  }
+
+  #contact_con {
+    width: 100%;
+  }
+
+  #openingUren_con {
+    padding: 1rem 0;
+  }
+
+  #openingUren_con ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #openingUren_con li {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
+
+  #openingUren_con span {
+    font-size: 1.5rem;
+  }
 }

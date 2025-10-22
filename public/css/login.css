@@ -161,3 +161,33 @@ form button:active {
 #login-div.hiddenLog {
   display: none;
 }
+
+@media (max-width: 1250px) {
+  #login-div, #registreer-div  {
+  width: 50%;
+  }
+}
+
+@media (max-width: 950px) {
+  #login-div, #registreer-div  {
+  width: 60%;
+  }
+}
+
+@media (max-width: 680px) {
+  #login-div, #registreer-div  {
+  width: 70%;
+  }
+}
+
+@media (max-width: 590px) {
+  #login-div, #registreer-div {
+  width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  #login-div, #registreer-div {
+  width: 98%;
+  }
+}

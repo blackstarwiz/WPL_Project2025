@@ -21,3 +21,29 @@ menuOverlay.addEventListener("click", () => {
   menuOverlay.classList.remove("show");
   uren.classList.toggle("hidden", isOpen);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.querySelector('.aside-toggle');
+    const aside = document.querySelector('main aside');
+    const overlay = document.querySelector('.aside-overlay');
+    const closeBtn = document.querySelector('.close-aside');
+    
+    if (toggleBtn && aside) {
+        toggleBtn.addEventListener('click', function() {
+            aside.classList.toggle('show');
+            overlay.classList.toggle('show');
+        });
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                aside.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+        }
+        
+        overlay.addEventListener('click', function() {
+            aside.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    }
+});
