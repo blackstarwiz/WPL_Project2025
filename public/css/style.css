@@ -11,6 +11,7 @@ html {
   color: black;
   font-family: Nunito, sans-serif;
   text-decoration: none;
+  max-width: 100%;
 
   .title {
     display: flex;
@@ -106,33 +107,6 @@ main {
   box-sizing: border-box;
 }
 
-/*orderstrook onderaan*/
-.order {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--color-light-bg);
-  align-items: center;
-  border-radius: 4px;
-  padding: --spacing-meduim;
-  margin-top: 30px;
-}
-
-.order h1 {
-  font-weight: bold;
-}
-
-.orderbutton,
-.orderbuttonpizzalist {
-  background-color: var(--primary-color);
-  color: var(--color-light-bg);
-  border: none;
-  padding: 8px 12px;
-  margin-top: 10px;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  text-decoration: none;
-}
-
 footer {
   height: 10vh;
   grid-area: footer;
@@ -150,12 +124,13 @@ footer {
     }
   }
   #marker {
-    text-align: center;
-    align-self: center;
-    flex-grow: 2;
+    padding-right: 1rem;
   }
   #contact {
-    padding-right: 1rem;
+    
+    flex-grow: 2;
+    text-align: center;
+    justify-items: center;
     ul {
       display: flex;
       gap: 1rem;
@@ -202,7 +177,7 @@ button:active,
 }
 
 #navOptiesMobile {
-  width: 200px; /* Breedte van het menu */
+  width: 200px; 
   height: 100%;
 
   display: flex;
@@ -214,14 +189,14 @@ button:active,
   left: 0;
   top:  0rem;
 
-  background-color: var(--color-light-bg); /* Achtergrondkleur */
+  background-color: var(--color-light-bg);
 
-  padding: 1rem; /* Binnenruimte */
+  padding: 1rem;
 
   z-index: 1000; /* Zorg dat het menu bovenop alles staat */
 
   transform: translateX(-100%); /* Begin buiten het scherm */
-  transition: transform 0.3s ease-in-out; /* Animatie bij openen/sluiten */
+  transition: transform 0.3s ease-in-out; 
 
   #openingUren_nav {
     margin-top: 5.6rem;
@@ -371,11 +346,53 @@ header {
     }
   }
 
+  
+}
+
+@media (max-width: 767px) {
   footer {
-    flex-direction: column;
     height: auto;
-    div {
-      margin-top: 5px;
+    padding: 1.5rem 1rem;
+    display: grid;
+    grid-template-areas: 
+      "contact contact"
+      "logo marker";
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    align-items: center;
+
+    #logoConFooter {
+      grid-area: logo;
+      padding-left: 0;
+      justify-self: start;
+      
+      .title span {
+        display: none;
+      }
+      
+      #logofooter {
+        height: 45px;
+        width: 45px;
+      }
+    }
+
+    #marker {
+      grid-area: marker;
+      padding-right: 0;
+      justify-self: end;
+      font-size: 0.85rem;
+    }
+
+    #contact {
+      grid-area: contact;
+      flex-grow: 0;
+      width: 100%;
+      
+      ul {
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     }
   }
 }
