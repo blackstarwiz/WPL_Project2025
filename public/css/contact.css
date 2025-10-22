@@ -73,6 +73,7 @@ main h2 {
   font-size: 1.5rem;
   font-weight: bold;
   font-style: oblique;
+  width: 10rem;
 }
 
 #openingUren_con span {
@@ -81,7 +82,18 @@ main h2 {
   font-size: 2rem;
   font-style: italic;
   font-weight: 200;
-  border-bottom: solid var(--primary-color) 0.25rem;
+  position: relative;
+  display: inline-block;
+}
+
+#openingUren_con span::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 9rem; /* ⬅️ Exact 9rem lange lijn */
+  height: 0.25rem;
+  background-color: var(--primary-color);
 }
 
 @media (max-width: 800px) {
@@ -111,11 +123,6 @@ main h2 {
     padding: 1rem 0;
   }
 
-  #openingUren_con ul {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   #openingUren_con li {
     font-size: 1.2rem;
     line-height: 1.8rem;
@@ -123,5 +130,9 @@ main h2 {
 
   #openingUren_con span {
     font-size: 1.5rem;
+  }
+
+  #openingUren_con span::after {
+    width: 6rem;
   }
 }

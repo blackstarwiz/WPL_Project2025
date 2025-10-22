@@ -152,6 +152,12 @@ aside form {
     padding: 5rem;
 }
 
+.close-aside,
+.aside-toggle,
+.aside-overlay {
+    display: none;
+}
+
 /* ===== BUTTON STYLES ===== */
 .remove-button,
 .bestelButton {
@@ -362,6 +368,15 @@ aside form {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
+
+    .close-aside {
+        display: flex; /* Toon sluitknop vanaf 1100px */
+    }
+
+    .aside-toggle {
+        display: flex; /* Toon toggle knop vanaf 720px */
+    }
+    
 }
 @media (max-width: 475px) {
     .card img {
