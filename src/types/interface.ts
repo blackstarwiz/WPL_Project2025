@@ -7,11 +7,19 @@ export interface User {
   role: "ADMIN" | "USER";
 }
 
+export interface Pizza {
+  name: string;
+  image: string;
+  ingredients: string[];
+  price: number;
+}
+
 export interface CartItem {
-  menuItemId: ObjectId;
+  menuItemId?: ObjectId;
   name: string;
   price: number;
   amount: number;
+  image?: string;
 }
 
 export interface Cart {
@@ -22,6 +30,6 @@ export interface Cart {
 }
 
 export interface FlashMessage {
-  type: "succes" | "error" | "warning";
+  type: "success" | "error" | "warning";
   text: string;
 }

@@ -1,12 +1,12 @@
 {
   "name": "gusto-italiano",
   "version": "1.0.0",
-  "description": "Project in teamverband: het opzetten van een webapplicatie genaamd **Gusto Italiano**.\r De app is gebouwd met **TypeScript**, **Node.js**, **Express**, en **EJS** templates.",
-  "main": "index.ts",
+  "description": "Project in teamverband: het opzetten van een webapplicatie genaamd Gusto Italiano. De app is gebouwd met TypeScript, Node.js, Express en EJS templates.",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon --watch src --watch views --watch public/**/* --exec ts-node src/index.ts",
+    "start": "nodemon --watch src --watch views --watch public --ext ts,ejs,js,css,json --exec ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "serve": "node dist/index.js",
     "test": "jest"
   },
   "author": "",

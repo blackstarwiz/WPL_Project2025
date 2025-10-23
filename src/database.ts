@@ -1,26 +1,10 @@
-import * as fs from "fs";
-import * as path from "path";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { Request } from "express";
-import { User } from "./types/interface";
+import { Cart, CartItem, Pizza, User } from "./types/interface";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-
-let naam: string[] = [
-  "Calzone",
-  "Capricciosa",
-  "Frutti di Mare",
-  "Fungi",
-  "Hawaii",
-  "Margarita",
-  "Pepperoni",
-  "Prosciutto",
-  "Prosciutto",
-  "Prosciutto",
-  "Quattro Stagioni",
-  "Salami",
-  "Tonno",
-];
+import { cpuUsage } from "process";
+const jsonMenuData: Pizza[] = require("./data/menu.json");
 
 export const MONGODB_URI =
   typeof process.env.MONGO_URI === "string" ? process.env.MONGO_URI : "";
@@ -31,6 +15,14 @@ const client = new MongoClient(MONGODB_URI);
 export const userCollection = client
   .db("gustoitaliano")
   .collection<User>("users");
+
+export const pizzaCollection = client
+  .db("gustoitaliano")
+  .collection<Pizza>("menu");
+
+export const cartCollection = client
+  .db("gustoitaliano")
+  .collection<Cart>("cart");
 
 async function createInitialUser() {
   try {
@@ -57,7 +49,41 @@ async function createInitialUser() {
     throw e;
   }
 }
+async function pizzaSeed() {
+  try {
+    if ((await userCollection.countDocuments()) > 0) {
+      return;
+    }
+    await pizzaCollection.insertMany(jsonMenuData);
+  } catch (e: any) {
+    console.log("Er ging iets van met pizzaSeed", e);
+  }
+}
 
+async function exit() {
+  try {
+    await client.close();
+    console.log("Disconnected from database");
+  } catch (error) {
+    console.error(error);
+  }
+  process.exit(0);
+}
+
+export async function connect() {
+  try {
+    console.log("Poging tot database verbinding en initialisatie...");
+    await client.connect();
+    await createInitialUser();
+    await pizzaSeed();
+    console.log("Connected to database");
+    process.on("SIGINT", exit);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//HELPFUNCTIES
 export async function login(email: string, password: string) {
   if (!email || !password) {
     throw new Error("Alle velden zijn verplicht");
@@ -88,64 +114,35 @@ export function isAuthenticate(req: Request): boolean {
   }
 }
 
-export interface MenuItem {
-  naam: string;
-  foto: string;
+export async function findPizza(pizzaName: string) {
+  return await pizzaCollection.findOne({ name: pizzaName });
 }
 
-export let bestellingen: string[] = [];
+export function addPizzaToCart(
+  pizza: Pizza,
+  amount: number,
+  userId?: ObjectId
+): Cart {
+  const item: CartItem = {
+    menuItemId: new ObjectId(),
+    name: pizza.name,
+    price: pizza.price,
+    amount,
+    image: pizza.image,
+  };
 
-function humanNameFromFilename(filename: string) {
-  try {
-    naam.forEach((element) => {
-      return element.toString();
-    });
-  } catch (err) {
-    return "";
-  }
-}
+  let items: CartItem[] = [item];
 
-function loadMenuFromDir(
-  relDir = "public/assets/images/pizza_images"
-): MenuItem[] {
-  try {
-    const imagesDir = path.join(process.cwd(), relDir);
+  const totalPrice = items.reduce(
+    (acc, curr) => acc + curr.price * curr.amount,
+    0
+  );
 
-    if (!fs.existsSync(imagesDir)) return [];
+  const myCart: Cart = {
+    userId: userId,
+    items,
+    totalPrice,
+  };
 
-    const files = fs
-      .readdirSync(imagesDir)
-      .filter((f) => /^pizza_.+\.(png|png)$/i.test(f));
-
-    return files.map((f) => ({
-      naam: humanNameFromFilename(f) || "",
-      foto: `assets/images/pizza_images/${f}`,
-    }));
-  } catch (err) {
-    return [];
-  }
-}
-
-export let menu: MenuItem[] = loadMenuFromDir();
-
-async function exit() {
-  try {
-    await client.close();
-    console.log("Disconnected from database");
-  } catch (error) {
-    console.error(error);
-  }
-  process.exit(0);
-}
-
-export async function connect() {
-  try {
-    console.log("Poging tot database verbinding en initialisatie...");
-    await createInitialUser();
-    await client.connect();
-    console.log("Connected to database");
-    process.on("SIGINT", exit);
-  } catch (error) {
-    console.error(error);
-  }
+  return myCart;
 }

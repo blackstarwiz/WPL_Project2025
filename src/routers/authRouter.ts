@@ -36,7 +36,7 @@ export default function loginRouter() {
           sameSite: "lax",
           secure: true,
         });
-        req.session.message = { type: "succes", text: "Succesvol ingelogd" };
+        req.session.message = { type: "success", text: "Succesvol ingelogd" };
         res.redirect("/");
       } catch (e: any) {
         req.session.message = { type: "error", text: e.message };

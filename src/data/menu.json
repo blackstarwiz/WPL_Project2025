@@ -1,0 +1,81 @@
+[
+  {
+    "name": "Calzone",
+    "image": "pizza_calzone.png",
+    "ingredients": ["tomato", "cheese", "ham"],
+    "price": 13.75
+  },
+  {
+    "name": "Capricciosa",
+    "image": "pizza_capricciosa.png",
+    "ingredients": ["tomato", "cheese", "ham", "mushrooms", "artichoke"],
+    "price": 15.0
+  },
+  {
+    "name": "Frutti di Mare",
+    "image": "pizza_fruttidiMare.png",
+    "ingredients": ["tomato", "cheese", "seafood"],
+    "price": 16.5
+  },
+  {
+    "name": "Fungi",
+    "image": "pizza_fungi.png",
+    "ingredients": ["tomato", "cheese", "mushrooms"],
+    "price": 12.75
+  },
+  {
+    "name": "Hawaii",
+    "image": "pizza_hawaii.png",
+    "ingredients": ["tomato", "cheese", "ham", "pineapple"],
+    "price": 13.75
+  },
+  {
+    "name": "Margherita",
+    "image": "pizza_margherita.png",
+    "ingredients": ["tomato", "cheese", "basil"],
+    "price": 11.5
+  },
+  {
+    "name": "Pepperoni",
+    "image": "pizza_pepperoni.png",
+    "ingredients": ["tomato", "cheese", "pepperoni"],
+    "price": 14.25
+  },
+  {
+    "name": "Prosciutto",
+    "image": "pizza_prosciutto.png",
+    "ingredients": ["tomato", "cheese", "ham"],
+    "price": 13.25
+  },
+  {
+    "name": "Prosciutto 2",
+    "image": "pizza_prosciutto_2.png",
+    "ingredients": ["tomato", "cheese", "ham"],
+    "price": 13.25
+  },
+  {
+    "name": "Quattro Stagioni",
+    "image": "pizza_quattroStagioni.png",
+    "ingredients": [
+      "tomato",
+      "cheese",
+      "ham",
+      "mushrooms",
+      "olives",
+      "artichoke"
+    ],
+    "price": 15.5
+  },
+  {
+    "name": "Salami",
+    "image": "pizza_salami.png",
+    "ingredients": ["tomato", "cheese", "salami"],
+    "price": 13.75
+  },
+  {
+    "name": "Tonno",
+    "image": "pizza_tonno.png",
+    "ingredients": ["tomato", "cheese", "tuna", "onion"],
+    "price": 14.25
+  }
+]
