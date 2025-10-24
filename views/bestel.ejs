@@ -8,19 +8,35 @@
     <section id="bestsellers">
       <h1 class="sectionNaam">Bestsellers</h1>
       <div class="listItem">
+        <% pizzas.forEach(pizza => {%>
         <article class="card">
           <img
-            src="assets/images/pizza_images/pizza_margherita.png"
-            alt=""
-            srcset=""
+            src="assets/images/pizza_images/<%= pizza.image %>"
+            alt="<%= pizza.name %>"
           />
-          <h1 class="pizzaNaam">Pizzanaam</h1>
+          <h1 class="pizzaNaam"><%= pizza.name %></h1>
           <!-- <h2 class="ingredienten">item1, item2, item3</h2> -->
           <form action="/bestel" method="POST">
-            <input type="hidden" name="pizza" value="<%= //item.naam %>" />
-            <button type="submit" class="orderbutton">Bestel nu</button>
+            <!-- css in de tag puur voor gewoon te testen, moet nog aangepast worden :) -->
+            <span class="pizzaPrice" style="font-size: 1rem"
+              >Vanaf €<%= pizza.price.toFixed(2) %></span
+            >
+            <label>
+              <span style="font-size: 0.9rem">Aantal</span>
+              <input
+                type="number"
+                name="amount"
+                value="<%= updateAmountInEjs(pizza, cart) %>"
+                min="1"
+              />
+            </label>
+            <input type="hidden" name="pizza" value="<%= pizza.name %>" />
+            <input type="hidden" name="price" value="<%= pizza.price %>" />
+            <input type="hidden" name="image" value="<%= pizza.image %>" />
+            <button type="submit" class="orderbutton">+</button>
           </form>
         </article>
+        <% }); %>
       </div>
     </section>
   </section>
@@ -30,17 +46,19 @@
     <div>
       <h1>Uw Bestelling</h1>
       <ul class="order-list">
+        <% cart.items.forEach(item => { %>
         <li>
           <div class="pizzalist">
-            <h2></h2>
-            <p>€XX.XX</p>
+            <h2><%= item.name %></h2>
+            <p>€<%= item.price %></p>
+            <p>x<%= item.amount %></p>
           </div>
           <form
             action="/bestel/verwijder"
             method="POST"
             style="display: inline"
           >
-            <input type="hidden" name="index" value="" />
+            <input type="hidden" name="item" value="<%= item.name %>" />
             <button
               type="submit"
               class="remove-button"
@@ -50,22 +68,25 @@
             </button>
           </form>
         </li>
+        <% }); %>
       </ul>
     </div>
 
     <div id="afrekenen">
       <div class="total">
-        <h2>Totaal: <% // prijs logica komt hier %></h2>
-        <p>€0.00</p>
+        <h2>Totaal: €<%= cart.totalPrice %></h2>
       </div>
-      <button type="submit" class="bestelButton">Bestellen</button>
+      <form action="/checkout">
+        <input type="hidden" name="image" value="<%= cart.totalPrice %>" />
+        <button type="submit" class="bestelButton">Bestellen</button>
+      </form>
     </div>
   </aside>
 
   <!-- Voeg deze toggle knop toe VOOR de closing body tag -->
   <button class="aside-toggle">
     🛒
-    <span class="cart-count"></span>
+    <span class="cart-count"><%= totalAmountCartItems(cart) %></span>
   </button>
   <div class="aside-overlay"></div>
 </main>

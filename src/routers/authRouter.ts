@@ -36,6 +36,15 @@ export default function loginRouter() {
           sameSite: "lax",
           secure: true,
         });
+
+        if (!req.session.cart) {
+          req.session.cart = { items: [], totalPrice: 0 };
+        }
+
+        if (user._id) {
+          req.session.cart.userId = user._id;
+          delete req.session.cart.guestId;
+        }
         req.session.message = { type: "success", text: "Succesvol ingelogd" };
         res.redirect("/");
       } catch (e: any) {
@@ -50,6 +59,10 @@ export default function loginRouter() {
     secureMiddleware,
     async (req: Request, res: Response) => {
       res.clearCookie("jwt");
+      if (req.session.cart) {
+        delete req.session.cart.userId;
+        req.session.cart.guestId = crypto.randomUUID();
+      }
       res.redirect("/login");
     }
   );

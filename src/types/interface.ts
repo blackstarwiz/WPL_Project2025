@@ -25,6 +25,7 @@ export interface CartItem {
 export interface Cart {
   _id?: ObjectId;
   userId?: ObjectId;
+  guestId?: string;
   items: CartItem[];
   totalPrice: number;
 }

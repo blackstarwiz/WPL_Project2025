@@ -13,6 +13,8 @@ import { secureMiddleware } from "./middelware/secureMiddleware";
 import { connect } from "./database";
 import { flashMiddleware } from "./middelware/flashMiddleware";
 import sessionMiddleware from "./session";
+import { assignGuestId } from "./middelware/assignGuestId";
+import checkoutRouter from "./routers/checkoutRouter";
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
@@ -38,12 +40,14 @@ app.set("port", process.env.PORT ?? 3000);
 // Middleware voor locals
 app.use(sessionMiddleware);
 app.use(flashMiddleware);
+app.use(assignGuestId);
 app.use(setLocals);
 
 //Routers
 app.use(loginRouter());
 app.use("/contact", secureMiddleware, contactRouter());
 app.use("/bestel", secureMiddleware, bestelRouter());
+app.use("/checkout", secureMiddleware, checkoutRouter());
 
 app.get("/", secureMiddleware, (req, res) => {
   console.log(res.locals.message);
@@ -53,12 +57,16 @@ app.get("/", secureMiddleware, (req, res) => {
   });
 });
 
-app.listen(app.get("port"), async () => {
+const startServer = async () => {
   try {
-    await connect();
-    console.log("Server started on http://localhost:" + app.get("port"));
+    await connect(); // Connect DB first
+    app.listen(app.get("port"), () => {
+      console.log("Server running at http://localhost:" + app.get("port"));
+    });
   } catch (e) {
-    console.log(e);
+    console.error("Failed to start server:", e);
     process.exit(1);
   }
-});
+};
+
+startServer();

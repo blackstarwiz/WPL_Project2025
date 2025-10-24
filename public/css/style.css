@@ -127,7 +127,6 @@ footer {
     padding-right: 1rem;
   }
   #contact {
-    
     flex-grow: 2;
     text-align: center;
     justify-items: center;
@@ -138,7 +137,8 @@ footer {
   }
 }
 
-h1,span {
+h1,
+span {
   font-family: Lobster;
   font-size: 2.3rem;
 }
@@ -177,7 +177,7 @@ button:active,
 }
 
 #navOptiesMobile {
-  width: 200px; 
+  width: 200px;
   height: 100%;
 
   display: flex;
@@ -187,7 +187,7 @@ button:active,
 
   position: fixed; /* Zorg dat het menu bovenop de content verschijnt */
   left: 0;
-  top:  0;
+  top: 0;
 
   background-color: var(--color-light-bg);
 
@@ -196,9 +196,7 @@ button:active,
   z-index: 1000; /* Zorg dat het menu bovenop alles staat */
 
   transform: translateX(-100%); /* Begin buiten het scherm */
-  transition: transform 0.3s ease-in-out; 
-
-  
+  transition: transform 0.3s ease-in-out;
 
   &.show {
     transform: translateX(0); /* Breng het menu in beeld */
@@ -220,7 +218,28 @@ button:active,
     }
   }
 
-  section{
+  #navOptiesMobile .logoutButton {
+    display: inline-block;
+    width: 100%; /* zelfde als links */
+    font-size: 2rem; /* zelfde grootte */
+    color: var(--primary-color); /* zelfde kleur */
+    padding: 0.5rem 1rem; /* zelfde padding */
+    background: none; /* verwijder standaard knopstijl */
+    border: none; /* verwijder rand */
+    text-align: left; /* uitlijnen als de links */
+    cursor: pointer;
+  }
+
+  #navOptiesMobile .logoutButton:hover {
+    color: var(--color-green-dark);
+    transform: scale(1.05);
+  }
+
+  #navOptiesMobile .logoutButton:active {
+    transform: scale(0.95);
+  }
+
+  section {
     margin-top: 15vh;
   }
 }
@@ -321,8 +340,6 @@ header {
       display: flex;
     }
   }
-
-  
 }
 
 @media (max-width: 767px) {
@@ -330,7 +347,7 @@ header {
     height: auto;
     padding: 1.5rem 1rem;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
       "contact contact"
       "logo marker";
     grid-template-rows: auto auto;
@@ -341,11 +358,11 @@ header {
       grid-area: logo;
       padding-left: 0;
       justify-self: start;
-      
+
       .title span {
         display: none;
       }
-      
+
       #logofooter {
         height: 45px;
         width: 45px;
@@ -363,7 +380,7 @@ header {
       grid-area: contact;
       flex-grow: 0;
       width: 100%;
-      
+
       ul {
         gap: 1.5rem;
         justify-content: center;

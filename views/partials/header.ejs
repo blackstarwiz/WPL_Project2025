@@ -63,7 +63,13 @@
           <section id="links">
             <a href="/bestel" class="mobileNavButtons">Menu</a>
           <a href="/contact" class="mobileNavButtons">Contact</a>
+          <% if (user) { %>
+            <form action="logout" method="post">
+              <button type="submit">Logout</button>
+            </form>
+          <%} else {%>
           <a href="/login" class="mobileNavButtons">Login</a>
+          <%} %>
           </section>
           
         </div>

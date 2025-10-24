@@ -1,7 +1,7 @@
 import { MONGODB_URI } from "./database";
 import session from "express-session";
 import mongoDbSession from "connect-mongodb-session";
-import { FlashMessage } from "./types/interface";
+import { Cart, FlashMessage } from "./types/interface";
 
 const MongoDBStore = mongoDbSession(session);
 
@@ -14,6 +14,7 @@ const mongoStore = new MongoDBStore({
 declare module "express-session" {
   export interface SessionData {
     message?: FlashMessage;
+    cart?: Cart;
   }
 }
 

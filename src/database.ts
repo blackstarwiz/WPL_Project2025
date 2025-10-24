@@ -3,7 +3,7 @@ import { Request } from "express";
 import { Cart, CartItem, Pizza, User } from "./types/interface";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import { cpuUsage } from "process";
+import { v4 as uuidv4 } from "uuid";
 const jsonMenuData: Pizza[] = require("./data/menu.json");
 
 export const MONGODB_URI =
@@ -51,7 +51,7 @@ async function createInitialUser() {
 }
 async function pizzaSeed() {
   try {
-    if ((await userCollection.countDocuments()) > 0) {
+    if ((await pizzaCollection.countDocuments()) > 0) {
       return;
     }
     await pizzaCollection.insertMany(jsonMenuData);
@@ -71,19 +71,20 @@ async function exit() {
 }
 
 export async function connect() {
+  console.log("Poging tot database verbinding en initialisatie...");
+  await client.connect();
   try {
-    console.log("Poging tot database verbinding en initialisatie...");
-    await client.connect();
     await createInitialUser();
     await pizzaSeed();
     console.log("Connected to database");
     process.on("SIGINT", exit);
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
-//HELPFUNCTIES
+//Loginfuncties
 export async function login(email: string, password: string) {
   if (!email || !password) {
     throw new Error("Alle velden zijn verplicht");
@@ -114,35 +115,86 @@ export function isAuthenticate(req: Request): boolean {
   }
 }
 
-export async function findPizza(pizzaName: string) {
+//Bestelfuncties
+export async function getPizzas(): Promise<Pizza[]> {
+  return await pizzaCollection.find().sort({ price: 1 }).toArray();
+}
+
+export async function findPizza(pizzaName: string): Promise<Pizza | null> {
   return await pizzaCollection.findOne({ name: pizzaName });
 }
 
-export function addPizzaToCart(
-  pizza: Pizza,
-  amount: number,
-  userId?: ObjectId
-): Cart {
-  const item: CartItem = {
-    menuItemId: new ObjectId(),
-    name: pizza.name,
-    price: pizza.price,
-    amount,
-    image: pizza.image,
+export function addPizzaToCartHandler(req: Request) {
+  const { pizza, price, image, amount } = req.body; // <-- pizza i.p.v. name
+
+  const parsedPrice = parseFloat(price);
+  const parsedAmount = parseInt(amount);
+
+  if (!pizza || isNaN(parsedPrice) || isNaN(parsedAmount)) {
+    console.log("Geen geldige pizza of prijs ontvangen", req.body);
+    return;
+  }
+
+  if (!req.session.cart) {
+    req.session.cart = { guestId: uuidv4(), items: [], totalPrice: 0 };
+  }
+
+  if (req.user && req.user._id) {
+    req.session.cart.userId = new ObjectId(req.user._id);
+  }
+
+  const cart = req.session.cart;
+
+  const newItem: CartItem = {
+    name: pizza, // hier gebruik je pizza.name
+    price: parsedPrice,
+    amount: parsedAmount,
+    image,
   };
 
-  let items: CartItem[] = [item];
+  const existingItem = cart.items.find((item) => item.name === newItem.name);
 
-  const totalPrice = items.reduce(
-    (acc, curr) => acc + curr.price * curr.amount,
+  if (existingItem) {
+    existingItem.amount = parsedAmount; // overschrijven
+  } else {
+    cart.items.push(newItem);
+  }
+
+  req.session.cart.totalPrice = req.session.cart.items.reduce(
+    (acc, item) => acc + item.price * item.amount,
     0
   );
 
-  const myCart: Cart = {
-    userId: userId,
-    items,
-    totalPrice,
-  };
+  console.log("guestId " + cart.guestId);
+}
 
-  return myCart;
+export function updateAmountInEjs(
+  pizza: Pizza,
+  cart: Cart | undefined
+): number {
+  const item = cart?.items.find((i) => i.name === pizza.name);
+  return item ? item.amount : 1;
+}
+
+export function totalAmountCartItems(cart: Cart): number {
+  let totalAmount: number = 0;
+  const items = cart.items;
+  if (!items) {
+    return totalAmount;
+  }
+  totalAmount = items.reduce((acc, item) => acc + item.amount, 0);
+  return totalAmount;
+}
+
+export function removePizzaFromSessionCart(req: Request, pizzaName: string) {
+  if (!req.session.cart) return;
+
+  req.session.cart.items = req.session.cart.items.filter(
+    (item) => item.name !== pizzaName
+  );
+
+  req.session.cart.totalPrice = req.session.cart.items.reduce(
+    (acc, item) => acc + item.price * item.amount,
+    0
+  );
 }

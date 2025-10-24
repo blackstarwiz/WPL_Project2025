@@ -42,7 +42,8 @@
     "express-session": "^1.18.2",
     "jsonwebtoken": "^9.0.2",
     "livereload": "^0.10.3",
-    "mongodb": "^6.20.0"
+    "mongodb": "^6.20.0",
+    "uuid": "^13.0.0"
   },
   "directories": {
     "test": "tests"
