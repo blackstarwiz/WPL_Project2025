@@ -155,7 +155,7 @@ export function addPizzaToCartHandler(req: Request) {
   const existingItem = cart.items.find((item) => item.name === newItem.name);
 
   if (existingItem) {
-    existingItem.amount = parsedAmount; // overschrijven
+    existingItem.amount += parsedAmount; // overschrijven
   } else {
     cart.items.push(newItem);
   }
@@ -176,8 +176,30 @@ export function updateAmountInEjs(
   return item ? item.amount : 1;
 }
 
-export function totalAmountCartItems(cart: Cart): number {
+export function updateCartItemAmount(
+  req: Request,
+  itemName: string
+): CartItem | null {
+  const cart = req.session.cart;
+  if (!cart) return null;
+
+  const existingItem = cart.items.find((item) => item.name === itemName);
+  if (!existingItem) return null;
+
+  const amount = parseInt(req.body.amount);
+  if (isNaN(amount) || amount < 1) return existingItem;
+
+  existingItem.amount = amount;
+  cart.totalPrice = cart.items.reduce((sum, i) => sum + i.price * i.amount, 0);
+
+  return existingItem;
+}
+
+export function totalAmountCartItems(cart: Cart | undefined): number {
   let totalAmount: number = 0;
+  if (!cart) {
+    return 0;
+  }
   const items = cart.items;
   if (!items) {
     return totalAmount;

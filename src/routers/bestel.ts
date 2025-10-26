@@ -7,6 +7,7 @@ import {
   removePizzaFromSessionCart,
   totalAmountCartItems,
   updateAmountInEjs,
+  updateCartItemAmount,
 } from "../database";
 
 export default function bestelRouter() {
@@ -46,6 +47,16 @@ export default function bestelRouter() {
     req.session.message = {
       type: "success",
       text: `${item} verwijderd uit je winkelmand`,
+    };
+    res.redirect("/bestel");
+  });
+
+  router.post("/update", (req, res) => {
+    const pizzaName: string = req.body.item;
+    const cartItem = updateCartItemAmount(req, pizzaName);
+    req.session.message = {
+      type: "success",
+      text: `${cartItem?.name} aangepast naar ${cartItem?.amount}`,
     };
     res.redirect("/bestel");
   });

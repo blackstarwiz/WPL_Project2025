@@ -1,7 +1,5 @@
 <%- include('partials/header') %>
 
-<!-- voorbeeld nu de css te kunnen gebruiken, onderaan staat de ejs -->
-
 <main>
   <section class="menu">
     <h1 id="ons_menu">Ons Menu</h1>
@@ -15,21 +13,11 @@
             alt="<%= pizza.name %>"
           />
           <h1 class="pizzaNaam"><%= pizza.name %></h1>
-          <!-- <h2 class="ingredienten">item1, item2, item3</h2> -->
           <form action="/bestel" method="POST">
-            <!-- css in de tag puur voor gewoon te testen, moet nog aangepast worden :) -->
             <span class="pizzaPrice" style="font-size: 1rem"
               >Vanaf €<%= pizza.price.toFixed(2) %></span
             >
-            <label>
-              <span style="font-size: 0.9rem">Aantal</span>
-              <input
-                type="number"
-                name="amount"
-                value="<%= updateAmountInEjs(pizza, cart) %>"
-                min="1"
-              />
-            </label>
+            <input type="hidden" name="amount" value="1" />
             <input type="hidden" name="pizza" value="<%= pizza.name %>" />
             <input type="hidden" name="price" value="<%= pizza.price %>" />
             <input type="hidden" name="image" value="<%= pizza.image %>" />
@@ -51,7 +39,18 @@
           <div class="pizzalist">
             <h2><%= item.name %></h2>
             <p>€<%= item.price %></p>
-            <p>x<%= item.amount %></p>
+             <form action="/bestel/update" method="POST" style="display:inline">
+               <input type="hidden" name="item" value="<%= item.name %>" />
+                <label>
+                  <select name="amount" onchange="this.form.submit()">
+                    <% for (let i = 1; i <= Math.max(10, item.amount); i++) { %>
+                      <option value="<%= i %>" <%= item.amount === i ? "selected" : "" %>>
+                      <%= i %>
+                      </option>
+                    <% } %>
+                  </select>
+                </label>
+            </form>
           </div>
           <form
             action="/bestel/verwijder"
@@ -74,16 +73,19 @@
 
     <div id="afrekenen">
       <div class="total">
-        <h2>Totaal: €<%= cart.totalPrice %></h2>
+        <h2>Totaal: €<%= cart.totalPrice.toFixed(2) %></h2>
       </div>
       <form action="/checkout">
-        <input type="hidden" name="image" value="<%= cart.totalPrice %>" />
+        <input
+          type="hidden"
+          name="image"
+          value="<%= cart.totalPrice.toFixed %>"
+        />
         <button type="submit" class="bestelButton">Bestellen</button>
       </form>
     </div>
   </aside>
 
-  <!-- Voeg deze toggle knop toe VOOR de closing body tag -->
   <button class="aside-toggle">
     🛒
     <span class="cart-count"><%= totalAmountCartItems(cart) %></span>

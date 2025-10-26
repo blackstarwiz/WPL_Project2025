@@ -105,7 +105,10 @@ aside {
 }
 
 .card form {
-  align-self: center;
+  display: flex;
+  align-items: center; /* zorgt dat prijs en knop mooi op 1 lijn staan */
+  justify-content: center;
+  gap: 0.5rem; /* ruimte tussen prijs en knop */
 }
 
 /* ===== SIDEBAR (ORDER SUMMARY) ===== */
@@ -145,9 +148,9 @@ aside h1 {
   margin-top: var(--spacing-medium);
 }
 
-aside form {
+/* aside form {
   padding: 5rem;
-}
+} */
 
 .close-aside,
 .aside-toggle,
@@ -180,11 +183,15 @@ aside form {
   background-color: var(--primary-color);
   color: var(--color-light-bg);
   border: none;
-  border-radius: var(--border-radius-large);
+  border-radius: 50%;
   cursor: pointer;
   text-decoration: none;
-  padding: 8px 12px;
-  margin: 1rem 0;
+  width: 35px; /* even breed als hoog */
+  height: 35px;
+  font-size: 1.5rem; /* zodat het + mooi groot is */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== MEDIA QUERIES ===== */
