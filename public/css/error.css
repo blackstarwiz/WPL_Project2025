@@ -1,0 +1,23 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/assets/images/legePizzadoos.jpg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.error-page {
+    text-align: center;
+    background: var(--secondary-color);
+    padding: 2rem;
+    width: fit-content;
+    border-radius: var(--border-radius-large);
+    box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.2);
+}
+
+.button{
+    justify-self: left;
+}

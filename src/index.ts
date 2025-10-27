@@ -59,6 +59,7 @@ app.get("/", secureMiddleware, (req, res) => {
 
 app.use((req, res) => {
   res.status(404).render("error", {
+    page: 'error',
     title: "Pagina niet gevonden",
     emessage: "Oeps! Deze pagina bestaat niet.",
     user: req.user || null,
