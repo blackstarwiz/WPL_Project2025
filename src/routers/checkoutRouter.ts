@@ -7,6 +7,7 @@ export default function checkoutRouter() {
   router.get("/", (req, res) => {
     res.render("checkout", {
       title: "Checkout",
+      page: 'checkout',
       cart: req.session.cart,
     });
   });

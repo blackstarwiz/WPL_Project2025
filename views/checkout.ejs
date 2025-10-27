@@ -1,10 +1,11 @@
 <%- include('partials/header') %>
 
 <main>
+  <section id="cartItems">
   <h1>Checkout</h1>
   <p>Bekijk je winkelmand en rond je bestelling af.</p>
 
-  <section id="cartItems">
+  
     <% if (cart.items.length > 0) { %>
     <ul>
       <% cart.items.forEach(item => { %>
@@ -12,7 +13,7 @@
       <% }) %>
     </ul>
     <p>Totaal: €<%= cart.totalPrice %></p>
-    <form action="/checkout/pay" method="POST">
+    <form  action="/checkout/pay" method="POST">
       <button type="submit">Betalen</button>
     </form>
     <% } else { %>

@@ -25,23 +25,30 @@
     <% } %> <% if (page === 'login') { %>
     <link rel="stylesheet" href="/css/login.css" />
     <% } %>
+    <% if (page === 'checkout') { %>
+    <link rel="stylesheet" href="/css/checkout.css" />
+    <% } %><% if (page === 'error') { %>
+    <link rel="stylesheet" href="/css/error.css" />
+    <% } %>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
-    />
+    /> 
     <script src="/js/hamburger.js" defer></script>
     <title><%= title %></title>
   </head>
+
+
   <body>
     <% if (message) { %>
     <div class="flash-message <%= message.type %>" style="grid-area: flash">
       <%= message.text %>
     </div>
     <% } %>
-  </head>
   <body>
+
     <header>
       <div class="nav">
         <!-- Logo -->
@@ -94,10 +101,5 @@
       </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
-  </body>
-</html>
-
-      </div>
-    </header>
   </body>
 </html>
