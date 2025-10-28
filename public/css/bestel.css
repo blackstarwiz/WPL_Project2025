@@ -109,9 +109,9 @@ aside {
 
 .card form {
   display: flex;
-  align-items: center; /* zorgt dat prijs en knop mooi op 1 lijn staan */
+  align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* ruimte tussen prijs en knop */
+  gap: 0.5rem;
 }
 
 /* ===== SIDEBAR (ORDER SUMMARY) ===== */
@@ -133,14 +133,33 @@ aside {
   margin-right: 1rem;
 }
 
-aside h1 {
-  font-size: 1.75rem;
+aside h2 {
+  font-size: 1.5rem;
 }
 
 .pizzalist {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+/* Nieuwe container voor naam en prijs op één lijn */
+.pizza-header {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Container voor aantal en verwijderknop */
+.pizza-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .total {
@@ -151,9 +170,18 @@ aside h1 {
   margin-top: var(--spacing-medium);
 }
 
-/* aside form {
-  padding: 5rem;
-} */
+/* Aanpassingen voor de form elements */
+.pizza-controls form {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pizza-controls select {
+  padding: 4px 8px;
+  border-radius: var(--border-radius-small);
+  border: 1px solid #ccc;
+}
 
 .close-aside,
 .aside-toggle,
@@ -189,9 +217,9 @@ aside h1 {
   border-radius: 50%;
   cursor: pointer;
   text-decoration: none;
-  width: 35px; /* even breed als hoog */
+  width: 35px;
   height: 35px;
-  font-size: 1.5rem; /* zodat het + mooi groot is */
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +256,7 @@ aside h1 {
     bottom: 1vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
+    width: 100%;
     max-width: 70vw;
     max-height: 60vh;
     z-index: 1000;
@@ -344,17 +372,32 @@ aside h1 {
     gap: 0.5rem;
   }
 
+  .pizza-header {
+    flex-wrap: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .pizza-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .close-aside {
-    display: flex; /* Toon sluitknop vanaf 1100px */
+    display: flex;
   }
 
   .aside-toggle {
-    display: flex; /* Toon toggle knop vanaf 720px */
+    display: flex;
   }
 }
+
 @media (max-width: 720px) {
 
 }
+
 @media (max-width: 475px) {
   .card img {
     max-width: 8rem;
