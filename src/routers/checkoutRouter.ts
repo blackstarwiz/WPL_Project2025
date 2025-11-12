@@ -1,20 +1,3 @@
-// import express, { Router } from "express";
-// import { title } from "process";
-
-// export default function checkoutRouter() {
-//   const router: Router = express.Router();
-
-//   router.get("/", (req, res) => {
-//     res.render("checkout", {
-//       title: "Checkout",
-//       page: 'checkout',
-//       cart: req.session.cart,
-//     });
-//   });
-
-//   return router;
-// }
-
 import express, { Router } from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
@@ -55,6 +38,8 @@ export default function checkoutRouter() {
         line_items: lineItems,
         success_url: `${req.protocol}://${req.get("host")}/checkout/success`,
         cancel_url: `${req.protocol}://${req.get("host")}/checkout/cancel`,
+
+        customer_email: req.user?.email,
       });
 
       res.redirect(session.url!);
