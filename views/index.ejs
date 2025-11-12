@@ -1,41 +1,43 @@
 <%- include('partials/header') %>
 
- 
-
 <main>
+    <!-- Code -->
+    <section id="intro">
+        <div id="overMarco">
+            <p>Ik ben Marco, de trotse eigenaar van Pizza Gusto.</p>
+            <a href="#marcoLink" class="anchor">Over Pizza Gusto</a>
+        </div>
+    </section>
 
-  <!-- Code -->
- <section id="intro">
-    <div id="overMarco">
-      <p>Ik ben Marco, de trotse eigenaar van Pizza Gusto.</p>
-      <a href="#marcoLink" class="anchor">Over Pizza Gusto</a>
-    </div>
-  </section>
-
-  <section class="highlights">
-      <h1>Populaire Pizza's</h1>
-    <div id="topitems">
-        <article class="topitem">
-          <img src="/assets/images/pizza_images/pizza_hawaii.png" alt="" />
-          <h2>Hawaii</h2>
-          <p>prijs</p>
-          <a href="/bestel" class="topitemButton"> Bestel</a>
-        </article>
-        <article class="topitem">
-          <img src="/assets/images/pizza_images/pizza_margherita.png" alt="" />
-          <h2>Margheria</h2>
-          <p>prijs</p>
-          <a href="/bestel" class="topitemButton"> Bestel</a>
-        </article>
-          <article class="topitem">
-          <img src="/assets/images/pizza_images/pizza_fungi.png" alt="" />
-          <h2>Fungi</h2>
-          <p>prijs</p>
-          <a href="/bestel" class="topitemButton"> Bestel</a>
-        </article>
-        
-    </div>
-  </section>
+    <section class="highlights">
+        <h1>Populaire Pizza's</h1>
+        <div id="topitems">
+            <article class="topitem">
+                <img
+                    src="/assets/images/pizza_images/pizza_hawaii.png"
+                    alt=""
+                />
+                <h2>Hawaii</h2>
+                <p>prijs</p>
+                <a href="/bestel" class="topitemButton"> Bestel</a>
+            </article>
+            <article class="topitem">
+                <img
+                    src="/assets/images/pizza_images/pizza_margherita.png"
+                    alt=""
+                />
+                <h2>Margheria</h2>
+                <p>prijs</p>
+                <a href="/bestel" class="topitemButton"> Bestel</a>
+            </article>
+            <article class="topitem">
+                <img src="/assets/images/pizza_images/pizza_fungi.png" alt="" />
+                <h2>Fungi</h2>
+                <p>prijs</p>
+                <a href="/bestel" class="topitemButton"> Bestel</a>
+            </article>
+        </div>
+    </section>
 
   <section id="review">
     <h1>Reviews</h1>
@@ -69,5 +71,6 @@
   
     </div>
     </section>
-<script src="/js/index.js"></script>
-<%- include('partials/footer') %>
+    <script src="/js/index.js"></script>
+    <%- include('partials/footer') %>
+</main>
