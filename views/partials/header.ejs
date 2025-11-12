@@ -62,17 +62,19 @@
           <span></span>
           <span></span>
           <span></span>
+          <span></span>
         </button>
         
         
         <!-- Linker kant Desktop nav-->
         <div id="navOptiesMobile" class="hidden">
           <section id="links">
+            <a href="/" class="mobileNavButtons">Home</a>
             <a href="/bestel" class="mobileNavButtons">Menu</a>
           <a href="/contact" class="mobileNavButtons">Contact</a>
           <% if (user) { %>
-            <form action="logout" method="post">
-              <button type="submit">Logout</button>
+            <form method="post">
+              <button class="logout" type="submit">Logout</button>
             </form>
           <%} else {%>
           <a href="/login" class="mobileNavButtons">Login</a>
@@ -86,8 +88,8 @@
           <a href="/bestel">Menu</a>
           <a href="/contact">Contact</a>
           <% if (user) { %>
-          <form action="logout" method="post">
-            <button type="submit">Logout</button>
+          <form method="post">
+            <button class="logout" type="submit">Logout</button>
           </form>
           <%} else {%>
             <a href="/login">Login</a>

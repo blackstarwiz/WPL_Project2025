@@ -165,6 +165,12 @@ button:hover,
   transform: scale(1.05); /* Subtiele vergroting */
 }
 
+.logout:hover {
+  background: transparent;
+  transform: none;
+  cursor: pointer;
+}
+
 button:active,
 .orderbutton:active,
 .orderbuttonpizzalist:active,

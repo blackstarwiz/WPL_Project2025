@@ -7,11 +7,10 @@ main {
 /* ===== INTRO SECTION ===== */
 #intro {
   display: flex;
-  height: 70vh;
+  height: 85vh;
   align-items: center;
-  background-image: url(/assets/images/Marco_Donatelli.png);
+  background-image: url(/assets/images/pizzaBanner.jpg);
   background-size: cover;
-  background-position: -10% 48%;
 }
 
 #overMarco {
