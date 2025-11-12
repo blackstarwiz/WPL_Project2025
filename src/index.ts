@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import path from "path";
 import { setLocals } from "./middelware/locals";
+import reviewsRouter from './routers/reviews';
 import bestelRouter from "./routers/bestel";
 import contactRouter from "./routers/contact";
 import loginRouter from "./routers/authRouter";
@@ -10,7 +11,7 @@ import livereload, { LiveReloadServer } from "livereload";
 import connectLivereload from "connect-livereload";
 import cookieParser from "cookie-parser";
 import { secureMiddleware } from "./middelware/secureMiddleware";
-import { connect } from "./database";
+import { connect, getReviews } from "./database";
 import { flashMiddleware } from "./middelware/flashMiddleware";
 import sessionMiddleware from "./session";
 import { assignGuestId } from "./middelware/assignGuestId";
@@ -48,13 +49,25 @@ app.use(loginRouter());
 app.use("/contact", secureMiddleware, contactRouter());
 app.use("/bestel", secureMiddleware, bestelRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
+app.use('/reviews', secureMiddleware, reviewsRouter());
 
-app.get("/", secureMiddleware, (req, res) => {
-  console.log(res.locals.message);
-  res.render("index", {
-    title: "Pizza Gusto",
-    page: "index",
-  });
+app.get("/", secureMiddleware, async (req, res) => {
+  try {
+    const reviews = await getReviews(); // Haal reviews op
+    
+    res.render("index", {
+      title: "Pizza Gusto",
+      page: "index",
+      reviews: reviews, // Voeg reviews toe aan de template data
+    });
+  } catch (error) {
+    console.error("Fout bij ophalen reviews:", error);
+    res.render("index", {
+      title: "Pizza Gusto",
+      page: "index",
+      reviews: [], // Geef lege array bij fout
+    });
+  }
 });
 
 app.use((req, res) => {

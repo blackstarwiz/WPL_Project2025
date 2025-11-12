@@ -1,10 +1,11 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { Request } from "express";
-import { Cart, CartItem, Pizza, User } from "./types/interface";
+import { Cart, CartItem, Pizza, User, Review } from "./types/interface";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 const jsonMenuData: Pizza[] = require("./data/menu.json");
+const jsonReviewsData: Review[] = require("./data/reviews.json");
 
 export const MONGODB_URI =
   typeof process.env.MONGO_URI === "string" ? process.env.MONGO_URI : "";
@@ -23,6 +24,10 @@ export const pizzaCollection = client
 export const cartCollection = client
   .db("gustoitaliano")
   .collection<Cart>("cart");
+
+export const reviewCollection = client 
+  .db("gustoitaliano")
+  .collection<Review>("reviews");
 
 async function createInitialUser() {
   try {
@@ -60,6 +65,19 @@ async function pizzaSeed() {
   }
 }
 
+async function reviewsSeed() {
+  try {
+    //await reviewCollection.deleteMany({}); // verwijderd alle reviewdata handig in test
+    if ((await reviewCollection.countDocuments()) > 0) {
+      return;
+    }
+    await reviewCollection.insertMany(jsonReviewsData);
+    console.log("Reviews succesvol toegevoegd aan database");
+  } catch (e: any) {
+    console.log("Er ging iets mis met reviewsSeed", e);
+  }
+}
+
 async function exit() {
   try {
     await client.close();
@@ -76,12 +94,17 @@ export async function connect() {
   try {
     await createInitialUser();
     await pizzaSeed();
+    await reviewsSeed();
     console.log("Connected to database");
     process.on("SIGINT", exit);
   } catch (error) {
     console.error(error);
     throw error;
   }
+}
+
+export async function getReviews(): Promise<Review[]> {
+  return await reviewCollection.find().toArray();
 }
 
 //Loginfuncties
