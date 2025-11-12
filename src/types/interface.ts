@@ -34,3 +34,10 @@ export interface FlashMessage {
   type: "success" | "error" | "warning";
   text: string;
 }
+
+export interface Review {
+  _id?: ObjectId;
+  naam: string;
+  profielfoto: string;
+  review: string;
+}

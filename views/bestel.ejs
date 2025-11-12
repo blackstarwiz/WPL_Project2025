@@ -36,13 +36,11 @@
         <% cart.items.forEach(item => { %>
         <li>
           <div class="pizzalist">
-            <!-- Eerste lijn: naam en prijs -->
             <div class="pizza-header">
               <h2><%= item.name %></h2>
               <p>€<%= item.price %></p>
             </div>
             
-            <!-- Tweede lijn: aantal en verwijderknop -->
             <div class="pizza-controls">
               <form action="/bestel/update" method="POST" style="display:inline">
                 <input type="hidden" name="item" value="<%= item.name %>" />

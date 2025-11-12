@@ -38,24 +38,23 @@
   </section>
 
   <section id="review">
-
     <h1>Reviews</h1>
     <div id="reviewItems">
-      <article class="reviewItem">
-       <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_margherita.png" alt="" />person1</h2>
-       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum id dolorem vitae corrupti voluptatem numquam exercitationem nobis labore blanditiis repellat?</p>
-      </article>
-      <article class="reviewItem">
-        <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_margherita.png" alt="" />person2</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero ea a voluptate cumque repellendus laudantium doloribus, facilis aliquam est et unde consequatur tenetur corporis asperiores rem ipsam delectus perspiciatis id eveniet praesentium beatae. Assumenda deserunt expedita alias fugiat!</p>
-      </article>
-      <article class="reviewItem">
-        <h2><img class= "profilePic" src="/assets/images/pizza_images/pizza_fungi.png" alt="" />person3</h2>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quo est, illo qui rerum similique incidunt dolorum ipsum deserunt porro! Praesentium ducimus amet fugiat officiis, nobis eligendi. Consequatur id magnam illum illo.</p>
-      </article>
+        <% if (reviews && reviews.length > 0) { %>
+            <% reviews.forEach(function(review) { %>
+            <article class="reviewItem">
+                <h2>
+                    <img class="profilePic" src="assets/icons/<%= review.profielfoto %>" />
+                    <%= review.naam %>
+                </h2>
+                <p><%= review.review %></p>
+            </article>
+            <% }); %>
+        <% } else { %>
+            <p>Er zijn nog geen reviews beschikbaar.</p>
+        <% } %>
     </div>
-    
-  </section>
+</section>
   
   <section class="aboutUs">
     <h1 id="marcoLink">Over Marco</h1>
