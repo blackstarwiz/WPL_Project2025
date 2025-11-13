@@ -25,7 +25,7 @@ export const cartCollection = client
   .db("gustoitaliano")
   .collection<Cart>("cart");
 
-export const reviewCollection = client 
+export const reviewCollection = client
   .db("gustoitaliano")
   .collection<Review>("reviews");
 
@@ -136,6 +136,33 @@ export function isAuthenticate(req: Request): boolean {
   } catch (err) {
     return false;
   }
+}
+
+//Registratiefuncties
+export async function emailCheck(email: string): Promise<boolean> {
+  if (!email) {
+    return false;
+  }
+
+  const user = await userCollection.findOne({ email });
+  return user ? true : false;
+}
+
+export async function createUser(
+  email: string,
+  password: string,
+  phone: string,
+  name: string
+) {
+
+  await userCollection.insertOne({
+    email,
+    password: await bcrypt.hash(password, saltRounds),
+    phone,
+    name,
+    role: "USER"
+  });
+
 }
 
 //Bestelfuncties

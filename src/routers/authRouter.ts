@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import { redirectIfAuthenticated } from "../middelware/redirectIfAuthenticated";
 import { User } from "../types/interface";
-import { login } from "../database";
+import { createUser, emailCheck, login } from "../database";
 import * as jwt from "jsonwebtoken";
 import { secureMiddleware } from "../middelware/secureMiddleware";
 
@@ -63,6 +63,36 @@ export default function loginRouter() {
         delete req.session.cart.userId;
         req.session.cart.guestId = crypto.randomUUID();
       }
+      res.redirect("/login");
+    }
+  );
+
+  router.get(
+    "/register",
+    redirectIfAuthenticated,
+    (req: Request, res: Response) => {
+      res.render("register", {
+        title: "Registreer",
+        page: "register",
+        user: res.locals.user,
+      });
+    }
+  );
+
+  router.post(
+    "/register",
+    redirectIfAuthenticated,
+    async (req: Request, res: Response) => {
+      const email : string = req.body.email;
+      if (await emailCheck(email)) {
+        req.session.message = { type: "error", text: "Deze email is reeds gebruikt" };
+        res.redirect("/register");
+      }
+      const name: string = req.body.naam;
+      const phone: string = req.body.phoneNumber;
+      const password : string = req.body.password;
+      await createUser(email, password, phone, name);
+      req.session.message = { type: "success", text: "Succesvol geregistreerd" };
       res.redirect("/login");
     }
   );
