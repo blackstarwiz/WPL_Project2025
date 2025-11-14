@@ -1,54 +1,68 @@
 <%- include('partials/header') %>
 
 <main>
-<!-- start html registreer-->
-<div id="registreer-div">
-  <div id="inhoudReg">
-    <div class="registreer_div">
-      <h2>Registreren</h2>
-      <h3>
-        <img src="\assets\nav_login\arrowhead-left.svg" alt="" />
-        <span id="inlogForm"><a href="/login">Terug</a></span>
-      </h3>
+  <!-- start html registreer-->
+  <div id="registreer-div">
+    <div id="inhoudReg">
+      <div class="registreer_div">
+        <h2>Registreren</h2>
+        <h3>
+          <img src="\assets\nav_login\arrowhead-left.svg" alt="" srcset="" />
+          <a id="inlogForm" href="/login">Terug</a>
+        </h3>
+      </div>
+      
+      <form action="/register" method="post" id="persoon_data">
+        <h4>REGISTREER MET JE E-MAILADRES</h4>
+        
+        <!--Email-->
+        <input
+          type="email"
+          name="email"
+          placeholder="Uw emailadres"
+          id="reg-email"
+          value="<%= formData.email || '' %>"
+          required
+        />
+        <!--Naam-->
+        <input type="text" name="name" id="naam" placeholder="Naam" value="<%= formData.name || '' %>"/>
+        <!--GSM-Nummer-->
+        <input
+          type="tel"
+          name="phoneNumber"
+          placeholder="+32 *** ** ** **"
+          id="reg-tel"
+          pattern="^\+32\s?\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$"
+          value="<%= formData.phone || '' %>"
+          required
+        />
+        
+        <!-- <div class="checkbox-group">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Ingelogd blijven</label>
+        </div> -->
+
+        <h4>WACHTWOORD</h4>
+        <input
+          type="password"
+          name="password"
+          id="reg-password"
+          placeholder="Wachtwoord"
+          required
+        />
+        
+         <input
+          type="password"
+          name="passwordConfirmation"
+          id="bev-password"
+          placeholder="Bevestig je wachtwoord"
+          required
+        />
+
+        <button type="submit">Registreren</button>
+      </form>
     </div>
-
-    <!-- Registratieformulier -->
-    <form action="/registreer" method="post" id="registreer-form">
-
-      <!-- Persoonlijke gegevens -->
-      <fieldset>
-        <legend>Registreer met je e-mailadres</legend>
-
-        <!-- Email -->
-        <input type="email" name="email" placeholder="Uw emailadres" id="reg-email" required
-               value="<%= typeof formData !== 'undefined' ? formData.email : '' %>" />
-
-        <!-- Naam -->
-        <input type="text" name="naam" id="naam" placeholder="Naam"
-               value="<%= typeof formData !== 'undefined' ? formData.naam : '' %>" />
-
-        <!-- GSM-Nummer -->
-        <input type="tel" name="phoneNumber" placeholder="+32 *** ** ** **" id="reg-tel"
-               pattern="^\+32\s?\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$"
-               value="<%= typeof formData !== 'undefined' ? formData.phoneNumber : '' %>" required />
-      </fieldset>
-
-      <!-- Wachtwoord -->
-      <fieldset>
-        <legend>Wachtwoord</legend>
-
-        <input type="password" name="password" id="reg-password" placeholder="Wachtwoord" required />
-        <input type="password" name="confirmPassword" id="bev-password" placeholder="Bevestig je wachtwoord" required />
-      </fieldset>
-
-      <button type="submit">Registreren</button>
-
-      <% if (typeof error !== 'undefined') { %>
-        <p class="error-message"><%= error %></p>
-      <% } %>
-    </form>
   </div>
-</div>
 </main>
 
 <%- include('partials/footer') %>

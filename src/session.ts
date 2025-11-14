@@ -1,7 +1,7 @@
 import { MONGODB_URI } from "./database";
 import session from "express-session";
 import mongoDbSession from "connect-mongodb-session";
-import { Cart, FlashMessage } from "./types/interface";
+import { Cart, FlashMessage, Form } from "./types/interface";
 
 const MongoDBStore = mongoDbSession(session);
 
@@ -15,14 +15,15 @@ declare module "express-session" {
   export interface SessionData {
     message?: FlashMessage;
     cart?: Cart;
+    formData?: Form;
   }
 }
 
 export default session({
   secret: process.env.SESSION_SECRET ?? "sewey",
   store: mongoStore,
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 2,
   },

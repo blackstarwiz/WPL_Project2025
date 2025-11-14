@@ -148,6 +148,10 @@ export async function emailCheck(email: string): Promise<boolean> {
   return user ? true : false;
 }
 
+export function passwCheck(password: string, confirmPassw: string): boolean{
+  return password !== confirmPassw ? true : false;
+}
+
 export async function createUser(
   email: string,
   password: string,

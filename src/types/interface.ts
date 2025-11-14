@@ -43,3 +43,9 @@ export interface Review {
   profielfoto: string;
   review: string;
 }
+
+export interface Form{ 
+  email?: string; 
+  name?: string; 
+  phone?: string 
+};

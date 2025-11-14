@@ -39,7 +39,7 @@ main {
   font-size: larger;
 }
 
-#aanmeldform {
+#aanmeldForm {
   color: var(--primary-color);
 }
 
@@ -83,6 +83,7 @@ main {
   justify-self: center;
   align-self: center;
   color: var(--primary-color);
+  text-decoration: none;
 }
 
 /* ===== FORM STYLES ===== */
@@ -144,10 +145,9 @@ form button,
 }
 
 /* ===== INTERACTIVE STATES ===== */
-#aanmeldform:hover,
+#aanmeldForm:hover,
 #inlogForm:hover {
   cursor: pointer;
-  text-decoration: underline;
 }
 
 button:hover,
