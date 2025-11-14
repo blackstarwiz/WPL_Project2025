@@ -95,11 +95,11 @@ export default function loginRouter() {
 
       req.session.formData = {email, name, phone};
       if (await emailCheck(email)) {
-        req.session.message = { type: "error", text: "Deze email is reeds gebruikt" };
+        req.session.message = { type: "error", text: "Deze email is al in gebruik" };
         return res.redirect("/register");
       }
       if (passwCheck(password, passConfirm)) {
-        req.session.message = { type: "error", text: "Het wachtwoord komt niet overeen met de bevestiging wachtwoord" };
+        req.session.message = { type: "error", text: "Het wachtwoord en de bevestiging komen niet overeen" };
         return res.redirect("/register");
       }
       await createUser(email, password, phone, name);
