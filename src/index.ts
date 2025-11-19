@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import path from "path";
 import { setLocals } from "./middelware/locals";
-import reviewsRouter from './routers/reviews';
+import reviewsRouter from "./routers/reviews";
 import bestelRouter from "./routers/bestel";
 import contactRouter from "./routers/contact";
 import loginRouter from "./routers/authRouter";
@@ -49,12 +49,13 @@ app.use(loginRouter());
 app.use("/contact", secureMiddleware, contactRouter());
 app.use("/bestel", secureMiddleware, bestelRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
-app.use('/reviews', secureMiddleware, reviewsRouter());
+app.use("/reviews", secureMiddleware, reviewsRouter());
+app.use("/checkout", secureMiddleware, checkoutRouter());
 
 app.get("/", secureMiddleware, async (req, res) => {
   try {
     const reviews = await getReviews(); // Haal reviews op
-    
+
     res.render("index", {
       title: "Pizza Gusto",
       page: "index",
@@ -72,7 +73,7 @@ app.get("/", secureMiddleware, async (req, res) => {
 
 app.use((req, res) => {
   res.status(404).render("error", {
-    page: 'error',
+    page: "error",
     title: "Pagina niet gevonden",
     emessage: "Oeps! Deze pagina bestaat niet.",
     user: req.user || null,

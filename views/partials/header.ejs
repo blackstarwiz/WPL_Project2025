@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="" />
-    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/root.css" />
-    <link rel="icon" type="image/png" sizes="34x34" href="/assets/icons/favicon.ico">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="34x34"
+      href="/assets/icons/favicon.ico"
+    />
 
     <% if (page === 'index') { %>
     <link rel="stylesheet" href="/css/index.css" />
@@ -22,10 +27,9 @@
     <link rel="stylesheet" href="/css/map.css" />
     <% } %> <% if (page === 'bestel') { %>
     <link rel="stylesheet" href="/css/bestel.css" />
-    <% } %> <% if (page === 'login') { %>
+    <% } %> <% if (page === 'login' || page === 'register') { %>
     <link rel="stylesheet" href="/css/login.css" />
-    <% } %>
-    <% if (page === 'checkout') { %>
+    <% } %> <% if (page === 'checkout') { %>
     <link rel="stylesheet" href="/css/checkout.css" />
     <% } %><% if (page === 'error') { %>
     <link rel="stylesheet" href="/css/error.css" />
@@ -35,11 +39,10 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
-    /> 
+    />
     <script src="/js/hamburger.js" defer></script>
     <title><%= title %></title>
   </head>
-
 
   <body>
     <% if (message) { %>
@@ -47,7 +50,6 @@
       <%= message.text %>
     </div>
     <% } %>
-  <body>
 
     <header>
       <div class="nav">
@@ -64,23 +66,21 @@
           <span></span>
           <span></span>
         </button>
-        
-        
-        <!-- Linker kant Desktop nav mibile-->
+
+        <!-- Linker kant Desktop nav-->
         <div id="navOptiesMobile" class="hidden">
           <section id="links">
             <a href="/" class="mobileNavButtons">Home</a>
             <a href="/bestel" class="mobileNavButtons">Menu</a>
-          <a href="/contact" class="mobileNavButtons">Contact</a>
-          <% if (user) { %>
-            <form method="post">
-              <button class="logout" type="submit">Logout</button>
+            <a href="/contact" class="mobileNavButtons">Contact</a>
+            <% if (user) { %>
+            <form action="logout" method="post">
+              <button type="submit">Logout</button>
             </form>
-          <%} else {%>
-          <a href="/login" class="mobileNavButtons">Login</a>
-          <%} %>
+            <%} else {%>
+            <a href="/login" class="mobileNavButtons">Login</a>
+            <%} %>
           </section>
-          
         </div>
 
         <!-- Linker kant Desktop nav-->
@@ -92,7 +92,7 @@
             <button class="logout" type="submit">Logout</button>
           </form>
           <%} else {%>
-            <a href="/login">Login</a>
+          <a href="/login">Login</a>
           <%} %>
         </div>
 
@@ -103,5 +103,3 @@
       </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
-  </body>
-</html>

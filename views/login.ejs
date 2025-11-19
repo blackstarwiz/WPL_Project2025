@@ -4,7 +4,7 @@
   <div id="login-div">
     <div class="login_div">
       <h2>Inloggen</h2>
-      <h3>Geen account? <span id="aanmeldform">Registreer</span></h3>
+      <h3>Geen account? <a id="aanmeldForm" href="/register">Registreren</a></h3>
     </div>
 
     <form action="/login" method="post">
@@ -34,72 +34,5 @@
       <button type="submit">Inloggen</button>
     </form>
   </div>
-
-  <!-- start html registreer-->
-  <div id="registreer-div">
-    <div id="inhoudReg">
-      <div class="registreer_div">
-        <h2>Registreren</h2>
-        <h3>
-          <img src="\assets\nav_login\arrowhead-left.svg" alt="" srcset="" />
-          <span id="inlogForm">terug</span>
-        </h3>
-      </div>
-
-      <form action="/registreer" method="post" id="persoon_data">
-        <h4>REGISTREER MET JE E-MAILADRES</h4>
-        
-        <!--Email-->
-        <input
-          type="email"
-          name="email"
-          placeholder="Uw emailadres"
-          id="reg-email"
-          required
-        />
-        <!--Naam-->
-        <input type="text" id="naam" placeholder="Naam" />
-        <!--GSM-Nummer-->
-        <input
-          type="tel"
-          name="phoneNumber"
-          placeholder="+32 *** ** ** **"
-          id="reg-tel"
-          pattern="^\+32\s?\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$"
-          required
-        />
-        
-        <!-- <div class="checkbox-group">
-        <input type="checkbox" id="remember" name="remember" />
-        <label for="remember">Ingelogd blijven</label>
-      </div> -->
-
-      <form action="/registreer" method="post" id="pass_data">
-        <h4>WACHTWOORD</h4>
-        <input
-          type="password"
-          name="password"
-          id="reg-password"
-          placeholder="Wachtwoord"
-          required
-        />
-        
-         <input
-          type="password"
-          name="password"
-          id="bev-password"
-          placeholder="Bevestig je wachtwoord"
-          required
-        />
-
-        <button type="submit">Registreren</button>
-      </form>
-      </form>
-      
-
-      
-    </div>
-  </div>
 </main>
-<script src="/js/inlog_page.js"></script>
 <%- include('partials/footer') %>

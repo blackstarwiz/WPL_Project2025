@@ -39,7 +39,7 @@ main {
   font-size: larger;
 }
 
-#aanmeldform {
+#aanmeldForm {
   color: var(--primary-color);
 }
 
@@ -83,6 +83,7 @@ main {
   justify-self: center;
   align-self: center;
   color: var(--primary-color);
+  text-decoration: none;
 }
 
 /* ===== FORM STYLES ===== */
@@ -96,6 +97,7 @@ form {
   padding-bottom: 2rem;
 }
 
+/* Inputs blijven zoals login */
 form input {
   text-indent: 1rem;
   border-radius: 1.75rem;
@@ -103,8 +105,23 @@ form input {
   background-color: whitesmoke;
 }
 
-.registreer_div h4 {
-  text-indent: 0.5rem;
+/* ===== FIELDSET & LEGEND ===== */
+form fieldset {
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+form legend {
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0 0.5rem;
+  color: var(--primary-color);
+}
+
+form fieldset input {
+  margin-top: 0.5rem;
 }
 
 /* ===== BUTTON STYLES ===== */
@@ -128,10 +145,9 @@ form button,
 }
 
 /* ===== INTERACTIVE STATES ===== */
-#aanmeldform:hover,
+#aanmeldForm:hover,
 #inlogForm:hover {
   cursor: pointer;
-  text-decoration: underline;
 }
 
 button:hover,
@@ -159,32 +175,33 @@ form button:active {
   display: none;
 }
 
+/* ===== MEDIA QUERIES ===== */
 @media (max-width: 1250px) {
   #login-div, #registreer-div  {
-  width: 50%;
+    width: 50%;
   }
 }
 
 @media (max-width: 950px) {
   #login-div, #registreer-div  {
-  width: 60%;
+    width: 60%;
   }
 }
 
 @media (max-width: 680px) {
   #login-div, #registreer-div  {
-  width: 70%;
+    width: 70%;
   }
 }
 
 @media (max-width: 590px) {
   #login-div, #registreer-div {
-  width: 90%;
+    width: 90%;
   }
 }
 
 @media (max-width: 450px) {
   #login-div, #registreer-div {
-  width: 98%;
+    width: 98%;
   }
 }
