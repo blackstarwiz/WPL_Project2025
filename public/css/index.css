@@ -7,7 +7,7 @@ main {
 /* ===== INTRO SECTION ===== */
 #intro {
   display: flex;
-  height: 85vh;
+  max-height: 80vh;
   align-items: center;
   background-image: url(/assets/images/pizzaBanner.jpg);
   background-size: cover;
@@ -15,13 +15,11 @@ main {
 
 #overMarco {
   padding: 2rem;
-  background: var(--color-beige);
-  border-radius: var(--border-radius-large);
   margin: auto auto 2rem 2rem;
 }
 
 #overMarco p {
-  color: black;
+  color: var(--color-light-bg);
   padding-bottom: 1rem;
   width: 25rem;
   word-wrap: normal;
@@ -81,12 +79,15 @@ main {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  font-size: large;
 }
 
 .topitemButton {
   width: 75%;
   margin: 0.75rem 0;
+  padding: 0 auto;
   border-radius: 2rem;
+  
 }
 
 /* ===== REVIEWS SECTION ===== */
@@ -186,7 +187,18 @@ button:active,
 }
 
 /* ===== MEDIA QUERIES ===== */
-
+@media screen and (max-width: 2400px) 
+{
+  #intro {
+    height: 50rem;
+  }
+}
+@media screen and (max-width: 1900px) 
+{
+  #intro {
+    height: 40rem;
+  }
+}
 
 @media screen and (max-width: 1278px) {
   #reviewItems {
@@ -196,19 +208,21 @@ button:active,
   gap: 1rem;
   padding: 1rem;
   scroll-behavior: smooth;
-}
-.reviewItem {
+  }
+  .reviewItem {
   flex: 0 0 90%; /* 80% van containerbreedte */
   scroll-snap-align: center;
-}
-#reviewItems::-webkit-scrollbar {
+  }
+  #reviewItems::-webkit-scrollbar {
   display: none;
-}
+  }
   .reviewItem p {
     font-size: 1rem;
     max-width: fit-content;
   }
-  
+  #intro {
+    height: 30rem;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -216,9 +230,6 @@ button:active,
   .reviewItem{
     padding-left: 3rem;
     padding-right: 3rem;
-  }
-  #intro {
-    height: 30rem;
   }
   
   #overMarco {
@@ -243,7 +254,7 @@ button:active,
 
 @media (max-width: 768px) {
   /* Algemene full-width stijl voor alle secties */
-  .highlights:not(#topItems),
+  .highlights,
   #review,
   .aboutUs {
     width: 100%;
@@ -272,53 +283,29 @@ button:active,
     margin: 0;
     gap: 1rem;
   }
-
   /* ===== POPULAIRE PIZZA’S: CAROUSEL OP MOBIEL ===== */
   #topitems {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 1rem;
-    padding: 3rem 1.5rem;
     scroll-behavior: smooth;
     justify-content: flex-start;
+    gap: 0;
+    padding: 1rem;
   }
-
+  
   #topitems article {
-    flex: 0 0 90%;
+    flex: 0 0 70%;
     scroll-snap-align: center;
-    flex-shrink: 0;
-    background-color: #F9F3E7;
-    border-radius: var(--border-radius-large);
+    margin: 0 0.5rem; 
   }
-
+  
   #topitems::-webkit-scrollbar {
     display: none;
   }
-
-  /* Algemene stijl voor alle items */
-  .topitem {
-    display: flex;
-  }
-
-
-  .topitem h2 {
-    font-size: 2rem;
-    margin: 0;
-    text-align: center;
-  }
-
-  .topitem p {
-    font-size: 1rem;
-    margin: 0;
-  }
-
   .topitemButton {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    margin-top: 0.3rem;
-    width: 90%;
-    text-align: center;
+    width: 75%;
+    max-width: 200px; 
   }
 }
 
@@ -334,9 +321,5 @@ button:active,
     padding-right: 1rem;
     gap: 0.8rem;
     overflow-x: auto;
-  }
-
-  #topitems article {
-    flex: 0 0 90%;
   }
 }

@@ -89,6 +89,7 @@ header {
     #bestelButton {
       background: var(--primary-color);
       color: var(--color-light-bg);
+      font-size: large;
       border: none;
       padding: 8px 12px;
       border-radius: var(--border-radius-large);
@@ -210,7 +211,7 @@ button:active,
     transform: translateX(0); 
   }
 
-  a {
+  a, .logout{
     display: inline-block;
     width: 100%; 
     font-size: 2rem; 
@@ -218,11 +219,11 @@ button:active,
     padding: 0.5rem 1rem;
     &:hover {
       color: var(--color-green-dark);
-      transform: scale(1.05); /* Subtiele vergroting */
+      transform: scale(1.05); 
     }
 
     &:active {
-      transform: scale(0.95); /* Subtiele verkleining bij klik */
+      transform: scale(0.95); 
     }
   }
 
