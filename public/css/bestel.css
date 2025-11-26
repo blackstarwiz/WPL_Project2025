@@ -394,8 +394,27 @@ aside h2 {
   }
 }
 
-@media (max-width: 720px) {
-
+@media (max-width: 530px) {
+  .listItem {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .card {
+    min-width: auto;
+    width: calc(50% - 0.5rem);
+    max-width: 14rem;
+  }
+  
+  .card img {
+    max-width: 8rem;
+  }
+  
+  .card h1 {
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 475px) {
