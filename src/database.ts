@@ -179,7 +179,7 @@ export async function findPizza(pizzaName: string): Promise<Pizza | null> {
 }
 
 export function addPizzaToCartHandler(req: Request) {
-  const { pizza, price, image, amount } = req.body; // <-- pizza i.p.v. name
+  const { pizza, price, image, amount } = req.body; 
 
   const parsedPrice = parseFloat(price);
   const parsedAmount = parseInt(amount);
@@ -200,7 +200,7 @@ export function addPizzaToCartHandler(req: Request) {
   const cart = req.session.cart;
 
   const newItem: CartItem = {
-    name: pizza, // hier gebruik je pizza.name
+    name: pizza, 
     price: parsedPrice,
     amount: parsedAmount,
     image,
