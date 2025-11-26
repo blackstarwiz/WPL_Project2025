@@ -50,7 +50,7 @@
             <% reviews.slice(0, 3).forEach(function(review) { %>
             <article class="reviewItem">
                 <h2>
-                    <img class="profilePic" src="assets/images/pizza_images/<%= review.profielfoto %>" />
+                    <img class="profilePic" src="<%= review.profielfoto %>" />
                     <%= review.naam %>
                 </h2>
                 <p><%= review.review %></p>
@@ -72,7 +72,7 @@
                 <% reviews.forEach(function(review) { %>
                 <article class="reviewItem">
                     <h2>
-                        <img class="profilePic" src="assets/images/pizza_images/<%= review.profielfoto %>" />
+                        <img class="profilePic" src="<%= review.profielfoto %>" />
                         <%= review.naam %>
                     </h2>
                     <p><%= review.review %></p>

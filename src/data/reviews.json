@@ -1,17 +1,17 @@
 [
   {
     "naam": "Luca",
-    "profielfoto": "pizza_margherita.png",
+    "profielfoto": "assets/images/pizza_images/pizza_margherita.png",
     "review": "De Margherita pizza was fantastisch! Perfecte korst en heerlijke verse basilicum. Alsof ik terug in Napels was!"
   },
   {
     "naam": "Famke",
-    "profielfoto": "pizza_hawaii.png",
+    "profielfoto": "assets/images/pizza_images/pizza_hawaii.png",
     "review": "Quattro Stagioni besteld en wat een smaakexplosie! Elke seizoen proefde ik duidelijk. De bezorging was ook nog eens supersnel."
   },
   {
     "naam": "Sanne",
-    "profielfoto": "pizza_salami.png",
+    "profielfoto": "assets/images/pizza_images/pizza_salami.png",
     "review": "Helaas tegengevallen. De pizza was lauw aangekomen en de bodem was zacht geworden. Jammer, volgende keer maar ergens anders bestellen."
   }
 ]

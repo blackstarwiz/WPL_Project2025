@@ -56,17 +56,17 @@ router.post("/add", async (req, res) => {
 
 function getRandomProfilePicture(): string {
   const profilePictures = [
-    "pizza_calzone.png",
-    "pizza_capricciosa.png", 
-    "pizza_fruttidiMare.png",
-    "pizza_fungi.png",
-    "pizza_hawaii.png",
-    "pizza_margherita.png",
-    "pizza_pepperoni.png",
-    "pizza_prosciutto_2.png",
-    "pizza_quattroStagioni.png",
-    "pizza_salami.png",
-    "pizza_tonno.png"
+    "assets/images/pizza_images/pizza_calzone.png",
+    "assets/images/pizza_images/pizza_capricciosa.png", 
+    "assets/images/pizza_images/pizza_fruttidiMare.png",
+    "assets/images/pizza_images/pizza_fungi.png",
+    "assets/images/pizza_images/pizza_hawaii.png",
+    "assets/images/pizza_images/pizza_margherita.png",
+    "assets/images/pizza_images/pizza_pepperoni.png",
+    "assets/images/pizza_images/pizza_prosciutto_2.png",
+    "assets/images/pizza_images/pizza_quattroStagioni.png",
+    "assets/images/pizza_images/pizza_salami.png",
+    "assets/images/pizza_images/pizza_tonno.png"
   ];
   
   const randomIndex = Math.floor(Math.random() * profilePictures.length);
