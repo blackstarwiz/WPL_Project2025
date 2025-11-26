@@ -40,8 +40,9 @@ export interface FlashMessage {
 export interface Review {
   _id?: ObjectId;
   naam: string;
-  profielfoto: string;
   review: string;
+  profielfoto: string;
+  datum?: Date;
 }
 
 export interface Form{ 

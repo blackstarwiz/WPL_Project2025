@@ -47,3 +47,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Popup review
+document.addEventListener('DOMContentLoaded', function() {
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    const popup = document.getElementById('allReviewsPopup');
+    const closeBtn = document.querySelector('.close-btn');
+    
+    viewAllBtn.addEventListener('click', function() {
+        popup.style.display = 'block';
+    });
+    
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+    
+    // Sluit popup wanneer er buiten geklikt wordt
+    window.addEventListener('click', function(event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+});
+
+// Popup functionaliteit
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementen
+    const addReviewBtn = document.querySelector('.add-btn');
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    const addReviewPopup = document.getElementById('addReviewPopup');
+    const allReviewsPopup = document.getElementById('allReviewsPopup');
+    const closeButtons = document.querySelectorAll('.close-btn');
+    const addReviewForm = document.getElementById('addReviewForm');
+    
+    // Open popup voor review toevoegen
+    addReviewBtn.addEventListener('click', function() {
+        addReviewPopup.style.display = 'block';
+    });
+    
+    // Open popup voor alle reviews
+    viewAllBtn.addEventListener('click', function() {
+        allReviewsPopup.style.display = 'block';
+    });
+    
+    // Sluit popups
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            addReviewPopup.style.display = 'none';
+            allReviewsPopup.style.display = 'none';
+        });
+    });
+    
+    // Sluit popup wanneer er buiten geklikt wordt
+    window.addEventListener('click', function(event) {
+        if (event.target === addReviewPopup) {
+            addReviewPopup.style.display = 'none';
+        }
+        if (event.target === allReviewsPopup) {
+            allReviewsPopup.style.display = 'none';
+        }
+    });
+    
+    // Form submit handler
+    addReviewForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('reviewName').value;
+        const reviewText = document.getElementById('reviewText').value;
+        
+        try {
+            const response = await fetch('/reviews/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    naam: name,
+                    review: reviewText,
+                    profielfoto: 'default-user.png' // default profielfoto
+                })
+            });
+            
+            if (response.ok) {
+                // Success - herlaad de pagina om nieuwe review te tonen
+                window.location.reload();
+            } else {
+                alert('Er ging iets mis bij het toevoegen van de review');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Er ging iets mis bij het toevoegen van de review');
+        }
+    });
+});

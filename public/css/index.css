@@ -135,6 +135,120 @@ main {
   padding: 1rem 0.75rem;
 }
 
+/* ===== REVIEW BUTTONS ===== */
+#seeAndAddReviews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.review-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.review-btn {
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-all-btn {
+    background-color: var(--color-green-dark);
+    color: var(--color-light-bg);
+}
+
+.review-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+}
+
+.add-btn {
+    background-color: var(--primary-color);
+    color: var(--color-light-bg);
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius-large);
+    font-size: 1rem;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: var(--color-light-bg);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius-large);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-green-dark);
+}
+
+/* ===== POPUP STYLES ===== */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+    background-color: var(--color-light-bg);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.close-btn:hover {
+    color: var(--primary-color);
+}
+
 /* ===== ABOUT US SECTION ===== */
 .aboutUs {
   display: flex;
@@ -306,6 +420,15 @@ button:active,
   .topitemButton {
     width: 75%;
     max-width: 200px; 
+  }
+  #seeAndAddReviews {
+      flex-direction: column;
+      gap: 1rem;
+  }
+    
+  .popup-content {
+      margin: 10% auto;
+      width: 95%;
   }
 }
 

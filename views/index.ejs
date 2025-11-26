@@ -36,14 +36,21 @@
         </div>
     </section>
 
-  <section id="review">
-    <h1>Reviews</h1>
+  <!-- Reviews Sectie -->
+<section id="review">
+    <div id="seeAndAddReviews">
+        <h1>Reviews</h1>
+        <div class="review-buttons">
+            <button class="review-btn add-btn" title="Review toevoegen">+</button>
+            <button class="review-btn view-all-btn" title="Alle reviews bekijken">...</button>
+        </div>
+    </div>
     <div id="reviewItems">
         <% if (reviews && reviews.length > 0) { %>
-            <% reviews.forEach(function(review) { %>
+            <% reviews.slice(0, 3).forEach(function(review) { %>
             <article class="reviewItem">
                 <h2>
-                    <img class="profilePic" src="assets/icons/<%= review.profielfoto %>" />
+                    <img class="profilePic" src="assets/images/pizza_images/<%= review.profielfoto %>" />
                     <%= review.naam %>
                 </h2>
                 <p><%= review.review %></p>
@@ -54,6 +61,48 @@
         <% } %>
     </div>
 </section>
+
+<!-- Popup voor alle reviews -->
+<div id="allReviewsPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Alle Reviews</h2>
+        <div id="allReviewsList">
+            <% if (reviews && reviews.length > 0) { %>
+                <% reviews.forEach(function(review) { %>
+                <article class="reviewItem">
+                    <h2>
+                        <img class="profilePic" src="assets/images/pizza_images/<%= review.profielfoto %>" />
+                        <%= review.naam %>
+                    </h2>
+                    <p><%= review.review %></p>
+                </article>
+                <% }); %>
+            <% } else { %>
+                <p>Er zijn nog geen reviews beschikbaar.</p>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<!-- Popup voor review toevoegen -->
+<div id="addReviewPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Review Toevoegen</h2>
+        <form id="addReviewForm">
+            <div class="form-group">
+                <label for="reviewName">Naam:</label>
+                <input type="text" id="reviewName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="reviewText">Review:</label>
+                <textarea id="reviewText" name="review" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Review Toevoegen</button>
+        </form>
+    </div>
+</div>
   
   <section class="aboutUs">
     <h1 id="marcoLink">Over Marco</h1>
