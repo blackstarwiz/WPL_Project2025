@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<main>
+  <h1>Gelukte bestellingen:</h1>
+
+  <section class="orderOverview">
+    <ul class="orderList">
+      <% orders.forEach(order => { %>
+        <% 
+          let total = 0; 
+          order.items.forEach(item => { 
+            total += item.price * item.amount;
+          }); 
+        %>
+        <li class="order">
+          <span class="user-name"><%= order.user %></span>
+          <ul class="pizza-list">
+            <% order.items.forEach(item => { %>
+              <li class="pizza-item">
+                <span class="pizza-name"><%= item.pizza %></span>
+                <span class="pizza-amount"><%= item.amount %></span>
+                <span class="pizza-price"><%= item.price * item.amount %> €</span>
+              </li>
+            <% }) %>
+          </ul>
+          <span class="order-total">Totaal: <%= total %> €</span>
+        </li>
+      <% }); %>
+    </ul>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
