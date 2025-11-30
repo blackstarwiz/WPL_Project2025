@@ -123,13 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({
                     naam: name,
-                    review: reviewText,
-                    profielfoto: 'default-user.png' // default profielfoto
+                    review: reviewText
                 })
             });
             
             if (response.ok) {
-                // Success - herlaad de pagina om nieuwe review te tonen
                 window.location.reload();
             } else {
                 alert('Er ging iets mis bij het toevoegen van de review');
