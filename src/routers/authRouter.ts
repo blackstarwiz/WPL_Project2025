@@ -3,7 +3,7 @@ import { redirectIfAuthenticated } from "../middelware/redirectIfAuthenticated";
 import { User } from "../types/interface";
 import { createUser, emailCheck, login, passwCheck } from "../database";
 import * as jwt from "jsonwebtoken";
-import { secureMiddleware } from "../middelware/secureMiddleware";
+import { ObjectId } from "mongodb";
 
 export default function loginRouter() {
   const router: Router = express.Router();
@@ -54,18 +54,21 @@ export default function loginRouter() {
     }
   );
 
-  router.post(
-    "/logout",
-    secureMiddleware,
-    async (req: Request, res: Response) => {
-      res.clearCookie("jwt");
-      if (req.session.cart) {
-        delete req.session.cart.userId;
-        req.session.cart.guestId = crypto.randomUUID();
-      }
-      res.redirect("/login");
-    }
-  );
+router.post("/logout", (req, res) => {
+  res.clearCookie("jwt");
+
+  // Maak een NIEUWE lege cart voor een gast
+  req.session.cart = {
+    items: [],
+    totalPrice: 0,
+    guestId: new ObjectId(),
+  };
+
+  console.log("🔁 Nieuwe guest na logout:", req.session.cart.guestId);
+
+  res.redirect("/login");
+});
+
 
   router.get(
     "/register",

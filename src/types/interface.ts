@@ -7,6 +7,13 @@ export interface User {
   password?: string;
   phone?: string;
   role: "ADMIN" | "USER";
+  stripeCustomerId?: string;
+}
+
+export interface Guest{
+  _id? : ObjectId;
+  email?: string;
+  phone?: string;
 }
 
 export interface Pizza {
@@ -27,9 +34,11 @@ export interface CartItem {
 export interface Cart {
   _id?: ObjectId;
   userId?: ObjectId;
-  guestId?: string;
+  guestId?: ObjectId;
   items: CartItem[];
   totalPrice: number;
+  paymentId?: string;
+  createdAt?: Date;
 }
 
 export interface FlashMessage {

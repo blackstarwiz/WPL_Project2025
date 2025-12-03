@@ -14,10 +14,11 @@ export default function checkoutRouter() {
       title: "Checkout",
       page: "checkout",
       cart: req.session.cart,
+      isGuest: !req.user, // voor template: telefoonveld alleen tonen als guest
     });
   });
 
-  // Stripe betaling
+  // Stripe betaling starten
   router.post("/pay", async (req, res) => {
     try {
       const cart = req.session.cart;
@@ -32,25 +33,35 @@ export default function checkoutRouter() {
         quantity: item.amount,
       }));
 
+      // Metadata sturen naar webhook
+      const metadata: Record<string, string> = {
+        cart: JSON.stringify(cart.items),
+        totalPrice: String(cart.totalPrice),
+      };
+
+      if (!req.user && cart.guestId) metadata.guestId = cart.guestId.toString();
+      if (req.user?._id) metadata.userId = req.user._id.toString();
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
         line_items: lineItems,
         success_url: `${req.protocol}://${req.get("host")}/checkout/success`,
         cancel_url: `${req.protocol}://${req.get("host")}/checkout/cancel`,
-
-        customer_email: req.user?.email,
+        customer_email: req.user?.email ?? undefined, // ingevuld bij ingelogde users
+        phone_number_collection: { enabled: !req.user }, // alleen tonen bij guest
+        metadata,
       });
 
       res.redirect(session.url!);
     } catch (err) {
-      console.error(err);
+      console.error("Stripe fout:", err);
       res.status(500).send("Betaling mislukt.");
     }
   });
 
-  // Success / cancel pagina routes
   router.get("/success", (req, res) => {
+    req.session.cart = { items: [], totalPrice: 0 };
     res.render("checkout_success", { title: "Betaling gelukt" });
   });
 

@@ -1,9 +1,8 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { Request } from "express";
-import { Cart, CartItem, Pizza, User, Review } from "./types/interface";
+import { Cart, CartItem, Pizza, User, Review, Guest } from "./types/interface";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import { v4 as uuidv4 } from "uuid";
 const jsonMenuData: Pizza[] = require("./data/menu.json");
 const jsonReviewsData: Review[] = require("./data/reviews.json");
 
@@ -28,6 +27,10 @@ export const cartCollection = client
 export const reviewCollection = client
   .db("gustoitaliano")
   .collection<Review>("reviews");
+
+export const guestCollection = client
+  .db("gustoitaliano")
+  .collection<Guest>("guests");
 
 async function createInitialUser() {
   try {
@@ -178,48 +181,44 @@ export async function findPizza(pizzaName: string): Promise<Pizza | null> {
   return await pizzaCollection.findOne({ name: pizzaName });
 }
 
-export function addPizzaToCartHandler(req: Request) {
-  const { pizza, price, image, amount } = req.body; 
+export async function addPizzaToCartHandler(req: Request) {
+  const { pizza, price, image, amount } = req.body;
 
   const parsedPrice = parseFloat(price);
   const parsedAmount = parseInt(amount);
 
-  if (!pizza || isNaN(parsedPrice) || isNaN(parsedAmount)) {
-    console.log("Geen geldige pizza of prijs ontvangen", req.body);
-    return;
-  }
+  if (!pizza || isNaN(parsedPrice) || isNaN(parsedAmount)) return;
 
   if (!req.session.cart) {
-    req.session.cart = { guestId: uuidv4(), items: [], totalPrice: 0 };
+    req.session.cart = { items: [], totalPrice: 0 };
   }
 
-  if (req.user && req.user._id) {
-    req.session.cart.userId = new ObjectId(req.user._id);
-  }
+  const cart = req.session.cart as Cart;
 
-  const cart = req.session.cart;
+if (req.user?._id) {
+  req.session.cart.userId = req.user._id;
+  delete req.session.cart.guestId;
+}
 
   const newItem: CartItem = {
-    name: pizza, 
+    name: pizza,
     price: parsedPrice,
     amount: parsedAmount,
     image,
   };
 
-  const existingItem = cart.items.find((item) => item.name === newItem.name);
+  const existingItem = cart.items.find((item) => item.name === pizza);
 
   if (existingItem) {
-    existingItem.amount += parsedAmount; // overschrijven
+    existingItem.amount += parsedAmount;
   } else {
     cart.items.push(newItem);
   }
 
-  req.session.cart.totalPrice = req.session.cart.items.reduce(
-    (acc, item) => acc + item.price * item.amount,
+  cart.totalPrice = cart.items.reduce(
+    (sum, i) => sum + i.price * i.amount,
     0
   );
-
-  console.log("guestId " + cart.guestId);
 }
 
 export function updateAmountInEjs(
