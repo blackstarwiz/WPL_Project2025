@@ -8,7 +8,7 @@
         <% pizzas.forEach(pizza => {%>
         <article class="card">
           <img
-            src="<%= pizza.image %>"
+            src="assets/images/pizza_images/<%= pizza.image %>"
             alt="<%= pizza.name %>"
           />
           <h1 class="pizzaNaam"><%= pizza.name %></h1>
@@ -19,7 +19,7 @@
             <input type="hidden" name="amount" value="1" />
             <input type="hidden" name="pizza" value="<%= pizza.name %>" />
             <input type="hidden" name="price" value="<%= pizza.price %>" />
-            <input type="hidden" name="image" value="<%= pizza.image %>" />
+            <input type="hidden" name="image" value="<%= pizza.image %>"/>
             <button type="submit" class="orderbutton">+</button>
           </form>
         </article>
