@@ -30,6 +30,8 @@ export interface Cart {
   guestId?: string;
   items: CartItem[];
   totalPrice: number;
+  paymentId?: string;
+  createdAt?: Date;
 }
 
 export interface FlashMessage {
