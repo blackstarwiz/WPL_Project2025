@@ -2,16 +2,14 @@ import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import { ObjectId } from "mongodb";
-import { cartCollection } from "../database";
+import { cartCollection, guestCollection } from "../database";
 
 dotenv.config();
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export function stripeWebhookRouter() {
   const router = express.Router();
 
-  // Webhook moet raw body gebruiken
   router.post(
     "/stripe/webhook",
     express.raw({ type: "application/json" }),
@@ -19,7 +17,6 @@ export function stripeWebhookRouter() {
       const sig = req.headers["stripe-signature"] as string;
 
       let event;
-
       try {
         event = stripe.webhooks.constructEvent(
           req.body,
@@ -31,30 +28,23 @@ export function stripeWebhookRouter() {
         return res.status(400).send(`Webhook Error: ${err.message}`);
       }
 
-      // ✔ betaling voltooid
       if (event.type === "checkout.session.completed") {
         const session = event.data.object as any;
-
         console.log("💰 Betaling bevestigd:", session.id);
 
-        // Items terughalen
         const items = JSON.parse(session.metadata.cart);
+        const totalPrice = session.amount_total / 100;
 
-        // User of guest ID ophalen
-        const userId = session.metadata.userId
+        const userId = session.metadata?.userId
           ? new ObjectId(session.metadata.userId)
           : undefined;
-
-        const guestId = session.metadata.guestId
+        const guestId = session.metadata?.guestId
           ? new ObjectId(session.metadata.guestId)
           : undefined;
 
-        const totalPrice = session.amount_total / 100;
+        const buyerInfo = userId ? { userId } : guestId ? { guestId } : {};
 
-        // 🧑‍🤝‍🧑 Fang: user of guest?
-        const buyerInfo = userId ? { userId } : { guestId };
-
-        // 🛒 Bestelling opslaan
+        // Winkelmand opslaan
         await cartCollection.insertOne({
           ...buyerInfo,
           items,
@@ -62,8 +52,29 @@ export function stripeWebhookRouter() {
           paymentId: session.id,
           createdAt: new Date(),
         });
+        console.log("🛍️ Bestelling opgeslagen in 'cart'");
 
-        console.log("🛍️ Bestelling succesvol opgeslagen in 'cart'");
+        // Guest e-mail opslaan
+        const email = session.customer_email;
+        if (guestId && email) {
+          await guestCollection.updateOne(
+            { _id: guestId },
+            { $set: { email } },
+            { upsert: true }
+          );
+          console.log("📧 Guest email opgeslagen/updated");
+        }
+
+        // Telefoon opslaan (alleen voor guest, ingelogde users vullen dit al in Stripe)
+        const phone = session.customer_details?.phone;
+        if (guestId && phone) {
+          await guestCollection.updateOne(
+            { _id: guestId },
+            { $set: { phone } },
+            { upsert: true }
+          );
+          console.log("📱 Guest telefoonnummer opgeslagen");
+        }
       }
 
       res.json({ received: true });

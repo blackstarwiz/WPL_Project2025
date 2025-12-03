@@ -7,6 +7,7 @@ export interface User {
   password?: string;
   phone?: string;
   role: "ADMIN" | "USER";
+  stripeCustomerId?: string;
 }
 
 export interface Guest{
