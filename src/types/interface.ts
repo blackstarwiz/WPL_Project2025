@@ -9,6 +9,11 @@ export interface User {
   role: "ADMIN" | "USER";
 }
 
+export interface Guest{
+  _id? : ObjectId;
+  email?: string;
+}
+
 export interface Pizza {
   name: string;
   image: string;
@@ -27,7 +32,7 @@ export interface CartItem {
 export interface Cart {
   _id?: ObjectId;
   userId?: ObjectId;
-  guestId?: string;
+  guestId?: ObjectId;
   items: CartItem[];
   totalPrice: number;
   paymentId?: string;

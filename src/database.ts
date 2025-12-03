@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { Request } from "express";
-import { Cart, CartItem, Pizza, User, Review } from "./types/interface";
+import { Cart, CartItem, Pizza, User, Review, Guest } from "./types/interface";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
@@ -28,6 +28,10 @@ export const cartCollection = client
 export const reviewCollection = client
   .db("gustoitaliano")
   .collection<Review>("reviews");
+
+export const guestCollection = client
+  .db("gustoitaliano")
+  .collection<Guest>("guests");
 
 async function createInitialUser() {
   try {
@@ -178,48 +182,61 @@ export async function findPizza(pizzaName: string): Promise<Pizza | null> {
   return await pizzaCollection.findOne({ name: pizzaName });
 }
 
-export function addPizzaToCartHandler(req: Request) {
-  const { pizza, price, image, amount } = req.body; 
+export async function ensureGuest(req: Request) {
+  if (!req.session.cart?.guestId) {
+    // Nieuwe guest aanmaken
+    const newGuest = {
+      email: undefined, // kan later optioneel gevuld worden
+    };
+    const result = await guestCollection.insertOne(newGuest);
 
+    // Sla guestId op in de sessie
+    if (!req.session.cart) {
+      req.session.cart = {
+        _id: new ObjectId(),
+        items: [],
+        totalPrice: 0,
+        guestId: result.insertedId,
+      };
+    } else {
+      req.session.cart.guestId = result.insertedId;
+    }
+
+    console.log("Nieuwe guest aangemaakt met ID:", result.insertedId.toHexString());
+  }
+}
+
+export async function addPizzaToCartHandler(req: Request) {
+  const { pizza, price, image, amount } = req.body;
   const parsedPrice = parseFloat(price);
   const parsedAmount = parseInt(amount);
 
-  if (!pizza || isNaN(parsedPrice) || isNaN(parsedAmount)) {
-    console.log("Geen geldige pizza of prijs ontvangen", req.body);
-    return;
-  }
+  if (!pizza || isNaN(parsedPrice) || isNaN(parsedAmount)) return;
 
-  if (!req.session.cart) {
-    req.session.cart = { guestId: uuidv4(), items: [], totalPrice: 0 };
-  }
-
-  if (req.user && req.user._id) {
-    req.session.cart.userId = new ObjectId(req.user._id);
-  }
-
-  const cart = req.session.cart;
-
-  const newItem: CartItem = {
-    name: pizza, 
-    price: parsedPrice,
-    amount: parsedAmount,
-    image,
-  };
-
-  const existingItem = cart.items.find((item) => item.name === newItem.name);
-
-  if (existingItem) {
-    existingItem.amount += parsedAmount; // overschrijven
+  // Zorg dat guestId aanwezig is als er geen ingelogde user is
+  if (!req.user?._id) {
+    await ensureGuest(req);
   } else {
-    cart.items.push(newItem);
+    // Ingelogde gebruiker
+    if (!req.session.cart) {
+      req.session.cart = {
+        _id: new ObjectId(),
+        items: [],
+        totalPrice: 0,
+      };
+    }
+    req.session.cart.userId = new ObjectId(req.user._id);
+    delete req.session.cart.guestId;
   }
 
-  req.session.cart.totalPrice = req.session.cart.items.reduce(
-    (acc, item) => acc + item.price * item.amount,
-    0
-  );
+  const cart = req.session.cart as Cart;
 
-  console.log("guestId " + cart.guestId);
+  const newItem: CartItem = { name: pizza, price: parsedPrice, amount: parsedAmount, image };
+  const existingItem = cart.items.find((item) => item.name === pizza);
+  if (existingItem) existingItem.amount += parsedAmount;
+  else cart.items.push(newItem);
+
+  cart.totalPrice = cart.items.reduce((sum, i) => sum + i.price * i.amount, 0);
 }
 
 export function updateAmountInEjs(

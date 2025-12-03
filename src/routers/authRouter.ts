@@ -4,6 +4,7 @@ import { User } from "../types/interface";
 import { createUser, emailCheck, login, passwCheck } from "../database";
 import * as jwt from "jsonwebtoken";
 import { secureMiddleware } from "../middelware/secureMiddleware";
+import { ObjectId } from "mongodb";
 
 export default function loginRouter() {
   const router: Router = express.Router();
@@ -61,7 +62,7 @@ export default function loginRouter() {
       res.clearCookie("jwt");
       if (req.session.cart) {
         delete req.session.cart.userId;
-        req.session.cart.guestId = crypto.randomUUID();
+        req.session.cart.guestId = new ObjectId();
       }
       res.redirect("/login");
     }
