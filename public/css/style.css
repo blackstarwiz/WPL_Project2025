@@ -113,7 +113,7 @@ footer {
   grid-area: footer;
   background: #f5f5f5;
   box-shadow: -3px -1px 21px 11px rgba(0, 0, 0, 0.1);
-
+  
   display: flex;
   align-items: center;
 
@@ -123,6 +123,10 @@ footer {
       height: 55px;
       width: 55px;
     }
+    
+  }
+  #top{
+    margin-left: 5px;
   }
   #marker {
     padding-right: 1rem;
