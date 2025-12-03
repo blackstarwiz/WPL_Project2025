@@ -1,17 +1,25 @@
 import { Request, Response, NextFunction } from "express";
-import crypto from "crypto";
+import { ObjectId } from "mongodb";
 
 export function assignGuestId(req: Request, res: Response, next: NextFunction) {
-  // Zorg dat er een winkelmand bestaat
   if (!req.session.cart) {
     req.session.cart = { items: [], totalPrice: 0 };
   }
 
-  // Als er geen userId (JWT login) is, gebruik een guestId
-  if (!req.session.cart.userId && !req.session.cart.guestId) {
-    req.session.cart.guestId = crypto.randomUUID();
-    console.log("🆕 Nieuwe gast ID:", req.session.cart.guestId);
+  // Als user is ingelogd → gebruik userId
+  if (req.user?._id) {
+    req.session.cart.userId = req.user._id;
+    delete req.session.cart.guestId;
+    return next();
+  }
+
+  // Alleen gasten krijgen een guestId
+  if (!req.session.cart.guestId) {
+    req.session.cart.guestId = new ObjectId();
+    console.log("🆕 Nieuwe guest ID:", req.session.cart.guestId);
   }
 
   next();
 }
+
+

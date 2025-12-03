@@ -20,6 +20,7 @@ import adminRouter from "./routers/adminRouter";
 
 // 1. Stripe webhook importeren
 import { stripeWebhookRouter } from "./routers/stripeWebhook";
+import { cwd } from "process";
 
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
@@ -52,19 +53,20 @@ app.set("port", process.env.PORT ?? 3000);
 // Sessions en middleware
 app.use(sessionMiddleware);
 app.use(flashMiddleware);
+app.use(secureMiddleware);
 app.use(assignGuestId);
 app.use(setLocals);
 
 // Routers
 app.use(loginRouter());
-app.use("/contact", secureMiddleware, contactRouter());
-app.use("/bestel", secureMiddleware, bestelRouter());
-app.use("/checkout", secureMiddleware, checkoutRouter());
-app.use("/reviews", secureMiddleware, reviewsRouter());
+app.use("/contact", contactRouter());
+app.use("/bestel", bestelRouter());
+app.use("/checkout", checkoutRouter());
+app.use("/reviews", reviewsRouter());
 app.use("/admin", adminRouter);
 
 // Home route
-app.get("/", secureMiddleware, async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const reviews = await getReviews();
     res.render("index", {
@@ -72,6 +74,15 @@ app.get("/", secureMiddleware, async (req, res) => {
       page: "index",
       reviews: reviews,
     });
+
+    if (req.session.cart?.userId) {
+      console.log("UserId = " + req.session.cart?.userId
+      );
+    } else{
+      console.log("GuestId = " + req.session.cart?.guestId);
+    }
+    console.log("TotalePrijs = " + req.session.cart?.totalPrice);
+
   } catch (error) {
     console.error("Fout bij ophalen reviews:", error);
     res.render("index", {

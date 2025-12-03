@@ -12,6 +12,7 @@ export interface User {
 export interface Guest{
   _id? : ObjectId;
   email?: string;
+  phone?: string;
 }
 
 export interface Pizza {

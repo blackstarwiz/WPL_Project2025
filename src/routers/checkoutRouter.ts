@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
+import { ObjectId } from "mongodb";
 
 dotenv.config();
 
@@ -17,45 +18,73 @@ export default function checkoutRouter() {
     });
   });
 
-  // Stripe betaling
+  // Stripe betaling starten
   router.post("/pay", async (req, res) => {
     try {
       const cart = req.session.cart;
-      if (!cart || cart.items.length === 0) return res.redirect("/checkout");
 
+      if (!cart || cart.items.length === 0) {
+        return res.redirect("/checkout");
+      }
+
+      // Line items voor Stripe
       const lineItems = cart.items.map((item: any) => ({
         price_data: {
           currency: "eur",
-          product_data: { name: item.name },
+          product_data: {
+            name: item.name,
+          },
           unit_amount: Math.round(item.price * 100),
         },
         quantity: item.amount,
       }));
 
+      // 🔥 Metadata meesturen — nog NIET opslaan!
+      const metadata: Record<string, string> = {
+        cart: JSON.stringify(cart.items),
+        totalPrice: String(cart.totalPrice),
+        guestId: cart.guestId?.toString() ?? "",
+        userId: cart.userId?.toString() ?? "",
+      };
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
         line_items: lineItems,
+
+        // Succes & cancel
         success_url: `${req.protocol}://${req.get("host")}/checkout/success`,
         cancel_url: `${req.protocol}://${req.get("host")}/checkout/cancel`,
 
-        customer_email: req.user?.email,
+        // Alleen als user is ingelogd
+        customer_email: req.user?.email ?? undefined,
+
+        // ⭐ SUPER BELANGRIJK — wordt gebruikt in webhook
+        metadata,
       });
 
       res.redirect(session.url!);
     } catch (err) {
-      console.error(err);
+      console.error("Stripe fout:", err);
       res.status(500).send("Betaling mislukt.");
     }
   });
 
-  // Success / cancel pagina routes
+  // ⭐ Betaling geslaagd
   router.get("/success", (req, res) => {
-    res.render("checkout_success", { title: "Betaling gelukt" });
+    // Winkelmand leegmaken — order is via webhook opgeslagen
+    req.session.cart = { items: [], totalPrice: 0 };
+
+    res.render("checkout_success", {
+      title: "Betaling gelukt",
+    });
   });
 
+  // Betaling geannuleerd
   router.get("/cancel", (req, res) => {
-    res.render("checkout_cancel", { title: "Betaling geannuleerd" });
+    res.render("checkout_cancel", {
+      title: "Betaling geannuleerd",
+    });
   });
 
   return router;
