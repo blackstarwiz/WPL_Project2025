@@ -10,6 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export function stripeWebhookRouter() {
   const router = express.Router();
 
+  // BELANGRIJK: raw body gebruiken voor Stripe!
   router.post(
     "/stripe/webhook",
     express.raw({ type: "application/json" }),
@@ -24,12 +25,13 @@ export function stripeWebhookRouter() {
           process.env.STRIPE_WEBHOOK_SECRET as string
         );
       } catch (err: any) {
-        console.error("Webhook fout:", err.message);
+        console.error("❌ Webhook fout:", err.message);
         return res.status(400).send(`Webhook Error: ${err.message}`);
       }
 
       if (event.type === "checkout.session.completed") {
         const session = event.data.object as any;
+
         console.log("💰 Betaling bevestigd:", session.id);
 
         const items = JSON.parse(session.metadata.cart);
@@ -38,13 +40,14 @@ export function stripeWebhookRouter() {
         const userId = session.metadata?.userId
           ? new ObjectId(session.metadata.userId)
           : undefined;
+
         const guestId = session.metadata?.guestId
           ? new ObjectId(session.metadata.guestId)
           : undefined;
 
         const buyerInfo = userId ? { userId } : guestId ? { guestId } : {};
 
-        // Winkelmand opslaan
+        // ❗ Bestelling opslaan
         await cartCollection.insertOne({
           ...buyerInfo,
           items,
@@ -52,28 +55,25 @@ export function stripeWebhookRouter() {
           paymentId: session.id,
           createdAt: new Date(),
         });
-        console.log("🛍️ Bestelling opgeslagen in 'cart'");
 
-        // Guest e-mail opslaan
-        const email = session.customer_email;
-        if (guestId && email) {
+        console.log("🛒 Bestelling opgeslagen");
+
+        // Guest email opslaan
+        if (guestId && session.customer_email) {
           await guestCollection.updateOne(
             { _id: guestId },
-            { $set: { email } },
+            { $set: { email: session.customer_email } },
             { upsert: true }
           );
-          console.log("📧 Guest email opgeslagen/updated");
         }
 
-        // Telefoon opslaan (alleen voor guest, ingelogde users vullen dit al in Stripe)
-        const phone = session.customer_details?.phone;
-        if (guestId && phone) {
+        // Guest telefoon opslaan
+        if (guestId && session.customer_details?.phone) {
           await guestCollection.updateOne(
             { _id: guestId },
-            { $set: { phone } },
+            { $set: { phone: session.customer_details.phone } },
             { upsert: true }
           );
-          console.log("📱 Guest telefoonnummer opgeslagen");
         }
       }
 
