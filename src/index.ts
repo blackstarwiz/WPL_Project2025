@@ -16,6 +16,7 @@ import { flashMiddleware } from "./middelware/flashMiddleware";
 import sessionMiddleware from "./session";
 import { assignGuestId } from "./middelware/assignGuestId";
 import checkoutRouter from "./routers/checkoutRouter";
+import usersRouter from "./routers/user";
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
@@ -51,6 +52,8 @@ app.use("/bestel", secureMiddleware, bestelRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
 app.use("/reviews", secureMiddleware, reviewsRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
+app.use("/users", secureMiddleware, usersRouter());
+
 
 app.get("/", secureMiddleware, async (req, res) => {
   try {
