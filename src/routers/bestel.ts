@@ -54,12 +54,53 @@ export default function bestelRouter() {
   router.post("/update", (req, res) => {
     const pizzaName: string = req.body.item;
     const cartItem = updateCartItemAmount(req, pizzaName);
+
+    if (!cartItem) {
+      // Als we via fetch werken → JSON fout teruggeven
+      if (
+        req.xhr ||
+        req.headers["x-requested-with"] === "XMLHttpRequest"
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Item niet gevonden in winkelmand",
+        });
+      }
+
+      // Gewone fallback -> oude gedrag (redirect)
+      req.session.message = {
+        type: "error",
+        text: "Item niet gevonden in winkelmand",
+      };
+      return res.redirect("/bestel");
+    }
+
     req.session.message = {
       type: "success",
-      text: `${cartItem?.name} aangepast naar ${cartItem?.amount}`,
+      text: `${cartItem.name} aangepast naar ${cartItem.amount}`,
     };
+
+    const wantsJson =
+      req.xhr ||
+      req.headers["x-requested-with"] === "XMLHttpRequest" ||
+      (typeof req.headers.accept === "string" &&
+        req.headers.accept.includes("application/json"));
+
+    // ✅ Bij AJAX: JSON terugsturen → geen full reload
+    if (wantsJson) {
+      return res.json({
+        success: true,
+        item: cartItem,
+        message: req.session.message,
+        totalPrice: req.session.cart?.totalPrice ?? 0,
+        totalItems: totalAmountCartItems(req.session.cart),
+      });
+    }
+
+    // ✅ Bij gewone form submit blijft het oude gedrag
     res.redirect("/bestel");
   });
+
 
   return router;
 }

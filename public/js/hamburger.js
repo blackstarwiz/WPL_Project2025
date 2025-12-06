@@ -47,3 +47,63 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+  // Zoek de lijst met bestellingen in de aside
+  var orderList = document.querySelector('.order-list');
+  if (!orderList) return;
+
+  // Alle formulieren die de hoeveelheid updaten
+  var updateForms = orderList.querySelectorAll('form[action="/bestel/update"]');
+
+  updateForms.forEach(function(form) {
+    var select = form.querySelector('select[name="amount"]');
+    if (!select) return;
+
+    // 🔧 Oude inline handler uitschakelen (onchange="this.form.submit()")
+    select.onchange = null;
+
+    select.addEventListener('change', function (event) {
+      event.preventDefault();
+
+      var formData = new FormData(form);
+      var body = new URLSearchParams();
+      formData.forEach(function(value, key) {
+        body.append(key, value.toString());
+      });
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: body
+      })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('Netwerkfout bij updaten winkelmand');
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          if (!data || !data.success) {
+            return;
+          }
+
+          // ✅ Totaalprijs in de aside updaten
+          var totalEl = document.querySelector('.total h2');
+          if (totalEl && typeof data.totalPrice === 'number') {
+            totalEl.textContent = 'Totaal: €' + data.totalPrice.toFixed(2);
+          }
+
+          // ✅ Aantal items bij het winkelmand-icoon updaten
+          var countEl = document.querySelector('.cart-count');
+          if (countEl && typeof data.totalItems === 'number') {
+            countEl.textContent = data.totalItems;
+          }
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    });
+  });
+});

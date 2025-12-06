@@ -131,6 +131,9 @@ aside {
   margin-top: 9rem;
   margin-left: 1rem;
   margin-right: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+
 }
 
 aside h2 {
