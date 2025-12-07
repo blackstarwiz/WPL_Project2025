@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { secureMiddleware } from "../middelware/secureMiddleware";
 import { cartCollection, userCollection, guestCollection } from "../database";
 import { ObjectId } from "mongodb";
+import { authorizeRole } from "../middelware/authorizeRole";
 
 const router = Router();
 
-router.get("/pizza-overview", secureMiddleware, (req, res) => {
+router.get("/pizza-overview", authorizeRole('admin'), (req, res) => {
   res.render("admin_pizza_overview", {
     title: "Pizza overview",
     page: "admin_pizza_overview",
@@ -13,7 +13,7 @@ router.get("/pizza-overview", secureMiddleware, (req, res) => {
   });
 });
 
-router.get("/order-overview", secureMiddleware, async (req, res) => {
+router.get("/order-overview", authorizeRole('admin'), async (req, res) => {
   try {
     const orders = await cartCollection
       .find({ paymentId: { $exists: true } })
@@ -83,7 +83,7 @@ router.get("/order-overview", secureMiddleware, async (req, res) => {
   }
 });
 
-router.get("/user-overview", secureMiddleware, (req, res) => {
+router.get("/user-overview", authorizeRole('admin'), (req, res) => {
   res.render("admin_user_overview", {
     title: "User overview",
     page: "admin_user_overview",

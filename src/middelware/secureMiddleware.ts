@@ -27,7 +27,7 @@ export function secureMiddleware(
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as User;
     req.user = decoded;
     res.locals.user = decoded;
-    console.log("✅ Ingelogd als:", decoded.email);
+    console.log("✅ Ingelogd als:", decoded.email + "\n" + decoded.role);
   } catch {
     console.log("❌ Token ongeldig of verlopen");
     res.clearCookie("jwt");

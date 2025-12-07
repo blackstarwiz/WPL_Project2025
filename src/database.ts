@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import { Request } from "express";
 import { Cart, CartItem, Pizza, User, Review, Guest } from "./types/interface";
 import bcrypt from "bcrypt";
@@ -32,18 +32,18 @@ export const guestCollection = client
   .db("gustoitaliano")
   .collection<Guest>("guests");
 
-async function createInitialUser() {
+async function createAdmin() {
   try {
     if ((await userCollection.countDocuments()) > 0) {
       return;
     }
 
-    let email1: string | undefined = process.env.USER1_EMAIL;
-    let password1: string | undefined = process.env.USER1_PSW;
+    let email1: string | undefined = process.env.ADMIN_EMAIL;
+    let password1: string | undefined = process.env.ADMIN_PSW;
 
     if (email1 === undefined || password1 === undefined) {
       throw new Error(
-        "USER1_EMAIL or USER1_PSW moet in de enviroment file komen"
+        "ADMIN_EMAIL of ADMIN_PSW moet in de enviroment file komen"
       );
     }
 
@@ -53,7 +53,7 @@ async function createInitialUser() {
       role: "ADMIN",
     });
   } catch (e: any) {
-    console.error("Fout in createInitialUser:", e.message);
+    console.error("Fout in createAdmin:", e.message);
     throw e;
   }
 }
@@ -64,7 +64,7 @@ async function pizzaSeed() {
     }
     await pizzaCollection.insertMany(jsonMenuData);
   } catch (e: any) {
-    console.log("Er ging iets van met pizzaSeed", e);
+    console.log("Er ging iets fout met pizzaSeed", e);
   }
 }
 
@@ -95,7 +95,7 @@ export async function connect() {
   console.log("Poging tot database verbinding en initialisatie...");
   await client.connect();
   try {
-    await createInitialUser();
+    await createAdmin();
     await pizzaSeed();
     await reviewsSeed();
     console.log("Connected to database");
