@@ -109,6 +109,7 @@ main {
 }
 
 footer {
+  
   height: 10vh;
   grid-area: footer;
   background: #f5f5f5;

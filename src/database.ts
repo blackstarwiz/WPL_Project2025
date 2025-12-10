@@ -12,6 +12,8 @@ export const saltRounds: number = 10;
 
 const client = new MongoClient(MONGODB_URI);
 
+
+
 export const userCollection = client
   .db("gustoitaliano")
   .collection<User>("users");

@@ -14,7 +14,6 @@ main h2 {
 #contactCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   padding: 0 2rem;
   background-color: #f9f3e7;
   border-radius: var(--border-radius-large);
@@ -24,10 +23,11 @@ main h2 {
 /* ===== CONTACT SECTIONS ===== */
 .contact {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
 }
 
 #gegevens_con {
+  
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -53,6 +53,7 @@ main h2 {
 
 /* ===== OPENING HOURS ===== */
 #openingUren_con {
+  width: 100%;
   flex-grow: 2;
   align-content: center;
   padding: 2rem 0;
@@ -95,7 +96,7 @@ main h2 {
 /* ===== MAP ===== */
 #map {
   height: 400px;
-  width: 100%;
+  width: fit-content;
   margin: 2rem 0;
   border-radius: var(--border-radius-large);
 }

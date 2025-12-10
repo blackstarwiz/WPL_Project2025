@@ -14,7 +14,7 @@
           <h1 class="pizzaNaam"><%= pizza.name %></h1>
           <form action="/bestel" method="POST">
             <span class="pizzaPrice" style="font-size: 1rem"
-              >Vanaf €<%= pizza.price.toFixed(2) %></span
+              >Vanaf € <%= pizza.price.toFixed(2) %></span
             >
             <input type="hidden" name="amount" value="1" />
             <input type="hidden" name="pizza" value="<%= pizza.name %>" />

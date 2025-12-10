@@ -13,27 +13,45 @@
       sizes="34x34"
       href="/assets/icons/favicon.ico"
     />
-
     <% if (page === 'index') { %>
-    <link rel="stylesheet" href="/css/index.css" />
-    <% } %> <% if (page === 'contact') { %>
-    <link rel="stylesheet" href="/css/contact.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <link rel="stylesheet" href="/css/map.css" />
-    <% } %> <% if (page === 'bestel') { %>
-    <link rel="stylesheet" href="/css/bestel.css" />
-    <% } %> <% if (page === 'login' || page === 'register') { %>
-    <link rel="stylesheet" href="/css/login.css" />
-    <% } %> <% if (page === 'checkout') { %>
-    <link rel="stylesheet" href="/css/checkout.css" />
-    <% } %><% if (page === 'error') { %>
-    <link rel="stylesheet" href="/css/error.css" />
+      <link rel="stylesheet" href="/css/index.css" />
     <% } %>
+
+    <% if (page === 'contact') { %>
+      <link rel="stylesheet" href="/css/contact.css" />
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+      />
+      <link rel="stylesheet" href="/css/map.css" />
+    <% } %>
+
+    <% if (page === 'bestel') { %>
+      <link rel="stylesheet" href="/css/bestel.css" />
+    <% } %>
+
+    <% if (page === 'login' || page === 'register') { %>
+      <link rel="stylesheet" href="/css/login.css" />
+    <% } %>
+
+    <% if (page === 'checkout') { %>
+      <link rel="stylesheet" href="/css/checkout.css" />
+    <% } %>
+
+    <% if (page === 'admin') { %>
+      <link rel="stylesheet" href="/css/admin.css" />
+    <% } %>
+
+    <% if (page === 'pizza-overview') { %>
+      <link rel="stylesheet" href="/css/pizza-overview.css" />
+    <% } %>
+
+    <% if (page === 'error') { %>
+      <link rel="stylesheet" href="/css/error.css" />
+    <% } %>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

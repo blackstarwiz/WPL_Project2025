@@ -1,0 +1,82 @@
+main {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  justify-self: center;
+  align-self: center;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  border: solid 0.1rem rgb(209, 205, 205);
+  box-shadow: 5px 5px 19px 11px rgba(0, 0, 0, 0.18);
+}
+button {
+  background: var(--primary-color);
+  color: var(--color-light-bg);
+  font-size: large;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius-large);
+  cursor: pointer;
+  text-decoration: none;
+}
+form {
+  width: 100%;
+  padding: 1.3rem;
+  border: solid red 0.1rem;
+  label {
+    display: inline;
+  }
+  input[type="text"] {
+    padding: 0.7rem;
+    margin: 0.5rem 0rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+  }
+}
+#addPizzaFrom {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+#upload-data {
+border: solid;
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  button {
+    width: fit-content;
+  }
+
+  #name,
+  #price {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: solid;
+    width: 49%;
+    input{
+        width: 40%;
+    }
+    label{
+        font-size: larger;
+    }
+  }
+  #upload{
+    width: 100%;
+    border: solid;
+  }
+}
+#submit-data{
+    display: flex;
+    #addImagePreview,#addImageUrl{
+
+        height: 150px;
+        width: 150px;
+        border: solid;
+    }
+    border: solid;
+}

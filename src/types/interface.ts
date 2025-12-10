@@ -6,7 +6,7 @@ export interface User {
   email: string;
   password?: string;
   phone?: string;
-  role: "ADMIN" | "USER";
+  role: "ADMIN" | "USER"; //role kunnen we gebruiken bij het inloggen van de admin of user, als dit admin is geven we extra opties mee aan de pagina
   stripeCustomerId?: string;
 }
 
@@ -40,6 +40,7 @@ export interface Cart {
   paymentId?: string;
   createdAt?: Date;
 }
+
 
 export interface FlashMessage {
   type: "success" | "error" | "warning";

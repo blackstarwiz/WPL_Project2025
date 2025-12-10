@@ -1,21 +1,23 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
-dotenv.config();
+import connectLivereload from "connect-livereload";
+import cookieParser from "cookie-parser";
+import livereload, { LiveReloadServer } from "livereload";
+
 
 import path from "path";
+dotenv.config();
+import { flashMiddleware } from "./middelware/flashMiddleware";
+import sessionMiddleware from "./session";
+import { assignGuestId } from "./middelware/assignGuestId";
 import { setLocals } from "./middelware/locals";
+import { secureMiddleware } from "./middelware/secureMiddleware";
+
 import reviewsRouter from "./routers/reviews";
 import bestelRouter from "./routers/bestel";
 import contactRouter from "./routers/contact";
 import loginRouter from "./routers/authRouter";
-import livereload, { LiveReloadServer } from "livereload";
-import connectLivereload from "connect-livereload";
-import cookieParser from "cookie-parser";
-import { secureMiddleware } from "./middelware/secureMiddleware";
 import { connect, getReviews } from "./database";
-import { flashMiddleware } from "./middelware/flashMiddleware";
-import sessionMiddleware from "./session";
-import { assignGuestId } from "./middelware/assignGuestId";
 import checkoutRouter from "./routers/checkoutRouter";
 import adminRouter from "./routers/adminRouter";
 
@@ -61,7 +63,7 @@ app.use("/contact", contactRouter());
 app.use("/bestel", bestelRouter());
 app.use("/checkout", checkoutRouter());
 app.use("/reviews", reviewsRouter());
-app.use("/admin", adminRouter);
+app.use("/admin",  adminRouter());
 
 // Home
 app.get("/", async (req, res) => {

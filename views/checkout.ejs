@@ -7,19 +7,42 @@
 
   
     <% if (cart.items.length > 0) { %>
-    <ul>
+    
+      <ul>
       <% cart.items.forEach(item => { %>
-      <li><%= item.name %> - €<%= item.price %> x <%= item.amount %></li>
+      <li>
+        
+        <img src='assets/images/pizza_images/<%= item.image%>' alt=" pizza foto">
+        <p>
+          <%= item.name %> 
+        -
+         
+        €<%= item.price %> 
+
+        x 
+
+        <%= item.amount %>
+        </p>
+        
+      </li>
       <% }) %>
     </ul>
+
+
     <p>Totaal: €<%= cart.totalPrice %></p>
+
+
     <form  action="/checkout/pay" method="POST">
       <button type="submit">Betalen</button>
     </form>
+
     <% } else { %>
+
     <p>Je winkelmand is leeg.</p>
     <a href="/bestel">Ga terug naar de bestelpagina</a>
+    
     <% } %>
+
   </section>
 </main>
 

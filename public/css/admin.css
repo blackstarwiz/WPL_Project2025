@@ -1,0 +1,122 @@
+body {
+  background-image: url("/assets/images/inlog_page_background_main.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+main {
+  h1 {
+    color: #f5f5f5;
+    background-color: black;
+    height: fit-content;
+    padding: 1% 0% 1% 2%;
+  }
+  border-radius: 10px;
+  height: 100%;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  background-color: #f5f5f5;
+}
+#adminoverview {
+  background-image: url("../assets/images/inlog_page_background_main.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0% 2%;
+  padding-top: 1%;
+}
+section {
+  min-width: 40%;
+  height: fit-content;
+  border: solid 0.1rem rgb(209, 205, 205);
+  box-shadow: 5px 5px 19px 11px rgba(0, 0, 0, 0.18);
+  img {
+    height: 150px;
+    width: 150px;
+    background-color: aliceblue;
+  }
+}
+
+section:last-of-type {
+  margin: 1%;
+  width: 100%;
+}
+#order-overview {
+  display: block;
+}
+
+#orders,
+#users {
+  margin-top: 0rem;
+  overflow-y: scroll;
+  height: 540px;
+}
+
+/* orders */
+
+.order {
+  height: fit-content;
+  display: grid;
+  grid-template-rows: 0.2fr 1fr;
+}
+
+.orderdata {
+  border-bottom: solid gray 0.1rem;
+  background-color: #f5f5f5;
+  .name,
+  .date {
+    position: relative;
+    left: 1rem;
+  }
+  .name{
+    font-size: 2.5rem;
+  }
+ font-size: 1.75rem;
+}
+.pizzadata {
+  height: fit-content;
+  max-height: 430px;
+  overflow-y: scroll;
+  .item {
+    background-color: white;
+    border-bottom: solid green 0.1rem;
+    display: flex;
+    justify-content: space-around;
+    .pizza {
+      font-size: 2rem;
+      margin: 1.1rem;
+    }
+    .price {
+      margin: 1.1rem 0.5rem;
+    }
+  }
+}
+/* einde orders */
+
+/* users */
+#user-overview {
+    min-width: 56%;
+   background-color: grey;
+}
+#users{
+    background-color: white;
+}
+.user{
+    border-bottom: solid black 0.1rem ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    h2{
+        width: 50%; 
+        
+        padding: 1rem;
+        font-size: x-large;
+    }
+}
+/* einde users */
