@@ -3,6 +3,7 @@ import { cartCollection, userCollection, guestCollection, pizzaCollection, findP
 import { ObjectId } from "mongodb";
 import { authorizeRole } from "../middelware/authorizeRole";
 
+
 const router = Router();
 
 //Overzicht blanco formulieren
@@ -204,12 +205,32 @@ router.get("/order-overview", async (req, res) => {
   }
 });
 
-router.get("/user-overview", (req, res) => {
-  res.render("admin_user_overview", {
-    title: "User overview",
-    page: "admin_user_overview",
-    user: req.user,
-  });
-});
 
+router.get("/user-overview", async (req, res) => {
+  try {
+    // Of via getUsers(), zie hieronder
+    const users = await userCollection
+      .find({}, { projection: { password: 0 } }) 
+      .toArray();
+
+    res.render("admin_user_overview", {
+      title: "User overview",
+      page: "admin_user_overview",
+      user: req.user,          
+      users,                   
+      cart: req.session.cart,
+    });
+  } catch (error) {
+    console.error("Fout bij ophalen users:", error);
+    res.render("admin_user_overview", {
+      title: "User overview",
+      page: "admin_user_overview",
+      user: req.user,
+      users: [],               
+      cart: req.session.cart,
+      errorMessage: "Er ging iets fout bij het ophalen van de gebruikers.",
+    });
+  }
+});
 export default router;
+
