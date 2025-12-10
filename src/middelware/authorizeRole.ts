@@ -3,7 +3,11 @@ import { Request, Response, NextFunction,  } from "express";
 export function authorizeRole(role: string){
     return (req: Request, res: Response, next: NextFunction) => {
         if (req.user?.role.toLowerCase() !== role) {
-            return res.status(403).json({message: 'Toegang geweigerd'});
+            req.session.message = {
+                type: "error",
+                text: "Toegang geweigerd - admin only",
+            };
+            return res.redirect("/");
         }
         next();
     };
