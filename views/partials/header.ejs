@@ -1,107 +1,128 @@
 <!DOCTYPE html>
 <html lang="nl-be">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="" />
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/root.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="34x34"
-      href="/assets/icons/favicon.ico"
-    />
 
-    <% if (page === 'index') { %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="34x34" href="/assets/icons/favicon.ico" />
+
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/root.css" />
+
+  <% if (page==='index' ) { %>
     <link rel="stylesheet" href="/css/index.css" />
-    <% } %> <% if (page === 'contact') { %>
-    <link rel="stylesheet" href="/css/contact.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <link rel="stylesheet" href="/css/map.css" />
-    <% } %> <% if (page === 'bestel') { %>
-    <link rel="stylesheet" href="/css/bestel.css" />
-    <% } %> <% if (page === 'login' || page === 'register') { %>
-    <link rel="stylesheet" href="/css/login.css" />
-    <% } %> <% if (page === 'checkout') { %>
-    <link rel="stylesheet" href="/css/checkout.css" />
-    <% } %><% if (page === 'error') { %>
-    <link rel="stylesheet" href="/css/error.css" />
     <% } %>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <script src="/js/hamburger.js" defer></script>
-    <script src="/js/effects.js" defer></script>
-    <title><%= title %></title>
-  </head>
+      <% if (page==='contact' ) { %>
+        <link rel="stylesheet" href="/css/contact.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <link rel="stylesheet" href="/css/map.css" />
+        <% } %>
+          <% if (page==='bestel' ) { %>
+            <link rel="stylesheet" href="/css/bestel.css" />
+            <% } %>
+              <% if (page==='login' || page==='register' ) { %>
+                <link rel="stylesheet" href="/css/login.css" />
+                <% } %>
+                  <% if (page==='checkout' ) { %>
+                    <link rel="stylesheet" href="/css/checkout.css" />
+                    <% } %>
+                      <% if (page==='error' ) { %>
+                        <link rel="stylesheet" href="/css/error.css" />
+                        <% } %>
 
-  <body>
-    <% if (message) { %>
+                          <link rel="preconnect" href="https://fonts.googleapis.com" />
+                          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                          <link
+                            href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+                            rel="stylesheet" />
+
+                          <script src="/js/hamburger.js" defer></script>
+                          <script src="/js/effects.js" defer></script>
+                          <title>
+                            <%= title %>
+                          </title>
+</head>
+
+<body>
+  <% if (message) { %>
     <div class="flash-message <%= message.type %>" style="grid-area: flash">
       <%= message.text %>
     </div>
     <% } %>
 
-    <header>
-      <a id="top"></a>
-      <div class="nav">
-        <!-- Logo -->
-        <a href="/" class="title">
-          <img src="/assets/images/Logo.png" alt="Logo" id="logoheader" />
-          <span class="title-text">Pizza Gusto</span>
-        </a>
+      <header>
+        <a id="top"></a>
+        <div class="nav">
 
-        <!-- Hamburger-menu knop -->
-        <button class="hamburger-menu hidden" id="menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          <!-- Logo -->
+          <a href="/" class="title">
+            <img src="/assets/images/Logo.png" alt="Logo" id="logoheader" />
+            <span class="title-text">Pizza Gusto</span>
+          </a>
 
-        <!-- Linker kant Desktop nav-->
-        <div id="navOptiesMobile" class="hidden">
-          <section id="links">
-            <a href="/" class="mobileNavButtons">Home</a>
-            <a href="/bestel" class="mobileNavButtons">Menu</a>
-            <a href="/contact" class="mobileNavButtons">Contact</a>
-            <% if (user) { %>
-            <form action="/logout" method="post">
-              <button class="logout" type="submit">Logout</button>
-            </form>
-            <%} else {%>
-            <a href="/login" class="mobileNavButtons">Login</a>
-            <%} %>
-          </section>
+          <!-- Hamburger-menu knop -->
+          <button class="hamburger-menu hidden" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <!-- ADMIN NAVBAR -->
+          <% if (user && user.role==="ADMIN" ) { %>
+
+            <div id="navOpties">
+              <a href="/admin/pizza-overview">Pizzas</a>
+              <a href="/admin/user-overview">Gebruikers</a>
+              <a href="/admin/order-overview">Bestellingen</a>
+              <form action="/logout" method="post">
+                <button class="logout" type="submit">Logout</button>
+              </form>
+            </div>
+
+            <div id="rightheader">
+              <a href="/admin/pizza-overview" id="bestelButton"> ADMIN </a>
+            </div>
+
+            <% } else { %>
+              <!-- NORMALE USER NAVBAR -->
+              <div id="navOptiesMobile" class="hidden">
+                <section id="links">
+                  <a href="/" class="mobileNavButtons">Home</a>
+                  <a href="/bestel" class="mobileNavButtons">Menu</a>
+                  <a href="/contact" class="mobileNavButtons">Contact</a>
+
+                  <% if (user) { %>
+                    <form action="/logout" method="post">
+                      <button class="logout" type="submit">Logout</button>
+                    </form>
+                    <% } else { %>
+                      <a href="/login" class="mobileNavButtons">Login</a>
+                      <% } %>
+                </section>
+              </div>
+
+              <div id="navOpties">
+                <a href="/bestel">Menu</a>
+                <a href="/contact">Contact</a>
+
+                <% if (user) { %>
+                  <form action="/logout" method="post">
+                    <button class="logout" type="submit">Logout</button>
+                  </form>
+                  <% } else { %>
+                    <a href="/login">Login</a>
+                    <% } %>
+              </div>
+
+              <div id="rightheader">
+                <a href="/bestel" id="bestelButton"> Bestel nu </a>
+              </div>
+              <% } %>
+
         </div>
+      </header>
 
-        <!-- Linker kant Desktop nav-->
-        <div id="navOpties">
-          <a href="/bestel">Menu</a>
-          <a href="/contact">Contact</a>
-          <% if (user) { %>
-          <form action="/logout" method="post">
-            <button class="logout" type="submit">Logout</button>
-          </form>
-          <%} else {%>
-          <a href="/login">Login</a>
-          <%} %>
-        </div>
-
-        <!-- Rechter kant -->
-        <div id="rightheader">
-          <a href="/bestel" id="bestelButton"> Bestel nu </a>
-        </div>
-      </div>
-    </header>
-    <div class="menu-overlay" id="menuOverlay"></div>
+      <div class="menu-overlay" id="menuOverlay"></div>
