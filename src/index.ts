@@ -22,6 +22,7 @@ import adminRouter from "./routers/adminRouter";
 // Stripe webhook
 import { stripeWebhookRouter } from "./routers/stripeWebhook";
 import { authorizeRole } from "./middelware/authorizeRole";
+import usersRouter from "./routers/user";
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
