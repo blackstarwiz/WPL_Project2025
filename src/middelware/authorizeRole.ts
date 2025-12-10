@@ -7,7 +7,7 @@ export function authorizeRole(role: string){
                 type: "error",
                 text: "Toegang geweigerd - admin only",
             };
-            return res.redirect("/");
+            return res.redirect("/login");
         }
         next();
     };
