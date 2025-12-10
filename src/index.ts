@@ -52,7 +52,7 @@ app.use("/bestel", secureMiddleware, bestelRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
 app.use("/reviews", secureMiddleware, reviewsRouter());
 app.use("/checkout", secureMiddleware, checkoutRouter());
-app.use("/admin", adminRouter);
+app.use("/admin", adminRouter());
 
 app.get("/", secureMiddleware, async (req, res) => {
   try {

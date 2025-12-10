@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin User Overview</title>
-  </head>
-  <body>
+<%- include('partials/header') %>
+
+  <main>
     <h1>Gebruikers</h1>
     <section class="users">
       <ul class="userlist">
@@ -27,12 +22,13 @@
 
         <!-- <% users.forEach(user => { %>
         <li class="user">
-          <span class="user-name"><%= users.name %></span>
-          <span class="user-email"><%= users.email %></span>
-          <span class="user-phone"><%= users.phone %></span>
+          <span class="user-name"><%= user.name %></span>
+          <span class="user-email"><%= user.email %></span>
+          <span class="user-phone"><%= user.phone %></span>
         </li>
         <% }); %> -->
       </ul>
     </section>
-  </body>
-</html>
+  </main>
+
+  <%- include('partials/footer') %>

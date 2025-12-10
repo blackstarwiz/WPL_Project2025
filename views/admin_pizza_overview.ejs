@@ -1,102 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Pizza Overview</title>
-</head>
+    <main>
+        <h1>PIZZA</h1>
 
-<body>
+        <h2>Toevoegen</h2>
 
-    <h1>PIZZA</h1>
+        <form id="addPizzaForm">
 
-    <h2>Toevoegen</h2>
+            <label>Naam</label>
+            <input type="text" name="name" id="addName">
 
-    <form id="addPizzaForm">
+            <label>Prijs</label>
+            <input type="text" name="price" id="addPrice">
 
-        <label>Naam</label>
-        <input type="text" name="name" id="addName">
+            <label>Afbeelding upload (ImgBB)</label>
+            <input type="file" id="addImage" accept="image/*">
+            <button type="button" onclick="uploadAddImage()">Upload</button>
 
-        <label>Prijs</label>
-        <input type="text" name="price" id="addPrice">
+            <div id="addImagePreview"></div>
+            <div id="addImageUrl"></div>
 
-        <label>Afbeelding upload (ImgBB)</label>
-        <input type="file" id="addImage" accept="image/*">
-        <button type="button" onclick="uploadAddImage()">Upload</button>
+            <button type="submit">Toevoegen</button>
 
-        <div id="addImagePreview"></div>
-        <div id="addImageUrl"></div>
+        </form>
 
-        <button type="submit">Toevoegen</button>
+        <hr>
 
-    </form>
+        <h2>Bewerken</h2>
 
-    <hr>
+        <form id="editPizzaForm">
 
-    <h2>Bewerken</h2>
+            <label>Naam</label>
+            <select id="editSelect" name="pizza">
+                <option value="">selecteer</option>
+            </select>
 
-    <form id="editPizzaForm">
+            <label>Prijs</label>
+            <input type="text" name="price" id="editPrice">
 
-        <label>Naam</label>
-        <select id="editSelect" name="pizza">
-            <option value="">selecteer</option>
-        </select>
+            <label>Afbeelding upload (ImgBB)</label>
+            <input type="file" id="editImage" accept="image/*">
+            <button type="button" onclick="uploadEditImage()">Upload</button>
 
-        <label>Prijs</label>
-        <input type="text" name="price" id="editPrice">
+            <div id="editImagePreview"></div>
+            <div id="editImageUrl"></div>
 
-        <label>Afbeelding upload (ImgBB)</label>
-        <input type="file" id="editImage" accept="image/*">
-        <button type="button" onclick="uploadEditImage()">Upload</button>
+            <button type="button">Verwijderen</button>
+            <button type="submit">Bewerken</button>
 
-        <div id="editImagePreview"></div>
-        <div id="editImageUrl"></div>
+        </form>
 
-        <button type="button">Verwijderen</button>
-        <button type="submit">Bewerken</button>
+        <script>
 
-    </form>
+            // reusable upload function
+            async function uploadToImgBB(file, previewId, urlId) {
+                const form = new FormData();
+                form.append('key', '0100d0335817b15fe19145925a6d39ce');
+                form.append('image', file);
 
-    <script>
+                const response = await fetch('https://api.imgbb.com/1/upload', {
+                    method: 'POST',
+                    body: form
+                });
 
-        // reusable upload function
-        async function uploadToImgBB(file, previewId, urlId) {
-            const form = new FormData();
-            form.append('key', '0100d0335817b15fe19145925a6d39ce');
-            form.append('image', file);
+                const data = await response.json();
+                if (!data.success) return;
 
-            const response = await fetch('https://api.imgbb.com/1/upload', {
-                method: 'POST',
-                body: form
-            });
+                const url = data.data.url;
 
-            const data = await response.json();
-            if (!data.success) return;
+                document.getElementById(previewId).innerHTML =
+                    '<img src="' + url + '" width="150">';
 
-            const url = data.data.url;
+                document.getElementById(urlId).textContent = url;
+            }
 
-            document.getElementById(previewId).innerHTML =
-                '<img src="' + url + '" width="150">';
+            // add form upload
+            async function uploadAddImage() {
+                const file = document.getElementById('addImage').files[0];
+                if (!file) return;
+                await uploadToImgBB(file, 'addImagePreview', 'addImageUrl');
+            }
 
-            document.getElementById(urlId).textContent = url;
-        }
+            // edit form upload
+            async function uploadEditImage() {
+                const file = document.getElementById('editImage').files[0];
+                if (!file) return;
+                await uploadToImgBB(file, 'editImagePreview', 'editImageUrl');
+            }
 
-        // add form upload
-        async function uploadAddImage() {
-            const file = document.getElementById('addImage').files[0];
-            if (!file) return;
-            await uploadToImgBB(file, 'addImagePreview', 'addImageUrl');
-        }
+        </script>
+    </main>
 
-        // edit form upload
-        async function uploadEditImage() {
-            const file = document.getElementById('editImage').files[0];
-            if (!file) return;
-            await uploadToImgBB(file, 'editImagePreview', 'editImageUrl');
-        }
-
-    </script>
-
-</body>
-
-</html>
+    <%- include('partials/footer') %>
