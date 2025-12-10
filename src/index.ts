@@ -21,6 +21,7 @@ import adminRouter from "./routers/adminRouter";
 
 // Stripe webhook
 import { stripeWebhookRouter } from "./routers/stripeWebhook";
+import { authorizeRole } from "./middelware/authorizeRole";
 
 const liveReloadServer: LiveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
@@ -61,7 +62,7 @@ app.use("/contact", contactRouter());
 app.use("/bestel", bestelRouter());
 app.use("/checkout", checkoutRouter());
 app.use("/reviews", reviewsRouter());
-app.use("/admin", adminRouter);
+app.use("/admin", authorizeRole("admin"), adminRouter);
 
 // Home
 app.get("/", async (req, res) => {

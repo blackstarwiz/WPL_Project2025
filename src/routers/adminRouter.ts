@@ -6,7 +6,7 @@ import { authorizeRole } from "../middelware/authorizeRole";
 const router = Router();
 
 //Overzicht blanco formulieren
-router.get("/pizza-overview", authorizeRole("admin"), async (req, res) => {
+router.get("/pizza-overview", async (req, res) => {
   try {
     const docs = await pizzaCollection
       .find({}, { projection: { name: 1, _id: 0 } })
@@ -28,7 +28,7 @@ router.get("/pizza-overview", authorizeRole("admin"), async (req, res) => {
 });
 
 //Post edit pagina
-router.post("/pizza-overview/edit", authorizeRole("admin"), async (req, res) => {
+router.post("/pizza-overview/edit", async (req, res) => {
   const chosenName = req.body.pizzaName;
   if (!chosenName) return res.redirect("/admin/pizza-overview");
   res.redirect(`/admin/pizza-overview/edit/${chosenName}`);
@@ -38,7 +38,6 @@ router.post("/pizza-overview/edit", authorizeRole("admin"), async (req, res) => 
 //Get edit pagina
 router.get(
   "/pizza-overview/edit/:name",
-  authorizeRole("admin"),
   async (req, res) => {
     const pizzaName = req.params.name;
     const pizza = await findPizza(pizzaName);
@@ -59,7 +58,7 @@ router.get(
 );
 
 //Post add pagina
-router.post("/pizza-overview/add", authorizeRole("admin"), async (req, res) => {
+router.post("/pizza-overview/add", async (req, res) => {
   try {
     const { name, price, imageUrl, ingredients } = req.body;
 
@@ -86,7 +85,7 @@ router.post("/pizza-overview/add", authorizeRole("admin"), async (req, res) => {
 });
 
 //Post save pizza
-router.post("/pizza-overview/save", authorizeRole("admin"), async (req, res) => {
+router.post("/pizza-overview/save", async (req, res) => {
   try {
     const { oldName, newName, price, imageUrl, ingredients } = req.body;
 
@@ -117,7 +116,7 @@ router.post("/pizza-overview/save", authorizeRole("admin"), async (req, res) => 
 });
 
 //Post Pizza verwijderen
-router.post("/pizza-overview/delete", authorizeRole("admin"), async (req, res) => {
+router.post("/pizza-overview/delete", async (req, res) => {
   try {
     const { pizzaName } = req.body;
 
@@ -135,7 +134,7 @@ router.post("/pizza-overview/delete", authorizeRole("admin"), async (req, res) =
 });
 
 
-router.get("/order-overview", authorizeRole('admin'), async (req, res) => {
+router.get("/order-overview", async (req, res) => {
   try {
     const orders = await cartCollection
       .find({ paymentId: { $exists: true } })
@@ -205,7 +204,7 @@ router.get("/order-overview", authorizeRole('admin'), async (req, res) => {
   }
 });
 
-router.get("/user-overview", authorizeRole('admin'), (req, res) => {
+router.get("/user-overview", (req, res) => {
   res.render("admin_user_overview", {
     title: "User overview",
     page: "admin_user_overview",
