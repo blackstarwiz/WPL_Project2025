@@ -9,7 +9,7 @@ main {
   display: flex;
   max-height: 80vh;
   align-items: center;
-  background-image: url(/assets/images/pizzaBanner.jpg);
+  background-image: url(/assets/images/pizza_Banner.jpg);
   background-size: cover;
 }
 

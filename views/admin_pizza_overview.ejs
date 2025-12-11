@@ -2,34 +2,6 @@
 <main>
   <h1>PIZZA BEHEER</h1>
 
-
-  <!-- ADD FORM -->
-  <section>
-    <h2>Toevoegen</h2>
-    <form action="/admin/pizza-overview/add" method="POST">
-
-      <label>Naam</label>
-      <input type="text" name="name" required>
-
-      <label>Prijs</label>
-      <input type="text" name="price" required>
-
-      <label>Ingrediënten (komma gescheiden)</label>
-      <input type="text" name="ingredients">
-
-      <label>Afbeelding upload (ImgBB)</label>
-      <input type="file" id="addImage" accept="image/*">
-      <button type="button" onclick="uploadAddImage()">Upload</button>
-
-      <div id="addImagePreview"></div>
-      <input type="hidden" name="imageUrl" id="addImageUrl">
-
-      <button type="submit">Toevoegen</button>
-    </form>
-  </section>
-
-  <hr>
-
   <!-- EDIT FORM-->
   <section>
     <h2>Bewerken</h2>
@@ -43,28 +15,32 @@
           <option value="<%= name %>" <%= pizza && pizza.name === name ? "selected" : "" %>><%= name %></option>
         <% }) %>
       </select>
-      <button type="submit">Laad pizza</button>
+      <button class="adminButton" type="submit">Laad pizza</button>
     </form>
 
 <% if (pizza) { %>
   <hr>
   <h3>Bewerken: <%= pizza.name %></h3>
 
-  <form action="/admin/pizza-overview/save" method="POST">
+  <form class="editPizzaForm" action="/admin/pizza-overview/save" method="POST">
     <input type="hidden" name="oldName" value="<%= pizza.name %>">
-
-    <label>Nieuwe naam</label>
-    <input type="text" name="newName" value="<%= pizza.name %>" required>
-
-    <label>Prijs</label>
-    <input type="text" name="price" value="<%= pizza.price %>" required>
+    <div class="row">
+        <div class="field">
+          <label>Nieuwe pizzanaam</label>
+          <input type="text" name="newName" value="<%= pizza.name %>" required>
+        </div>
+        <div class="field">
+          <label>Eenheidsprijs</label>
+          <input type="text" name="price" value="<%= pizza.price %>" required>
+        </div>
+    </div>
 
     <label>Ingrediënten (komma gescheiden)</label>
     <input type="text" name="ingredients" value="<%= pizza.ingredients.join(', ') %>">
 
     <label>Afbeelding upload (ImgBB)</label>
     <input type="file" id="editImage" accept="image/*">
-    <button type="button" onclick="uploadEditImage()">Upload</button>
+    <button class="adminButton" type="button" onclick="uploadEditImage()">Upload</button>
 
     <div id="editImagePreview">
       <% if (pizza.image) { %>
@@ -74,7 +50,7 @@
 
     <input type="hidden" name="imageUrl" id="editImageUrl" value="<%= pizza.image %>">
 
-    <button type="submit">Opslaan</button>
+    <button class="adminButton" type="submit">Opslaan</button>
   </form>
 
   <!--DELETE FORM (KNOP)-->
@@ -85,7 +61,7 @@
     style="margin-top:10px;"
   >
     <input type="hidden" name="pizzaName" value="<%= pizza.name %>">
-    <button type="submit">Verwijderen</button>
+    <button class="adminButton" type="submit">Verwijderen</button>
   </form>
 <% } %>
 
@@ -126,5 +102,39 @@
       await uploadToImgBB(file, "editImagePreview", "editImageUrl");
     }
   </script>
+
+  <hr>
+
+    <!-- ADD FORM -->
+
+<section>
+    <h2>Toevoegen</h2>
+    <form class="pizzaForm" id="addPizzaForm" action="/admin/pizza-overview/add" method="POST">
+      <div class="row">
+        <div class="field">
+          <label>Naam pizza</label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="field">
+          <label>Eenheidsrijs</label>
+          <input type="text" name="price" required>
+        </div>
+      </div>
+
+      <label>Ingrediënten (komma gescheiden)</label>
+      <input type="text" name="ingredients">
+
+      <label>Afbeelding upload (ImgBB)</label>
+      <input type="file" id="addImage" accept="image/*">
+      <button class="adminButton" type="button" onclick="uploadAddImage()">Upload</button>
+
+      <div id="addImagePreview"></div>
+      <input type="hidden" name="imageUrl" id="addImageUrl">
+
+      <button class="adminButton" class="adminButton" type="submit">Toevoegen</button>
+    </form>
+  </section>
+
+
 </main>
 <%- include('partials/footer') %>

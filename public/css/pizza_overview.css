@@ -1,0 +1,252 @@
+/* ===== MAIN WRAPPER ===== */
+main {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  border: 0.1rem solid rgb(209, 205, 205);
+  box-shadow: 5px 5px 19px 11px rgba(0, 0, 0, 0.18);
+  width: 95%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+main > h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+/* ===== GENERAL BUTTON ===== */
+.adminButton {
+  background: var(--primary-color);
+  color: var(--color-light-bg);
+  font-size: 1rem;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--border-radius-large);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adminButton:hover {
+  opacity: 0.8;
+}
+
+/* ===== FORMS ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input[type="text"],
+form select,
+form input[type="file"] {
+  padding: 0.7rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form input[type="file"] {
+  padding: 0.4rem;
+}
+
+/* ===== UNIFORM SECTION STYLING ===== */
+section {
+  flex: 1;
+  background-color: #ffffff;
+  border: 0.1rem solid rgb(209, 205, 205);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem; /* uniforme padding */
+  margin: 1rem 0;  /* uniforme margin */
+}
+
+/* Section titles */
+section > h1,
+section > h2 {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 0 0 1rem 0;
+}
+
+/* ===== UNIFORM FORM STYLING ===== */
+.pizzaForm,
+.editPizzaForm {
+  padding: 1.5rem; /*zelfde als sectie padding */
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+
+/* ===== IMAGE PREVIEW ===== */
+#addImagePreview,
+#editImagePreview {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: white;
+}
+
+#addImagePreview img,
+#editImagePreview img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.editPizzaForm .row,
+.pizzaForm .row {
+  display: flex;
+  gap: 1rem;
+}
+
+.editPizzaForm .row .field,
+.pizzaForm .row .field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#adminoverview {
+  display: flex;
+  gap: 20px;
+  height: 70vh;
+  padding: 1%;
+  box-sizing: border-box;
+}
+
+/* Scrollable list containers */
+ul.orders,
+ul.users {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ========== ORDER ITEMS ========== */
+.order {
+  background-color: white;
+  margin: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.orderdata {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.orderdata .name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.id-date-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.pizzadata .item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-total-row {
+  text-align: center;
+  padding: 12px;
+  background-color: #eee;
+  font-weight: bold;
+}
+
+/* ========== USER ITEMS ========== */
+.user {
+  background-color: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.user p {
+  margin: 0;
+}
+
+.upload-block {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-row input[type="file"] {
+  flex: 1;
+}
+
+.upload-row .adminButton {
+  flex-shrink: 0;
+  padding: 8px 12px;
+}
+
+/* ===== ADMIN BUTTON ===== */
+.adminButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  width: 8rem;
+  text-align: center;
+}
+
+.adminButton:hover {
+  opacity: 0.85;
+}

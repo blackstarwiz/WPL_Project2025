@@ -128,7 +128,7 @@ aside {
   position: sticky;
   top: var(--spacing-medium);
 
-  margin-top: 9rem;
+  margin-top: 8rem;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -187,6 +187,38 @@ aside h2 {
 .aside-toggle,
 .aside-overlay {
   display: none;
+}
+
+.order-list {
+  max-height: 400px; /* Pas hoogte aan naar wens */
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.order-list {
+  max-height: 250px;
+  overflow-y: auto;
+  
+  /* Fix voor horizontale scroll: */
+  overflow-x: hidden;
+}
+
+/* Of specifieker: */
+.order-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.order-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
+.order-list {
+  scrollbar-width: thin; /* voor Firefox */
+  scrollbar-color: var(--primary-color) #f1f1f1;
 }
 
 /* ===== BUTTON STYLES ===== */

@@ -135,7 +135,7 @@ router.post("/pizza-overview/delete", async (req, res) => {
 });
 
 
-router.get("/order-overview", async (req, res) => {
+router.get("/admin-overview", async (req, res) => {
   try {
     const orders = await cartCollection
       .find({ paymentId: { $exists: true } })
@@ -186,51 +186,32 @@ router.get("/order-overview", async (req, res) => {
         };
       })
     );
-
-    res.render("admin_order_overview", {
-      title: "Order overview",
-      page: "admin_order_overview",
-      user: req.user,
-      orders: ordersWithUserInfo,
-    });
-  } catch (error) {
-    console.error("Fout bij ophalen bestellingen:", error);
-    res.render("admin_order_overview", {
-      title: "Order overview",
-      page: "admin_order_overview",
-      user: req.user,
-      orders: [],
-      error: "Kon bestellingen niet ophalen",
-    });
-  }
-});
-
-
-router.get("/user-overview", async (req, res) => {
-  try {
-    // Of via getUsers(), zie hieronder
-    const users = await userCollection
+    const usersB = await userCollection
       .find({}, { projection: { password: 0 } }) 
       .toArray();
 
-    res.render("admin_user_overview", {
-      title: "User overview",
-      page: "admin_user_overview",
-      user: req.user,          
-      users,                   
+    res.render("admin_overview", {
+      title: "Admin overview",
+      page: "admin_overview",
+      user: req.user,
+      orders: ordersWithUserInfo,       
+      usersB,                   
       cart: req.session.cart,
     });
   } catch (error) {
-    console.error("Fout bij ophalen users:", error);
-    res.render("admin_user_overview", {
-      title: "User overview",
-      page: "admin_user_overview",
+    console.error("Fout bij het laden van de pagina:", error);
+    res.render("admin_overview", {
+      title: "Admin overview",
+      page: "admin_overview",
       user: req.user,
-      users: [],               
+      orders: [],
+      error: "Fout bij het laden van de pagina:",
+      userB: [],               
       cart: req.session.cart,
-      errorMessage: "Er ging iets fout bij het ophalen van de gebruikers.",
+      errorMessage: "Fout bij het laden van de pagina:",
     });
   }
 });
+
 export default router;
 
