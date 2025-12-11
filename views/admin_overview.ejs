@@ -1,2 +1,76 @@
-<%- include('admin_order_overview') %>
-<%- include('admin_user_overview') %>
+<%- include('partials/header') %>
+<main>
+  <h1>Admin pagina</h1>
+
+  <div id="adminoverview">
+    <section id="order-overview">
+      <h1>Order overview</h1>
+
+        <% if (orders && orders.length === 0) { %>
+        <p>Er zijn nog geen bestellingen.</p>
+        <% } else { %>
+      <ul class="orders">
+        <% orders.forEach(order => { %>
+          <% 
+            let total = 0; 
+            order.items.forEach(item => { 
+              total += item.price * item.amount;
+            }); 
+          %>
+          <li class="order">
+            <div class="orderdata">
+                <h3 class="name"><%= order.userName %></h3>        
+
+                <div class="id-date-row">
+                    <p class="order-id">Bestelling #<%= order._id.toString().slice(-6) %></p>
+                    <p class="date"><%= order.formattedDate %></p>
+                </div>
+            </div>
+            
+            <ul class="pizzadata">
+              <% order.items.forEach(item => { %>
+                <li class="item">
+                  <p class="pizza"><%= item.name %></p>
+                  <p class="pizza-amount"><%= item.amount %>x</p>
+                  <p class="price"><%= (item.price * item.amount).toFixed(2) %> €</p>
+                </li>
+              <% }) %>
+              <li class="order-total-row">
+                <p class="order-total">Totaal: <%= order.formattedTotal %> €</p>
+              </li>
+            </ul>                        
+          </li>
+
+        <% }) %>
+      </ul>
+    </section>
+  <% } %>
+
+
+  <section id="user-overview">
+    <h1>Gebruikers</h1>
+
+    <% if (usersB && usersB.length > 0) { %>
+      <ul class="users"></ul>
+          <% usersB.forEach(user => { %>
+            <li class="user">
+                <div class="row">
+                    <p class="name"><%= user.name || '-' %></p>
+                    <p class="phone"><%= user.phone || '-' %></p>
+                </div>
+
+                <div class="row">
+                    <p class="role"><%= user.role %></p>
+                    <p class="email"><%= user.email %></p>
+                </div>
+            </li>
+          <% }) %>
+        </ul>
+    <% } else { %>
+      <p>Geen gebruikers gevonden.</p>
+    <% } %>
+  </section>
+</div>
+</main>
+
+<%- include('partials/footer') %>

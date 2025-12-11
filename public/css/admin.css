@@ -1,0 +1,192 @@
+/* ===== MAIN WRAPPER ===== */
+
+main {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  border: 0.1rem solid rgb(209, 205, 205);
+  box-shadow: 5px 5px 19px 11px rgba(0, 0, 0, 0.18);
+  width: 95%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+main > h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+
+/* ===== GENERAL BUTTON ===== */
+
+.adminButton {
+  background: var(--primary-color);
+  color: var(--color-light-bg);
+  font-size: 1rem;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--border-radius-large);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adminButton:hover {
+  opacity: 0.8;
+}
+
+
+/* ===== FORMS ===== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input[type="text"],
+form select,
+form input[type="file"] {
+  padding: 0.7rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pizzaForm {
+  padding: 1.3rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 10px;
+}
+
+
+/* ===== IMAGE PREVIEW ===== */
+
+#addImagePreview,
+#editImagePreview {
+  margin-top: 10px;
+}
+
+#addImagePreview img,
+#editImagePreview img {
+  width: 150px;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+
+/* ===================================================== */
+/* ===== ADMIN OVERVIEW PAGE (ORDERS + USERS GRID) ===== */
+/* ===================================================== */
+
+#adminoverview {
+  display: flex;
+  gap: 20px;
+  height: 70vh;
+  padding: 1%;
+  box-sizing: border-box;
+}
+
+section {
+  flex: 1;
+  background-color: #ffffff;
+  border: 0.1rem solid rgb(209, 205, 205);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section titles */
+section > h1,
+section > h2 {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 0;
+}
+
+
+/* Scrollable list containers */
+ul.orders,
+ul.users {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* ========== ORDER ITEMS ========== */
+
+.order {
+  background-color: white;
+  margin: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.orderdata {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.orderdata .name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.id-date-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.pizzadata .item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-total-row {
+  text-align: center;
+  padding: 12px;
+  background-color: #eee;
+  font-weight: bold;
+}
+
+
+/* ========== USER ITEMS ========== */
+
+.user {
+  background-color: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.user p {
+  margin: 0;
+}
